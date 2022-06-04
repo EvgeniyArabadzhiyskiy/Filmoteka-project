@@ -1,115 +1,105 @@
-.header__container{
+.header__container {
+    min-width: 100%;
     height: 230px;
     padding-top: 44px;
     padding-bottom: 44px;
     text-align: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
-    ,url(../images/home/heder-home320-min.jpg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        max-width: 1600px;
-        width: 100vw;
-    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home320-min.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    max-width: 1600px;
+    width: 100vw;
+    @media (min-resolution: 2dppx) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home320@2x-min.jpg);
+    }
+    @media screen and (min-width: 768px) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home768-min.jpg);
+        height: 215px;
+        padding-top: 40px;
         @media (min-resolution: 2dppx) {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home320@2x-min.jpg);
-        }
-    
-        @media screen and (min-width: 768px) {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home768-min.jpg);
-            height: 215px;
-            padding-top: 40px;
-            @media (min-resolution: 2dppx) {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home768@2x-min.jpg);
-            }
-        }
-    
-        @media screen and (min-width: 1024px) {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home1024-min.jpg);
-
-            @media (min-resolution: 2dppx) {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home1024@2x-min.jpg);
-            }
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home768@2x-min.jpg);
         }
     }
+    @media screen and (min-width: 1024px) {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home1024-min.jpg);
+        @media (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home1024@2x-min.jpg);
+        }
+    }
+}
 
-
-.header__wrap{
+.header__wrap {
     display: flex;
     margin-bottom: 60px;
     justify-content: space-between;
     align-items: center;
     @media screen and (min-width: 768px) {
-           margin-bottom: 40px;
-        }
+        margin-bottom: 40px;
+    }
 }
 
-.header__box{
+.header__box {
     display: flex;
     align-items: center;
-    
 }
 
-.header__svg{
+.header__svg {
     margin-right: 10px;
 }
 
-.title{
+.title {
     display: none;
     @media screen and (min-width: 768px) {
         display: block;
-
-            margin: 0;
-                color: #FFFFFF;
-            
-                font-weight: 500;
-                font-size: 30px;
-                line-height: 1.16;
-                display: flex;
-                align-items: center;
-                text-align: center;
-        }
+        margin: 0;
+        color: #FFFFFF;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.16;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 //-----------------------------------nav
-
-.nav{
+.nav {
     display: flex;
     font-weight: 500;
-        font-size: 12px;
-        line-height: 1.16;
-        text-transform: uppercase;
-        a{
-            color: #FFFFFF;
-            text-decoration: none;
-        }
+    font-size: 12px;
+    line-height: 1.16;
+    text-transform: uppercase;
+    a {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
 }
 
-.nav__home{
+.nav__home {
     margin-right: 39px;
     position: relative;
-        padding-bottom: 5px;
+    padding-bottom: 5px;
 }
 
-.nav__current{
+.nav__current {
     &::after {
-            content: "";
-            width: 100%;
-            height: 4px;
-            background-color: #FF6B08;
-            border-radius: 2px;
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-        }
+        content: "";
+        width: 100%;
+        height: 4px;
+        background-color: #FF6B08;
+        border-radius: 2px;
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+    }
 }
 
 //------------------------------------form
-
-.search{
+.search {
     outline: none;
-        border: none;
-        border-bottom: 0.5px solid #FFFFFF;
+    border: none;
+    border-bottom: 0.5px solid #FFFFFF;
     background-color: transparent;
     text-decoration: none;
     display: flex;
@@ -117,28 +107,26 @@
     padding: 5px;
     margin-bottom: 16px;
     color: #FFFFFF;
-    &::placeholder{
+    &::placeholder {
         font-weight: 400;
-            font-size: 14px;
-            line-height: 1.14;
-            align-items: center;
-        
-            color: #FFFFFF;
+        font-size: 14px;
+        line-height: 1.14;
+        align-items: center;
+        color: #FFFFFF;
     }
-        @media screen and (min-width: 768px){
-            max-width: 336px;
-        }
+    @media screen and (min-width: 768px) {
+        max-width: 336px;
+    }
 }
 
-.form__search{
+.form__search {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     position: relative;
-
     @media screen and (min-width: 768px) {
-            justify-content: center;
-        }
+        justify-content: center;
+    }
 }
 
 button[type=submit] {
@@ -149,29 +137,25 @@ button[type=submit] {
     border: none;
 }
 
-.form__svg{
+.form__svg {
     position: absolute;
     right: 3px;
     @media screen and (min-width: 768px) {
-        right: 185px; 
-        }
-                @media screen and (min-width: 1024px) {
-                    right: 315px;
-                }
+        right: 185px;
+    }
+    @media screen and (min-width: 1024px) {
+        right: 315px;
+    }
 }
 
-.search__error{
+.search__error {
     display: none;
-
     color: #FF001B;
-
     margin: 0;
-
     font-weight: 400;
-        font-size: 14px;
-        line-height: 1.14;
-
-        @media screen and (min-width: 768px) {
-                text-align: center;
-            }
+    font-size: 14px;
+    line-height: 1.14;
+    @media screen and (min-width: 768px) {
+        text-align: center;
+    }
 }
