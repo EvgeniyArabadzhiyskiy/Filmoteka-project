@@ -1,15 +1,40 @@
 .header__container{
-    width: 320px;
-    height: 230px;
     margin: 0 auto;
-    padding: 44px 20px;
-    background-color: pink;
-}
+    padding-top: 44px;
+    padding-bottom: 44px;
+    background-image: url(../images/home/heder-home320-min.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        max-width: 1600px;
+        margin: 0 auto;
+        width: 100vw;
+    
+        @media (min-resolution: 2dppx) {
+            background-image: url(../images/home/heder-home320@2x-min.jpg);
+        }
+    
+        @media screen and (min-width: 768px) {
+            background-image: url(../images/home/heder-home768-min.jpg);
+            height: 215px;
+            @media (min-resolution: 2dppx) {
+                background-image: url(../images/home/heder-home768@2x-min.jpg);
+            }
+        }
+    
+        @media screen and (min-width: 1024px) {
+            background-image: url(../images/home/heder-home1024-min.jpg);
+    
+            @media (min-resolution: 2dppx) {
+                background-image: url(../images/home/heder-home1024@2x-min.jpg);
+            }
+        }
+    }
 
 .header__wrap{
     display: flex;
     margin-bottom: 60px;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .nav{
@@ -51,6 +76,8 @@
     text-decoration: none;
     display: flex;
     width: 100%;
+    padding: 5px;
+    margin-bottom: 16px;
     &::placeholder{
         font-weight: 400;
             font-size: 14px;
@@ -63,10 +90,33 @@
 
 .form__search{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    position: relative;
+
+}
+
+button[type=submit] {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.form__svg{
+    position: absolute;
+    right: 3px;
 }
 
 .search__error{
     display: none;
+
+    color: #FF001B;
+
+    margin: 0;
+
+    font-weight: 400;
+        font-size: 14px;
+        line-height: 1.14;
 }
