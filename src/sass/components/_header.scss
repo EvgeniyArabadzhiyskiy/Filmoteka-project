@@ -1,6 +1,8 @@
 .header__container{
     height: 230px;
-    padding: 44px 20px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+    text-align: center;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
     ,url(../images/home/heder-home320-min.jpg);
         background-repeat: no-repeat;
@@ -17,8 +19,6 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home768-min.jpg);
             height: 215px;
             padding-top: 40px;
-            padding-right: 32px;
-            padding-left: 32px;
             @media (min-resolution: 2dppx) {
                 background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home768@2x-min.jpg);
             }
@@ -26,12 +26,13 @@
     
         @media screen and (min-width: 1024px) {
             background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home1024-min.jpg);
-    
+
             @media (min-resolution: 2dppx) {
                 background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home1024@2x-min.jpg);
             }
         }
     }
+
 
 .header__wrap{
     display: flex;
@@ -137,7 +138,6 @@
 
     @media screen and (min-width: 768px) {
             justify-content: center;
-            // align-items: center;
         }
 }
 
@@ -155,6 +155,9 @@ button[type=submit] {
     @media screen and (min-width: 768px) {
         right: 185px; 
         }
+                @media screen and (min-width: 1024px) {
+                    right: 315px;
+                }
 }
 
 .search__error{
