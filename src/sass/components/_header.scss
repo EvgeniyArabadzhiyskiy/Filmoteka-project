@@ -2,10 +2,8 @@
     width: 320px;
     height: 230px;
     margin: 0 auto;
-    background-image: url('../images/bg-header__320.png');
-        background-size: cover;
-        background-position: center;
     padding: 44px 20px;
+    background-color: pink;
 }
 
 .header__wrap{
@@ -18,7 +16,7 @@
     display: flex;
     font-weight: 500;
         font-size: 12px;
-        line-height: 14px;
+        line-height: 1.16;
         text-transform: uppercase;
         a{
             color: #FFFFFF;
@@ -56,7 +54,7 @@
     &::placeholder{
         font-weight: 400;
             font-size: 14px;
-            line-height: 16px;
+            line-height: 1.14;
             align-items: center;
         
             color: #FFFFFF;
