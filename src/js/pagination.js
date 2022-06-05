@@ -69,7 +69,7 @@ function onPaginationChoice(e) {
         return;
     }
     const value = e.target.textContent;
-    console.log(value === '»');
+   
     switch (value) {
         case '«':
             globalPage -= 1;
@@ -84,13 +84,13 @@ function onPaginationChoice(e) {
     }
     resetPage();
 
-    console.log(globalPage);// fetch(globalPage)
+    
     apiService.fetchTrendData(globalPage).then((data)=> {
-  console.log(data.results);
+
   renderGallery(data.results);
   renderPaginationButtons(data.total_pages, data.page);
 }).catch(error => console.log(error));
-    console.log(e.target);
+  
     // makeButtonActive(e.target);
 }
 
