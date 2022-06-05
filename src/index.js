@@ -1,5 +1,6 @@
 import apiService from "./js/apiService";
 import renderGallery from "./js/templates/movieGallary";
+import { renderPaginationButtons } from "./js/pagination";
 
 let allGenres;
 
@@ -8,5 +9,9 @@ apiService.fetchGenresList().then((data)=> {
   allGenres = data;
 })
 apiService.fetchTrendData().then((data)=> {
+
   renderGallery(data.results, allGenres);
+
+  renderPaginationButtons(data.total_pages, data.page);
+
 }).catch(error => console.log(error));
