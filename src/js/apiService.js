@@ -11,8 +11,8 @@ const TREND_URL= `${BASE_URL}/trending/movie/day`;
 // export default fetchData();
 
 export default {
-    async fetchTrendData(){
-        const data =await axios.get(`${TREND_URL}?api_key=${API_KEY}`);
+    async fetchTrendData(page = 1){
+        const data =await axios.get(`${TREND_URL}?api_key=${API_KEY}&page=${page}`);
           console.log(data.data);
         return data.data;
     },
