@@ -20,24 +20,18 @@
         <div class="library-navigation">
           <div class="header-logo">
             <a href="/src/index.html" lang="en" class="logo">
-              <svg class="header__svg" width="24" height="24">
-                <use
-                  href=".//images/SVG-sprites/symbol-sprites.svg#icon-film"
-                ></use>
-              </svg>
-              <span class="logo_text">Filmoteka</span></a
-            >
-          </div>
-          <ul class="library-navigation__list">
-            <li class="library-navigation__item">
-              <a href="/src/index.html" class="library-navigation__link"
-                >HOME</a
-              >
-            </li>
-            <li class="library-navigation__item library-active">
-              <a href="" class="library-navigation__link">MY LIBRARY</a>
-            </li>
-          </ul>
+
+                <svg class="header__svg" width="24" height="24">
+                    <use
+                      href=".//images/SVG-sprites/symbol-sprites.svg#icon-film"
+                    ></use>
+                  </svg>
+                <span class="logo_text">Filmoteka</span></a>
+          </div>  
+        <ul class="library-navigation__list">
+          <li class="library-navigation__item"><a href="/src/index.html"class="library-navigation__link">HOME</a></li>
+          <li class="library-navigation__item library-active"><a href="/src/library.html" class="library-navigation__link">MY LIBRARY</a></li>
+        </ul>
         </div>
 
         <div class="library-check">
@@ -45,17 +39,11 @@
           <button class="library-btn">QUEUE</button>
         </div>
       </div>
-    </header>
 
-    <main>
-      <section class="section-library">
-        <div class="container movie-card__container">
-          <ul class="movie-card-list">
-            <li class="movie-card-item"></li>
-          </ul>
-        </div>
-      </section>
-      <h3 class="empty-container">Sorry, but this section is still empty:(</h3>
-    </main>
-  </body>
+          </header>  
+
+          <include src="./partials/home/footer.html"></include> 
+    
+</body>
+
 </html>
