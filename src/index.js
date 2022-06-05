@@ -1,13 +1,12 @@
 import apiService from "./js/apiService";
 import renderGallery from "./js/templates/movieGallary";
 
+let allGenres;
 
-//apiService.fetchData;
 const mainContainer = document.querySelector('.movie-card__container');
-apiService.fetchTrendData().then((data)=> {
-  console.log(data.results);
-  renderGallery(data.results);
-}).catch(error => console.log(error));
 apiService.fetchGenresList().then((data)=> {
-  console.log(data);
+  allGenres = data;
 })
+apiService.fetchTrendData().then((data)=> {
+  renderGallery(data.results, allGenres);
+}).catch(error => console.log(error));
