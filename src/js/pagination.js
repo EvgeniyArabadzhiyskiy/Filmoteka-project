@@ -5,6 +5,8 @@ const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
 let globalPage = 0;
 
+let allGenres;
+
 function renderPaginationButtons(allPages, page) {
     let paginationMarkup = '';
     let beforePreviousPage = page - 2;
@@ -84,12 +86,21 @@ function onPaginationChoice(e) {
     }
     resetPage();
 
-    
-    apiService.fetchTrendData(globalPage).then((data)=> {
 
-  renderGallery(data.results);
-  renderPaginationButtons(data.total_pages, data.page);
-}).catch(error => console.log(error));
+    apiService.fetchGenresList().then((data)=> {
+        allGenres = data;
+       
+    })
+
+    
+    apiService.fetchTrendData(globalPage)
+    .then((data)=> {
+    
+        renderGallery(data.results,allGenres);
+        
+        renderPaginationButtons(data.total_pages, data.page);
+    })
+    .catch(error => console.log(error));
   
     // makeButtonActive(e.target);
 }

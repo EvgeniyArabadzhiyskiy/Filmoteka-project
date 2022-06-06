@@ -9,6 +9,7 @@ apiService.fetchGenresList().then((data)=> {
   allGenres = data;
 })
 apiService.fetchTrendData().then((data)=> {
+// console.log("apiService.fetchTrendData ~ data", data.results);
 
   renderGallery(data.results, allGenres);
 
