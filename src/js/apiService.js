@@ -3,14 +3,15 @@ import axios from 'axios';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '33da1ae0687d870981cf19ad4813876b';
 const TREND_URL= `${BASE_URL}/trending/movie/day`;
-const URL_ID = `${BASE_URL}/movie/`
+const URL_ID = `${BASE_URL}/movie/`;
 let allGenres;
 const input = document.querySelector(".form__search").elements.search;
+let movieInfo;
 
 export default {
    async fetchTrendData(page = 1){
         const data =await axios.get(`${TREND_URL}?api_key=${API_KEY}&page=${page}`);
-          console.log(data.data);
+         //  console.log(data.data);
         return data.data;
     },
 
@@ -22,7 +23,7 @@ export default {
 async fetchFullMovieInfo(id){
    const movieFullInfo = await axios.get(`${URL_ID}/${id}?api_key=${API_KEY}`);
    movieInfo = movieFullInfo.data;
-   console.log(movieInfo);
+   // console.log(movieInfo);
    return movieInfo;
 },
 async movieSearch(){
