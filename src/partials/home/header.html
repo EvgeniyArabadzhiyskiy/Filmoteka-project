@@ -23,7 +23,7 @@
         placeholder="Поиск фильмов"
         class="search"
       />
-      <button type="submit">
+      <button type="submit" tabindex="-1">
         <svg class="form__svg" width="12" height="12">
           <use
             href=".//images/SVG-sprites/symbol-sprites.svg#icon-search"
@@ -34,5 +34,23 @@
     <p class="search__error">
       Search result not successful. Enter the correct movie name and
     </p>
+    <div label__wrap>
+      <input type="checkbox" class="checkbox" id="checkbox" tabindex="-1" />
+      <label for="checkbox" class="label">
+        <span class="fas fa-moon">
+          <svg class="moon-svg" width="15" height="15">
+            <use
+              href=".//images/SVG-sprites/symbol-sprites.svg#icon-moon"
+            ></use>
+          </svg>
+        </span>
+        <span class="fas fa-sun">
+          <svg class="sun-svg" width="15" height="15">
+            <use href=".//images/SVG-sprites/symbol-sprites.svg#icon-sun"></use>
+          </svg>
+        </span>
+        <div class="ball"></div>
+      </label>
+    </div>
   </div>
 </header>
