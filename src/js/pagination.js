@@ -4,7 +4,6 @@ import renderGallery from "./templates/movieGallary";
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
 let globalPage = 0;
-
 let allGenres;
 
 function renderPaginationButtons(allPages, page) {
@@ -24,20 +23,22 @@ function renderPaginationButtons(allPages, page) {
     }
 
     if (page > 2) {
-        paginationMarkup += `<li class="pagination-item pagination-pages">1</li>`;
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">1</li>`;
+        }
         if (page > 3) {
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             paginationMarkup += `<li class="pagination-item">...</li>`;
+            }
             if (beforePreviousPage > 0) {
-        paginationMarkup += `<li class="pagination-item pagination-pages">${beforePreviousPage}</li>`;
-    }
+                paginationMarkup += `<li class="pagination-item pagination-pages">${beforePreviousPage}</li>`;
+            }
         }
     }
     
     if (previousPage > 0) {
         paginationMarkup += `<li class="pagination-item pagination-pages">${previousPage}</li>`;
     }
-
-    
 
     paginationMarkup += `<li class="pagination-item pagination-pages current-page">${page}</li>`;
 
@@ -49,10 +50,13 @@ function renderPaginationButtons(allPages, page) {
         
         if (page < allPages - 2) {
             paginationMarkup += `<li class="pagination-item pagination-pages">${afterNextPage}</li>`;
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             paginationMarkup += `<li class="pagination-item">...</li>`;
-            
+            }
         }
-        paginationMarkup += `<li class="pagination-item pagination-pages">${allPages}</li>`;
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">${allPages}</li>`;
+        }
     }
     
     if (page < allPages) {
@@ -62,8 +66,6 @@ function renderPaginationButtons(allPages, page) {
     paginationList.innerHTML = paginationMarkup;
 
     paginationList.addEventListener('click', onPaginationChoice);
-
-    
 }
 
 function onPaginationChoice(e) {
@@ -89,10 +91,8 @@ function onPaginationChoice(e) {
 
     apiService.fetchGenresList().then((data)=> {
         allGenres = data;
-       
     })
 
-    
     apiService.fetchTrendData(globalPage)
     .then((data)=> {
     
@@ -101,16 +101,10 @@ function onPaginationChoice(e) {
         renderPaginationButtons(data.total_pages, data.page);
     })
     .catch(error => console.log(error));
-  
-    // makeButtonActive(e.target);
 }
 
 function resetPage() {
     cardsContainer.innerHTML = '';
-}
-
-function makeButtonActive(btn) {
-    btn.classList.add('is-active');
 }
 
 export { renderPaginationButtons };
