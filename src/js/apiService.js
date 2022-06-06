@@ -3,13 +3,14 @@ import axios from 'axios';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '33da1ae0687d870981cf19ad4813876b';
 const TREND_URL= `${BASE_URL}/trending/movie/day`;
+const URL_ID = `${BASE_URL}/movie/`
 let allGenres;
+let movieInfo;
 
 export default {
    async fetchTrendData(page = 1){
         const data =await axios.get(`${TREND_URL}?api_key=${API_KEY}&page=${page}`);
           console.log(data.data);
-
         return data.data;
     },
 
@@ -17,5 +18,11 @@ export default {
     const genres = await axios.get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
     allGenres = genres.data;
     return allGenres;
+},
+async fetchFullMovieInfo(id){
+   const movieFullInfo = await axios.get(`${URL_ID}/{id}?api_key=${API_KEY}`);
+   movieInfo = movieFullInfo.data;
+   console.log(movieInfo);
+   return movieInfo;
 }
 };
