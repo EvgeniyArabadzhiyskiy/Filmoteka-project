@@ -20,7 +20,7 @@ export default {
     return allGenres;
 },
 async fetchFullMovieInfo(id){
-   const movieFullInfo = await axios.get(`${URL_ID}/{id}?api_key=${API_KEY}`);
+   const movieFullInfo = await axios.get(`${URL_ID}/${id}?api_key=${API_KEY}`);
    movieInfo = movieFullInfo.data;
    console.log(movieInfo);
    return movieInfo;
