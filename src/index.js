@@ -1,5 +1,6 @@
 import apiService from "./js/apiService";
 import renderGallery from "./js/templates/movieGallary";
+import renderGallery from "./js/templates/darkThema";
 import { renderPaginationButtons } from "./js/pagination";
 
 let allGenres;
