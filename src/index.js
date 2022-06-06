@@ -1,3 +1,18 @@
 import apiService from "./js/apiService";
+import renderGallery from "./js/templates/movieGallary";
+import { renderPaginationButtons } from "./js/pagination";
 
-apiService.fetchData();
+let allGenres;
+
+const mainContainer = document.querySelector('.movie-card__container');
+apiService.fetchGenresList().then((data)=> {
+  allGenres = data;
+})
+apiService.fetchTrendData().then((data)=> {
+// console.log("apiService.fetchTrendData ~ data", data.results);
+
+  renderGallery(data.results, allGenres);
+
+  renderPaginationButtons(data.total_pages, data.page);
+
+}).catch(error => console.log(error));

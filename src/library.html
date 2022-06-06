@@ -1,47 +1,27 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./sass/index.scss" />
     <script type="module" src="./index.js"></script>
-</head>
+  </head>
+
 
 <body>
-        <header class="library-header">
-  <div class=" header-container">
   
-        <div class="library-navigation">
-          <div class="header-logo">
-            <a href="/src/index.html" lang="en" class="logo">
-                <svg class="header__svg" width="24" height="24">
-                    <use
-                      href=".//images/SVG-sprites/symbol-sprites.svg#icon-film"
-                    ></use>
-                  </svg>
-                <span class="logo_text">Filmoteka</span></a>
-          </div>  
-        <ul class="library-navigation__list">
-          <li class="library-navigation__item"><a href="/src/index.html"class="library-navigation__link">HOME</a></li>
-          <li class="library-navigation__item library-active"><a href="" class="library-navigation__link">MY LIBRARY</a></li>
-        </ul>
-        </div>
-        
-        <div class="library-check">
-          <button class="library-btn library-btn__isActive" data-action="watched">WATCHED</button>
-          <button class="library-btn" data-action="queue">QUEUE</button>
-        </div>
-        
-      </div>
-          </header>  
-
-          <include src="./partials/home/footer.html"></include> 
+      <include src="./partials/library/library-header.html"></include>
+      <include src="./partials/library/library-container.html"></include>
+      <include src="./partials/home/footer.html"></include> 
     
 </body>
+
 
 </html>
