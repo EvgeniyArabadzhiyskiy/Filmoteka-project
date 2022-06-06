@@ -22,17 +22,18 @@ function renderPaginationButtons(allPages, page) {
         paginationMarkup += `<li class="pagination-item pagination-arrow">&laquo</li>`;
     }
 
-    if (page > 2) {
-        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (page > 3) {
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             paginationMarkup += `<li class="pagination-item pagination-pages">1</li>`;
         }
-        if (page > 3) {
-            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            paginationMarkup += `<li class="pagination-item">...</li>`;
-            }
-            if (beforePreviousPage > 0) {
-                paginationMarkup += `<li class="pagination-item pagination-pages">${beforePreviousPage}</li>`;
-            }
+         }
+
+    if (page > 2) {
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && page > 4) {
+        paginationMarkup += `<li class="pagination-item">...</li>`;
+        }
+        if (beforePreviousPage > 0) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">${beforePreviousPage}</li>`;
         }
     }
     
@@ -50,7 +51,7 @@ function renderPaginationButtons(allPages, page) {
         
         if (page < allPages - 2) {
             paginationMarkup += `<li class="pagination-item pagination-pages">${afterNextPage}</li>`;
-            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && page < allPages - 3) {
             paginationMarkup += `<li class="pagination-item">...</li>`;
             }
         }
