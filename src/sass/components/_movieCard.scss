@@ -71,3 +71,19 @@
   line-height: 1.33;
   color: #ff6b08;
 }
+
+.imagePoster{
+    width: 280px;
+    height: 420px;
+  
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+    height: 504px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 309px;
+    height: 464px;
+  }
+  
+}

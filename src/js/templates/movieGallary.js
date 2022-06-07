@@ -29,7 +29,7 @@ export default function renderGallery(results, { genres }) {
 		const releaseYear = release_date.split("-").slice(0, 1);
       return `<li  class="movie-card-item">
 				<div class="movie-poster__container">
-					<img src="${imagePoster}" alt="poster" data-id="${id}"/>
+					<img src="${imagePoster}" alt="poster" class="imagePoster" data-id="${id}"/>
 				</div>
 				<div class="movie-card-item__info">
 					<h2 class="movie-card-item__title" data-id="${id}">${original_title}</h2>
