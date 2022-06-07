@@ -4,6 +4,7 @@ import renderMovieModal from './templates/renderMovieModal';
 const modal = document.querySelector('.backdrop')
 const filmList = document.querySelector('.movie-card-list')
 const modalMovieContainer = document.querySelector('.film-content');
+const modalButtonClose = document.querySelector('.modal__button-close')
 
 
 
@@ -21,6 +22,9 @@ if(e.target.nodeName !== "IMG" && e.target.nodeName!== "H2"){
 } 
 
 modal.classList.remove('is-hidden')
+modalButtonClose.addEventListener('click', modalClose)
+window.addEventListener("keyup", press )
+
 
 const filmId = e.target.dataset.id
 
@@ -33,5 +37,20 @@ modalMovieContainer.insertAdjacentHTML("beforeend", createMarkupFilmInModal)
 }
 
 
+function press(e){
+    if(e.code === "Escape"){
+    modalClose()
+    window.removeEventListener("keyup", press )
+    modalButtonClose.removeEventListener('click', modalClose)
+    }
+  return
+}
 
 
+
+function modalClose(e){
+    modal.classList.add('is-hidden')
+    window.removeEventListener("keyup", press)
+    modalButtonClose.removeEventListener('click', modalClose)
+    modalMovieContainer.innerHTML = ""
+}
