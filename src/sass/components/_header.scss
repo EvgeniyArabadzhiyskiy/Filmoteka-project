@@ -181,6 +181,13 @@ body.dark {
         background-color: #19171784;
         color: #FFFFFF;
     }
+    ul{
+        color: black;
+    }
+    p{
+        transition: color 0.2s linear;
+        color: #f7e9e9;
+    }
 }
 
 

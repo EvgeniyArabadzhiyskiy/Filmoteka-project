@@ -1,6 +1,6 @@
+import  "./js/templates/darkThema";
 import apiService from "./js/apiService";
 import renderGallery from "./js/templates/movieGallary";
-import  "./js/templates/darkThema";
 import { renderPaginationButtons } from "./js/pagination";
 import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open"
