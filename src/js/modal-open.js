@@ -4,6 +4,7 @@ import { addToWatched } from './addToWatched';
 import { addToQueue } from './addToQueue';
 import removeFromWatched from './removeFromWatched';
 import removeFromQueue from './removeFromQueue';
+import {watchedArr} from './addToWatched'
 
 const modal = document.querySelector('.backdrop');
 const filmList = document.querySelector('.movie-card-list');
@@ -38,6 +39,19 @@ async function onClick(e) {
 
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
+    console.log('watchedArr', watchedArr);
+    
+    watchedArr.forEach(obj => {
+        if (obj.id === Number(filmId)) {
+            addToWatchedBtn.classList.add('pressed');
+            addToWatchedBtn.textContent = 'Remove from Watched';
+        }
+        else {
+            addToWatchedBtn.classList.remove('pressed');
+            addToWatchedBtn.textContent = 'Add to Watched'
+         }
+    });
+
 
     addToWatchedBtn.addEventListener('click', () => {
         addToWatchedBtn.classList.toggle('pressed');
