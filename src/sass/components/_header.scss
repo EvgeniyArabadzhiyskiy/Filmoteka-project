@@ -10,7 +10,6 @@
     background-position: center;
     background-size: cover;
     max-width: 1600px;
-    width: 100vw;
     @media (min-resolution: 2dppx) {
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/home/heder-home320@2x-min.jpg);
     }
@@ -109,6 +108,7 @@
     padding: 5px;
     margin-bottom: 16px;
     color: #FFFFFF;
+    transition: border-color 0.5s linear;
     &::placeholder {
         font-weight: 400;
         font-size: 14px;
@@ -116,6 +116,9 @@
         align-items: center;
         color: #FFFFFF;
     }
+   &:hover, &:focus{
+        border-color: #FF6B01;
+    } 
     @media screen and (min-width: 768px) {
         max-width: 336px;
     }
@@ -163,33 +166,6 @@ button[type=submit] {
 }
 
 //-----------------------------dark
-body{
-    transition: background 0.2s linear;
-}
-
-.footer{
-    transition: background 0.2s linear;
-    transition: color 0.2s linear;
-}
-
-body.dark {
-    background-color: #19171784;
-    main{
-        color: #FFFFFF;
-    }
-    footer{
-        background-color: #19171784;
-        color: #FFFFFF;
-    }
-    ul{
-        color: black;
-    }
-    p{
-        transition: color 0.2s linear;
-        color: #f7e9e9;
-    }
-}
-
 
 .label__wrap{
     position: absolute;
@@ -255,4 +231,44 @@ body.dark {
     position: absolute;
     top: 5;
     right: 7;
+}
+
+
+//--------------------------------------------------------------------setting Dark Thema
+
+body {
+    transition: background 0.2s linear;
+}
+
+.footer {
+    transition: background 0.2s linear;
+    transition: color 0.2s linear;
+}
+
+body.dark {
+    background-color: #19171784;
+
+    main {
+        transition: color 0.2s linear;
+
+        .movie-card-item__text {
+            color: #FFFFFF;
+        }
+
+        .film-content {
+            background-color: hwb(0 64% 36% / 0.719);
+        }
+        .modal__button-close{
+            background-color: transparent;
+        }
+    }
+
+    footer {
+        background-color: #19171784;
+        color: #FFFFFF;
+    }
+
+    ul {
+        color: black;
+    }
 }
