@@ -1,5 +1,6 @@
 import apiService from "./apiService";
 import renderGallery from "./templates/movieGallary";
+import { input } from "./apiService";
 
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
@@ -94,14 +95,25 @@ function onPaginationChoice(e) {
         allGenres = data;
     })
 
-    apiService.fetchTrendData(globalPage)
-    .then((data)=> {
-    
-        renderGallery(data.results,allGenres);
+    if (input.value) {
+        apiService.movieSearch(globalPage)
+        .then((data)=> {
         
-        renderPaginationButtons(data.total_pages, data.page);
-    })
-    .catch(error => console.log(error));
+            renderGallery(data.results,allGenres);
+            
+            renderPaginationButtons(data.total_pages, data.page);
+        })
+        .catch(error => console.log(error));
+    } else {
+        apiService.fetchTrendData(globalPage)
+        .then((data)=> {
+        
+            renderGallery(data.results,allGenres);
+            
+            renderPaginationButtons(data.total_pages, data.page);
+        })
+        .catch(error => console.log(error));
+    }
 }
 
 function resetPage() {
@@ -109,3 +121,4 @@ function resetPage() {
 }
 
 export { renderPaginationButtons };
+
