@@ -24,7 +24,6 @@ export default function onSearchButton (e) {
             searchErrMsgEl.style.display = "none";
             clearGallery();
             renderGallery(data.results, allGenres);
-            renderPaginationButtons(data.total_pages, data.page);
             console.log("при сабмите", data.results)}
     })
     .catch(error => console.log(error));
