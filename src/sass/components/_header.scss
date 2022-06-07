@@ -1,4 +1,5 @@
 .header__container {
+    position: relative;
     min-width: 100%;
     height: 230px;
     padding-top: 40px;
@@ -159,4 +160,99 @@ button[type=submit] {
     @media screen and (min-width: 768px) {
         text-align: center;
     }
+}
+
+//-----------------------------dark
+body{
+    transition: background 0.2s linear;
+}
+
+.footer{
+    transition: background 0.2s linear;
+    transition: color 0.2s linear;
+}
+
+body.dark {
+    background-color: #19171784;
+    main{
+        color: #FFFFFF;
+    }
+    footer{
+        background-color: #19171784;
+        color: #FFFFFF;
+    }
+    ul{
+        color: black;
+    }
+    p{
+        transition: color 0.2s linear;
+        color: #f7e9e9;
+    }
+}
+
+
+.label__wrap{
+    position: absolute;
+}
+
+.checkbox  {
+    position: absolute;
+    opacity: 0;
+}
+
+.label{
+    position: absolute;
+    right: 10;
+    top: 190;
+
+    background-color: rgb(136, 102, 39);
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+
+    height: 26px;
+    width: 50px;
+
+    @media screen and (min-width: 768px) {
+            right: 20;
+                top: 170;
+        }
+}
+
+
+.ball{
+    position: absolute;
+    top: 2px;
+    left: 2px;
+
+    border-radius: 50%;
+    background-color: #e5b72e;
+    width: 22px;
+    height: 22px;
+
+    transition: transform 0.2s linear;
+}
+
+.checkbox:checked+.label .ball {
+    transform: translateX(24px);
+}
+
+.fa-moon {
+    fill: #FF6B01;
+}
+
+.moon-svg {
+    position: absolute;
+    top: 5;
+    left: 7;
+}
+
+.fa-sun {
+    fill: yellow;
+}
+
+.sun-svg {
+    position: absolute;
+    top: 5;
+    right: 7;
 }

@@ -12,11 +12,10 @@ const modalButtonClose = document.querySelector('.modal__button-close');
 
 
 
+
 export default function openModal(){
 
-
     filmList.addEventListener('click', onClick);
-
 
 }
 
@@ -63,6 +62,7 @@ if(e.target.nodeName !== "IMG" && e.target.nodeName!== "H2"){
             removeFromQueue(filmId);
         }
     });
+
 }
 
 
@@ -83,4 +83,5 @@ function modalClose(e){
     modalButtonClose.removeEventListener('click', modalClose);
     modalMovieContainer.innerHTML = "";
 }
+
 
