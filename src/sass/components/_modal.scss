@@ -1,3 +1,7 @@
+body.modal-open {
+    overflow: hidden;
+}
+
 .backdrop {
     position: fixed;
     top: 0;
@@ -53,9 +57,6 @@
     background-color: var(--white-color);
 }
 
-// .modal-close__icon {
-//     fill: #000000;
-// }
 .modal__img {
     border: 1px solid var(--black-color);
     border-radius: 5px;
