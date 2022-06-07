@@ -1,7 +1,16 @@
-import { IMG_URL } from "./movieGallary";
+// import { IMG_URL } from "./movieGallary";
+const IMG_URL= `https://image.tmdb.org/t/p/w500`;
+import noPoster from '../../images/no-poster.jpg';
 const modalMovieContainer = document.querySelector('.film-content');
  
 export default function renderMovieModal({poster_path, original_title, vote_average,vote_count, popularity, overview, genres}) {
+    let imagePoster = poster_path ? `${IMG_URL}${poster_path}` : noPoster;
+    if (overview === "") {
+        overview = "Sorry, no description for the movie.";
+    }
+    if (original_title === "") {
+        original_title = "Sorry, no title for the movie.";
+    }
     const genresNames = genres.reduce((acc, { name }, index) => {
         if (!genres.length) {
           return acc;
@@ -17,7 +26,7 @@ export default function renderMovieModal({poster_path, original_title, vote_aver
         }
         return acc;
       },'');	
-return `<img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="" width="280" height="357" class="modal__img">
+return `<img src="${imagePoster}" alt="" width="280" height="357" class="modal__img">
 <div class="info-box">
     <h2 class="film__title">${original_title}</h2>
 <div>
@@ -50,7 +59,7 @@ return `<img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="" width="2
                 <p class="film__text">${original_title}</p>
             </li>
             <li class="film__item">
-                <p class="film__text">${genresNames}</p>
+                <p class="film__text">${genresNames?genresNames:"No genres"}</p>
             </li>
         </ul>
     </div>

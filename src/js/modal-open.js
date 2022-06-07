@@ -11,29 +11,24 @@ const modalMovieContainer = document.querySelector('.film-content');
 const modalButtonClose = document.querySelector('.modal__button-close');
 
 
-
-
 export default function openModal(){
 
-    filmList.addEventListener('click', onClick);
+    filmList.addEventListener('click', onClick)
 
 }
 
-async function onClick(e){
-  
-if(e.target.nodeName !== "IMG" && e.target.nodeName!== "H2"){
-    return
-} 
+async function onClick(e) {
 
-    modal.classList.remove('is-hidden');
-    modalButtonClose.addEventListener('click', modalClose);
-    window.addEventListener("keyup", press);
-
+    if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
+        return
+    }
+    modal.classList.remove('is-hidden')
+    modalButtonClose.addEventListener('click', modalClose)
+    window.addEventListener("keyup", press)
 
     const filmId = e.target.dataset.id;
 
     const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
-
 
     const createMarkupFilmInModal = await renderMovieModal(fullMovieInfo);
 
@@ -72,9 +67,8 @@ function press(e){
         window.removeEventListener("keyup", press);
         modalButtonClose.removeEventListener('click', modalClose);
     }
-  return
+    return
 }
-
 
 
 function modalClose(e){
@@ -83,5 +77,4 @@ function modalClose(e){
     modalButtonClose.removeEventListener('click', modalClose);
     modalMovieContainer.innerHTML = "";
 }
-
 
