@@ -26,9 +26,11 @@ async fetchFullMovieInfo(id){
    // console.log(movieInfo);
    return movieInfo;
 },
-async movieSearch(){
-   const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${input.value}`);
-   console.log(foundMovies.data);
+async movieSearch(page = 1){
+   const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${input.value}`);
+   // console.log(foundMovies.data);
    return foundMovies.data;
 }
 };
+
+export {input};
