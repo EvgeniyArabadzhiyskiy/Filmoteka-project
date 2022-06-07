@@ -5,10 +5,13 @@ import { renderPaginationButtons } from "./js/pagination";
 import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open"
 
+
 let allGenres;
 const searchFormEl = document.querySelector(".form__search");
 const cardListEl = document.querySelector(".movie-card-list");
 const searchErrMsgEl = document.querySelector(".search__error");
+const addToWatchedBtn = document.querySelector('.btn-watched');
+
 
 openModal()
 
