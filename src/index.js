@@ -5,12 +5,13 @@ import { renderPaginationButtons } from "./js/pagination";
 import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
-
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 let allGenres;
 const addToWatchedBtn = document.querySelector('.btn-watched');
 
-
+NProgress.start();
 openModal()
 
 const mainContainer = document.querySelector('.movie-card__container');
@@ -25,7 +26,7 @@ apiService.fetchTrendData().then((data)=> {
   renderPaginationButtons(data.total_pages, data.page);
 
 }).catch(error => console.log(error));
-
+NProgress.done();
 
 
 
