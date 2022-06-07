@@ -8,47 +8,48 @@ const modalButtonClose = document.querySelector('.modal__button-close')
 
 
 
-export default function openModal(){
+export default function openModal() {
 
 
-filmList.addEventListener('click', onClick)
+    filmList.addEventListener('click', onClick)
 
 }
 
-async function onClick(e){
-  
-if(e.target.nodeName !== "IMG" && e.target.nodeName!== "H2"){
-    return
-} 
+async function onClick(e) {
 
-modal.classList.remove('is-hidden')
-modalButtonClose.addEventListener('click', modalClose)
-window.addEventListener("keyup", press )
-
-
-const filmId = e.target.dataset.id
-
-const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId)
-
-
-const createMarkupFilmInModal = await renderMovieModal(fullMovieInfo)
-
-modalMovieContainer.insertAdjacentHTML("beforeend", createMarkupFilmInModal)
-}
-
-
-function press(e){
-    if(e.code === "Escape"){
-    modalClose()
-    window.removeEventListener("keyup", press )
-    modalButtonClose.removeEventListener('click', modalClose)
+    if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
+        return
     }
-  return
+    document.body.classList.add("modal-open");
+    modal.classList.remove('is-hidden')
+    modalButtonClose.addEventListener('click', modalClose)
+    window.addEventListener("keyup", press)
+
+
+    const filmId = e.target.dataset.id
+
+    const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId)
+
+
+    const createMarkupFilmInModal = await renderMovieModal(fullMovieInfo)
+
+    modalMovieContainer.insertAdjacentHTML("beforeend", createMarkupFilmInModal)
+}
+
+
+function press(e) {
+    if (e.code === "Escape") {
+        modalClose()
+        window.removeEventListener("keyup", press)
+        modalButtonClose.removeEventListener('click', modalClose)
+    }
+    return
 }
 
 
 
-function modalClose(e){
+function modalClose(e) {
+    document.body.classList.remove("modal-open");
     modal.classList.add('is-hidden')
     window.removeEventListener("keyup", press)
     modalButtonClose.removeEventListener('click', modalClose)
