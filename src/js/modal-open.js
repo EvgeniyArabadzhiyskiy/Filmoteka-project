@@ -1,19 +1,16 @@
 import apiService from './apiService'
 import renderMovieModal from './templates/renderMovieModal';
-import { addToWatched } from './addToWatched';
-import { addToQueue } from './addToQueue';
-import removeFromWatched from './removeFromWatched';
-import removeFromQueue from './removeFromQueue';
+import addToLibrary  from './addToLibrary';
+import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import {watchedArr} from './addToWatched'
-
 
 const modal = document.querySelector('.backdrop');
 const filmList = document.querySelector('.movie-card-list');
 const modalMovieContainer = document.querySelector('.film-content');
 const modalButtonClose = document.querySelector('.modal__button-close');
-
+let watchedArr = JSON.parse(localStorage.getItem('watched'))? JSON.parse(localStorage.getItem('watched')) : [];
+let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) :[];
 
 export default function openModal() {
 
@@ -45,8 +42,9 @@ async function onClick(e) {
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
     console.log('watchedArr', watchedArr);
+    console.log('queueArr', queueArr);
     
-    watchedArr.forEach(obj => {
+        watchedArr.forEach(obj => {
         if (obj.id === Number(filmId)) {
             addToWatchedBtn.classList.add('pressed');
             addToWatchedBtn.textContent = 'Remove from Watched';
@@ -55,27 +53,40 @@ async function onClick(e) {
             addToWatchedBtn.classList.remove('pressed');
             addToWatchedBtn.textContent = 'Add to Watched'
          }
+        });
+    queueArr.forEach(obj => {
+        if (obj.id === Number(filmId)) {
+            addToQueueBtn.classList.add('pressed');
+            addToQueueBtn.textContent = 'Remove from Queue';
+        }
+        else {
+            addToQueueBtn.classList.remove('pressed');
+            addToQueueBtn.textContent = 'Add to Queue'
+         }
     });
+    
+    
 
 
     addToWatchedBtn.addEventListener('click', () => {
         addToWatchedBtn.classList.toggle('pressed');
         if (addToWatchedBtn.classList.contains('pressed')) {
             addToWatchedBtn.textContent = 'Remove from Watched';
-            addToWatched(fullMovieInfo);
+            addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
         } else {
             addToWatchedBtn.textContent = 'Add to Watched';
-            removeFromWatched(filmId);
+            removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
         }
+        
     });
     addToQueueBtn.addEventListener('click', () => {
         addToQueueBtn.classList.toggle('pressed');
         if (addToQueueBtn.classList.contains('pressed')) {
             addToQueueBtn.textContent = 'Remove from Queue';
-            addToQueue(fullMovieInfo);
+            addToLibrary(fullMovieInfo, queueArr, addToQueueBtn.dataset.target);
         } else {
             addToQueueBtn.textContent = 'Add to Queue';
-            removeFromQueue(filmId);
+            removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
         }
     });
 
