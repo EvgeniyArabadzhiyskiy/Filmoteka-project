@@ -4,7 +4,10 @@ import { addToWatched } from './addToWatched';
 import { addToQueue } from './addToQueue';
 import removeFromWatched from './removeFromWatched';
 import removeFromQueue from './removeFromQueue';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 import {watchedArr} from './addToWatched'
+
 
 const modal = document.querySelector('.backdrop');
 const filmList = document.querySelector('.movie-card-list');
@@ -19,7 +22,7 @@ export default function openModal() {
 }
 
 async function onClick(e) {
-
+    NProgress.start();
     if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
         return
     }
@@ -37,6 +40,8 @@ async function onClick(e) {
 
     modalMovieContainer.insertAdjacentHTML("beforeend", createMarkupFilmInModal);
 
+    NProgress.done();
+    
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
     console.log('watchedArr', watchedArr);
