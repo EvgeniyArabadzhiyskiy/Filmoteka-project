@@ -14,7 +14,7 @@ apiService.fetchGenresList().then((data)=> {
     allGenres = data;
 });
 
-searchFormEl.addEventListener('submit', onSearchButton);
+searchFormEl?.addEventListener('submit', onSearchButton);
 
 export default function onSearchButton (e) {
     e.preventDefault();
