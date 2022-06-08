@@ -3,7 +3,6 @@ const IMG_URL= `https://image.tmdb.org/t/p/w500`;
 const mainContainer = document.querySelector('.movie-card-list');
  
 export default function renderGallery(results, dataGenres) {
-    console.log("renderGallery ~ dataGenres", dataGenres);
 	const genres = dataGenres?.genres
 	const markup = results.map(({ poster_path, original_title, release_date, genre_ids, id }) => {
 		if (original_title === "") {
