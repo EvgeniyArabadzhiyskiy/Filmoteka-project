@@ -71,8 +71,8 @@ return `<img src="${imagePoster}" alt="" width="280" height="357" class="modal__
     </div>
 </div>
 <div class="btn-box">
-                    <button class="btn-watched">add to <br class="transfer" />Watched</button>
-                    <button class="btn-qweqwe">add to queue</button>
+                    <button class="btn-watched" data-target="watched">add to <br class="transfer" />Watched</button>
+                    <button class="btn-qweqwe" data-target="queue">add to queue</button>
                     </div>
         </div>`;}
    // }).join(''); 
