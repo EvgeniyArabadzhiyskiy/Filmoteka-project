@@ -1,0 +1,23 @@
+#nprogress .bar {
+    background: #ff6b08;
+  }
+  #nprogress .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 50%;
+  }
+  #nprogress .spinner-icon {
+    width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+  
+    border: solid 4px transparent;
+    border-top-color: #ff6b08;
+    border-left-color: #ff6b08;
+    border-radius: 50%;
+  
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+            animation: nprogress-spinner 400ms linear infinite;
+  }
