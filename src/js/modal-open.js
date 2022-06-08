@@ -3,7 +3,7 @@ import renderMovieModal from './templates/renderMovieModal';
 import addToLibrary  from './addToLibrary';
 import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
+//import 'nprogress/nprogress.css';
 
 const modal = document.querySelector('.backdrop');
 const filmList = document.querySelector('.movie-card-list');

@@ -3,7 +3,7 @@ import renderGallery from "./templates/movieGallary";
 import { renderPaginationButtons } from "./pagination";
 import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
+//import 'nprogress/nprogress.css';
 
 const searchFormEl = document.querySelector(".form__search");
 const cardListEl = document.querySelector(".movie-card-list");
