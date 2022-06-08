@@ -6,6 +6,7 @@ import removeFromWatched from './removeFromWatched';
 import removeFromQueue from './removeFromQueue';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import {watchedArr} from './addToWatched'
 
 
 const modal = document.querySelector('.backdrop');
@@ -43,6 +44,19 @@ async function onClick(e) {
     
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
+    console.log('watchedArr', watchedArr);
+    
+    watchedArr.forEach(obj => {
+        if (obj.id === Number(filmId)) {
+            addToWatchedBtn.classList.add('pressed');
+            addToWatchedBtn.textContent = 'Remove from Watched';
+        }
+        else {
+            addToWatchedBtn.classList.remove('pressed');
+            addToWatchedBtn.textContent = 'Add to Watched'
+         }
+    });
+
 
     addToWatchedBtn.addEventListener('click', () => {
         addToWatchedBtn.classList.toggle('pressed');
