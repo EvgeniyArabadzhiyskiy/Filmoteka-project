@@ -45,24 +45,18 @@ async function onClick(e) {
     console.log('queueArr', queueArr);
     
         watchedArr.forEach(obj => {
-        if (obj.id === Number(filmId)) {
+            if (obj.id === Number(filmId)) {
+                console.log('this film is in the watched');
             addToWatchedBtn.classList.add('pressed');
             addToWatchedBtn.textContent = 'Remove from Watched';
         }
-        else {
-            addToWatchedBtn.classList.remove('pressed');
-            addToWatchedBtn.textContent = 'Add to Watched'
-         }
+        
         });
     queueArr.forEach(obj => {
         if (obj.id === Number(filmId)) {
             addToQueueBtn.classList.add('pressed');
             addToQueueBtn.textContent = 'Remove from Queue';
         }
-        else {
-            addToQueueBtn.classList.remove('pressed');
-            addToQueueBtn.textContent = 'Add to Queue'
-         }
     });
     
     
