@@ -1,6 +1,7 @@
 import apiService from "./apiService";
 import renderGallery from "./templates/movieGallary";
-import renderPaginationButtons from "./apiService";
+import { renderPaginationButtons } from "./pagination";
+import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
@@ -24,7 +25,9 @@ export default function onSearchButton (e) {
         } else {
             searchErrMsgEl.style.display = "none";
             clearGallery();
+            resetPagination();
             renderGallery(data.results, allGenres);
+            renderPaginationButtons(data.total_pages, data.page);
 
             NProgress.done();
             
