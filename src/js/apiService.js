@@ -5,7 +5,7 @@ const API_KEY = '33da1ae0687d870981cf19ad4813876b';
 const TREND_URL= `${BASE_URL}/trending/movie/day`;
 const URL_ID = `${BASE_URL}/movie/`;
 let allGenres;
-const input = document.querySelector(".form__search").elements.search;
+const input = document.querySelector(".form__search")?.elements.search;
 let movieInfo;
 
 export default {
