@@ -1,5 +1,7 @@
+import  "./templates/darkThema";
 import openModal from './modalLibrary';
 import noPoster from '../images/no-poster.jpg';
+
 const IMG_URL = `https://image.tmdb.org/t/p/w500`;
 let data = [];
 

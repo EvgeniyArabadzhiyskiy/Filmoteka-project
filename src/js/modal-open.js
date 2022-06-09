@@ -44,7 +44,7 @@ async function onClick(e) {
     console.log('watchedArr', watchedArr);
     console.log('queueArr', queueArr);
     
-        watchedArr.forEach(obj => {
+    watchedArr.forEach(obj => {
             if (obj.id === Number(filmId)) {
                 console.log('this film is in the watched');
             addToWatchedBtn.classList.add('pressed');
