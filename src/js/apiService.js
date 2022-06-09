@@ -5,7 +5,7 @@ const API_KEY = '33da1ae0687d870981cf19ad4813876b';
 const TREND_URL = `${BASE_URL}/trending/movie/day`;
 const URL_ID = `${BASE_URL}/movie/`;
 
-export const input = document.querySelector('#search-query');
+
 
 export default {
   async fetchTrendData(page = 1) {
@@ -37,6 +37,7 @@ export default {
 
   async movieSearch(page = 1) {
     try {
+      const input = document.querySelector('#search-query');
       const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&page=${page}&query=${input.value}`);
     return foundMovies.data;
     } catch (error) {
