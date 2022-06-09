@@ -35,8 +35,9 @@
     &:last-child {
       margin-bottom: 0;
     }
+    
   }
-
+  
   @media screen and (min-width: 768px) {
     flex-basis: calc((100% - 2 * 32px) / 2);
     margin: 16px;
@@ -51,6 +52,9 @@
       margin-bottom: 0;
     }
   }
+}
+.movie-card-item:hover{
+  transform: scale(1.01);
 }
 .movie-card-item__title {
   text-transform: uppercase;
@@ -75,7 +79,7 @@
 .imagePoster{
     width: 280px;
     height: 420px;
-  
+    border-radius: 5px;
 
   @media screen and (min-width: 768px) {
     width: 336px;
