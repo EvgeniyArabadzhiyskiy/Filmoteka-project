@@ -6,13 +6,16 @@ import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 import NProgress from 'nprogress';
+import "./js/sliderTrendingMovies";
+import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
 //import 'nprogress/nprogress.css';
 
 let allGenres;
 const addToWatchedBtn = document.querySelector('.btn-watched');
+const filmList = document.querySelector('.movie-card-list'); 
 
 NProgress.start();
-openModal()
+openModal(filmList);
 
 const mainContainer = document.querySelector('.movie-card__container');
 apiService.fetchGenresList().then((data)=> {
@@ -20,6 +23,7 @@ apiService.fetchGenresList().then((data)=> {
 })
 apiService.fetchTrendData().then((data)=> {
 // console.log("apiService.fetchTrendData ~ data", data.results);
+  renderMovieCardsSlider(data.results);
 
   renderGallery(data.results, allGenres);
 

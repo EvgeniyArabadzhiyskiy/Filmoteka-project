@@ -6,15 +6,15 @@ import NProgress from 'nprogress';
 //import 'nprogress/nprogress.css';
 
 const modal = document.querySelector('.backdrop');
-const filmList = document.querySelector('.movie-card-list');
+
 const modalMovieContainer = document.querySelector('.film-content');
 const modalButtonClose = document.querySelector('.modal__button-close');
 let watchedArr = JSON.parse(localStorage.getItem('watched'))? JSON.parse(localStorage.getItem('watched')) : [];
 let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) :[];
 
-export default function openModal() {
+export default function openModal(movieContainer) {
 
-    filmList.addEventListener('click', onClick)
+    movieContainer.addEventListener('click', onClick)
 
 }
 
