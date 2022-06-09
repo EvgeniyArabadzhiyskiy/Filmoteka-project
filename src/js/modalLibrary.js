@@ -8,6 +8,7 @@ import NProgress from 'nprogress';
 //import 'nprogress/nprogress.css';
 
 let film = [];
+let data = [];
 let active;
 
 const modal = document.querySelector('.backdrop');
