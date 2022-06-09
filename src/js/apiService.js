@@ -9,27 +9,39 @@ export const input = document.querySelector('#search-query');
 
 export default {
   async fetchTrendData(page = 1) {
-    const {data} = await axios.get(`${TREND_URL}?api_key=${API_KEY}&page=${page}`);
-    
-    return data;
+    try {
+      const {data} = await axios.get(`${TREND_URL}?api_key=${API_KEY}&page=${page}`);
+      return data;
+    } catch (error) {
+      console.error('Smth wrong with api:' + error.message);
+    } 
   },
 
   async fetchGenresList() {
-    const allGenres = await axios.get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
-    
-   return allGenres.data;
+    try {
+      const allGenres = await axios.get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+      return allGenres.data;
+    } catch (error) {
+      console.error('Smth wrong with api:' + error.message);
+    }
   },
 
   async fetchFullMovieInfo(id) {
-    const movieFullInfo = await axios.get(`${URL_ID}/${id}?api_key=${API_KEY}`);
-    
-    return movieFullInfo.data;
+    try {
+      const movieFullInfo = await axios.get(`${URL_ID}/${id}?api_key=${API_KEY}`);
+      return movieFullInfo.data;  
+    } catch (error) {
+      console.error('Smth wrong with api:' + error.message);
+    }
   },
 
   async movieSearch(page = 1) {
-    const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&page=${page}&query=${input.value}`);
-
+    try {
+      const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&page=${page}&query=${input.value}`);
     return foundMovies.data;
+    } catch (error) {
+      console.error('Smth wrong with api:' + error.message);
+    }
   },
 };
 
