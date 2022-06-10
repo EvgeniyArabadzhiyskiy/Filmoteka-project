@@ -1,20 +1,25 @@
 
 import Swiper, { Navigation, Pagination } from 'swiper';
 
+import "swiper/swiper.scss";
+import "swiper/modules/navigation/navigation.scss";
+import "swiper/modules/pagination/pagination.scss";
 
-// const swiper = new Swiper(".image-slider", {
-//     modules: [Navigation, Pagination],
-//     navigation: {
-//         nextEl: '.swiper-button-next',
-//         prevEl: '.swiper-button-prev',
-//     },
-//     pagination: {
-//         el: '.swiper-pagination',
-//         type: 'bullets',
-//     },
-//     slidesPerView: 5,
-//     spaceBetween: 10,
-// })
+const swiper = new Swiper(".image-slider", {
+    modules: [Navigation, Pagination],
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+    },
+    slidesPerView: 5,
+    spaceBetween: 10,
+})
+
+console.log(swiper);
 
 const modalOpenBtn = document.querySelector(".students-modal-btn");
 const studentsModal = document.querySelector(".backdrop-team");

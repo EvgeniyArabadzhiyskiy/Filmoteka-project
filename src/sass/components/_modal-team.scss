@@ -1,5 +1,6 @@
 .swiper {
-    display: none;
+    // width: 600px;
+    // height: 300px;
 }
 
 .backdrop-team {
@@ -32,8 +33,23 @@
     }
 
     @media screen and (min-width: 1024px) {
-        width: 814px;
-        height: auto;
+        width: 1200px;
+        height: 400px;
     }
 }
 
+.students-modal-btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: inherit;
+}
+
+.students-modal-btn:hover {
+    font-weight: 700;
+}
+
+.image-slider__image {
+width: 100px;
+height: 100px;
+}
