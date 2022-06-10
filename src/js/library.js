@@ -15,7 +15,7 @@ const refs = {
 if (localStorage.getItem('watched') === null) {
     refs.sectionLibrary.innerHTML = `<h3 class="empty-container">Sorry, but this section is still empty:(</h3>`;
 }
-openModal();
+openModal(refs.moviesList);
 onWatchedMoviesClick();
 
 refs.watchedMovies.addEventListener('click', onWatchedMoviesClick);
