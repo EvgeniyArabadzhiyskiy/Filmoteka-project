@@ -120,5 +120,9 @@ function resetPage() {
     cardsContainer.innerHTML = '';
 }
 
-export { renderPaginationButtons };
+function resetPagination() {
+    paginationList.innerHTML = '';
+}
 
+export { renderPaginationButtons };
+export { resetPagination };

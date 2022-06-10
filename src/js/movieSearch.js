@@ -1,8 +1,9 @@
 import apiService from "./apiService";
 import renderGallery from "./templates/movieGallary";
-import renderPaginationButtons from "./apiService";
+import { renderPaginationButtons } from "./pagination";
+import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
+
 
 const searchFormEl = document.querySelector(".form__search");
 const cardListEl = document.querySelector(".movie-card-list");
@@ -13,7 +14,7 @@ apiService.fetchGenresList().then((data)=> {
     allGenres = data;
 });
 
-searchFormEl.addEventListener('submit', onSearchButton);
+searchFormEl?.addEventListener('submit', onSearchButton);
 
 export default function onSearchButton (e) {
     e.preventDefault();
@@ -24,13 +25,16 @@ export default function onSearchButton (e) {
         } else {
             searchErrMsgEl.style.display = "none";
             clearGallery();
+            resetPagination();
             renderGallery(data.results, allGenres);
+            renderPaginationButtons(data.total_pages, data.page);
 
             NProgress.done();
             
             console.log("при сабмите", data.results)}
     })
     .catch(error => console.log(error));
+    NProgress.done();
 };
 
 
