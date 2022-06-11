@@ -14,7 +14,7 @@ import './js/helpers/back-to-top';
 
 let allGenres;
 const addToWatchedBtn = document.querySelector('.btn-watched');
-const filmList = document.querySelector('.movie-card-list'); 
+const filmList = document.querySelector('.movie-card-list');
 
 NProgress.start();
 openModal(filmList);
@@ -24,8 +24,8 @@ apiService.fetchGenresList().then((data) => {
   allGenres = data;
 })
 
-apiService.fetchTrendData().then((data)=> {
-// console.log("apiService.fetchTrendData ~ data", data.results);
+apiService.fetchTrendData().then((data) => {
+  // console.log("apiService.fetchTrendData ~ data", data.results);
   renderMovieCardsSlider(data.results);
 
   renderGallery(data.results, allGenres);
