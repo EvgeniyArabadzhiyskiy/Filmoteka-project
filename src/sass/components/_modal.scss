@@ -33,10 +33,11 @@ body.modal-open {
     left: 50%;
     visibility: visible;
     opacity: 1;
-    border-radius: 4px;
+    border-radius: 25px 25px 25px 25px;
     background-color: var(--white-color);
     transform: translate(-50%, -50%) scale(1);
     transition: opacity 250ms ease-in, visibility 250ms ease-in, transform 250ms ease-in;
+    box-shadow: 0px 0px 15px 15px var(--accent-color);
     @media screen and (min-width: 768px) and (max-width: 1024px) {
         width: 704px;
         height: auto;
@@ -46,6 +47,59 @@ body.modal-open {
         height: auto;
     }
 }
+
+// Анимация
+.slideDownIn {
+    animation-name: slideDownIn;
+    -webkit-animation-name: slideDownIn;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+}
+
+@keyframes slideDownIn {
+    0% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateY(8%);
+    }
+    65% {
+        transform: translateY(-4%);
+    }
+    80% {
+        transform: translateY(4%);
+    }
+    95% {
+        transform: translateY(-2%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slideDownIn {
+    0% {
+        -webkit-transform: translateY(-100%);
+    }
+    50% {
+        -webkit-transform: translateY(8%);
+    }
+    65% {
+        -webkit-transform: translateY(-4%);
+    }
+    80% {
+        -webkit-transform: translateY(4%);
+    }
+    95% {
+        -webkit-transform: translateY(-2%);
+    }
+    100% {
+        -webkit-transform: translateY(0%);
+    }
+}
+
 
 // <-- --------------------- -->
 .modal__button-close {
@@ -167,54 +221,41 @@ body.modal-open {
 }
 
 .btn-box button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-style: normal;
     font-weight: 500;
     line-height: 1.33;
     border-radius: 5px;
     text-transform: uppercase;
     text-align: center;
+    background-color: #F8F8F8;
+    box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border: none;
+    height: 45px;
+    @media screen and (min-width: 768px) {
+        width: 125px;
+    }
 }
 
 .btn-watched {
-    background-color: var(--accent-color);
-    border-radius: 5px;
-    padding: 6px 27px;
-    color: var(--white-color);
-    border: none;
     margin-right: 10px;
-    height: 45px;
     width: 110px;
     @media screen and (min-width: 768px) {
-        width: 125px;
-        padding: 14px 10px;
         margin-right: 15px;
     }
 }
 
 .btn-qweqwe {
-    background-color: var(--white-color);
-    border: 1px solid black;
-    padding: 13px 14px;
-    height: 45px;
     width: 113px;
-    @media screen and (min-width: 768px) {
-        width: 125px;
-        padding: 14px 20px;
-    }
 }
-.pressed{
-    padding: 0 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    color: var(--black-color);
-    background-color: #E0E0E0;
-    box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    @media screen and (min-width: 768px) {
-            width: 125px;
-        }
+
+button.pressed {
+    background-color: var(--accent-color);
+    color: var(--white-color);
 }
+
 .transfer {
     @media screen and (min-width: 768px) {
         display: none;
