@@ -1,8 +1,10 @@
+
 import "./darkThema";
 import "./cursor";
 import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN } from './paginationLibrary';
+
 
 let watched = [];
 let queue = [];
@@ -45,7 +47,7 @@ function onWatchedMoviesClick() {
         }
     }
     if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
-        renderLibrary(currWatched);
+        renderLibrary(currWatched);    
     }
     refs.pagination.innerHTML = '';
     if (watched.length > 9) {

@@ -7,6 +7,7 @@ import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 import NProgress from 'nprogress';
+
 import "./js/team-modal";
 import "./js/sliderTrendingMovies";
 import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
@@ -23,6 +24,7 @@ const filmList = document.querySelector('.movie-card-list');
 let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
 let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
 
+
 NProgress.start();
 openModal(filmList);
 
@@ -31,7 +33,8 @@ apiService.fetchGenresList().then((data) => {
   allGenres = data;
 })
 
-apiService.fetchTrendData().then((data)=> {
+apiService.fetchTrendData().then((data) => {
+ 
   renderMovieCardsSlider(data.results);
   renderGallery(data.results, allGenres);
 
