@@ -47,7 +47,7 @@
     margin-right: 10px;
     fill: transparent;
     stroke: #818181;
-    transition: stroke 500ms linear, transform 500ms ease-in-out 500ms;;
+    transition: stroke 100ms linear, transform 100ms ease-in-out 200ms;;
 }
 .header__svg:hover {
     stroke: var(--accent-color);
