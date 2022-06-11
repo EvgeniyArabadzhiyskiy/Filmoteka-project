@@ -1,4 +1,5 @@
-import "./js/templates/darkThema";
+import "./js/darkThema";
+import "./js/cursor";
 import apiService from "./js/apiService";
 import renderGallery from "./js/templates/movieGallary";
 import { renderPaginationButtons } from "./js/pagination";

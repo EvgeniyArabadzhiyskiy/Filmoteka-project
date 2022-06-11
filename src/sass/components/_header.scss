@@ -254,6 +254,10 @@ body {
 body.dark {
     background-color: #19171784;
 
+    header{
+        box-shadow: 0 15px 50px 20px rgba(255, 159, 4, 0.5);
+    }
+
     main {
         transition: color 0.2s linear;
 
@@ -267,11 +271,26 @@ body.dark {
         .modal__button-close{
             background-color: transparent;
         }
+                .style__thema {
+                    .swiper {
+                        background-color: transparent;
+                        font-weight: bold;
+                        .slider-title {
+                                color: #FFFFFF;
+                                font-size: 18px;
+                            }
+                    }
+                }
+    }
+
+    .follow-cursor{
+        border: 1px solid #FFFFFF;
     }
 
     footer {
         background-color: #19171784;
         color: #FFFFFF;
+        box-shadow: 0 15px 50px 20px rgba(255, 159, 4, 0.5);
     }
 
     ul {
