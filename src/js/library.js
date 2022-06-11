@@ -26,7 +26,6 @@ if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
 else {
     onWatchedMoviesClick();
 }
-console.log(watched);
 
 refs.watchedMovies.addEventListener('click', onWatchedMoviesClick);
 refs.queueMovies.addEventListener('click', onQueueMoviesClick);
@@ -77,5 +76,3 @@ function onQueueMoviesClick() {
     }
 
 }
-
-export { onWatchedMoviesClick, onQueueMoviesClick };
