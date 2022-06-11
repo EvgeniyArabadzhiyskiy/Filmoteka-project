@@ -9,6 +9,7 @@ import NProgress from 'nprogress';
 import "./js/team-modal";
 import "./js/sliderTrendingMovies";
 import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
+import './js/helpers/back-to-top';
 
 let allGenres;
 const addToWatchedBtn = document.querySelector('.btn-watched');

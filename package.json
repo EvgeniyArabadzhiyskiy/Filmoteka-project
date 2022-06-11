@@ -21,7 +21,8 @@
     "axios": "^0.27.2",
     "modern-normalize": "^1.1.0",
     "nprogress": "^0.2.0",
-    "swiper": "^8.2.2"
+    "swiper": "^8.2.2",
+    "vanilla-back-to-top": "^7.2.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
