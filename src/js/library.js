@@ -32,7 +32,11 @@ function onWatchedMoviesClick() {
             console.log(e);
         }
     }
-    renderLibrary(watched);
+    renderLibrary(currWatched);
+    refs.pagination.innerHTML = '';
+    if (watched.length > 0) {
+        renderPaginationBTN(watched);
+    }
 }
 
 function onQueueMoviesClick() {
@@ -46,5 +50,11 @@ function onQueueMoviesClick() {
             console.log(e);
         }
     }
-    renderLibrary(queue);
+
+    renderLibrary(currQueue);
+    refs.pagination.innerHTML = '';
+    if (queue.length > 0) {
+        renderPaginationBTN(queue);
+    }
+
 }
