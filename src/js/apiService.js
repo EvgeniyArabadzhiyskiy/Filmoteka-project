@@ -37,7 +37,6 @@ export default {
 
   async movieSearch(page = 1) {
     try {
-      
       const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&page=${page}&query=${input.value}`);
     return foundMovies.data;
     } catch (error) {

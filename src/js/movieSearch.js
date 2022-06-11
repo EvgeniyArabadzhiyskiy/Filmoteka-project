@@ -3,6 +3,7 @@ import renderGallery from "./templates/movieGallary";
 import { renderPaginationButtons } from "./pagination";
 import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
+import { input } from "./apiService";
 
 
 const searchFormEl = document.querySelector(".form__search");
@@ -18,9 +19,15 @@ searchFormEl?.addEventListener('submit', onSearchButton);
 
 export default function onSearchButton (e) {
     e.preventDefault();
+    if (!input.value) {
+        searchErrMsgEl.textContent = "Search field is empty. Enter movie name and push search button";
+        searchErrMsgEl.style.display = "block";
+        return;
+    };
     NProgress.start();
     apiService.movieSearch().then((data)=> {
         if (data.total_results === 0) {
+            searchErrMsgEl.textContent = "Search result is not successful. Enter the correct movie name and push search button";
             searchErrMsgEl.style.display = "block";
         } else {
             searchErrMsgEl.style.display = "none";
@@ -29,9 +36,7 @@ export default function onSearchButton (e) {
             renderGallery(data.results, allGenres);
             renderPaginationButtons(data.total_pages, data.page);
 
-            NProgress.done();
-            
-            console.log("при сабмите", data.results)}
+            NProgress.done()}
     })
     .catch(error => console.log(error));
     NProgress.done();
