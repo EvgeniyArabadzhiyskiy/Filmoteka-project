@@ -48,12 +48,9 @@ async function onClick(e) {
     
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
-    // console.log('watchedArr', watchedArr);
-    // console.log('queueArr', queueArr);
     
     watchedArr.forEach(obj => {
             if (obj.id === Number(filmId)) {
-                console.log('this film is in the watched');
             addToWatchedBtn.classList.add('pressed');
             addToWatchedBtn.textContent = 'Remove from Watched';
         }
