@@ -4,6 +4,12 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import "swiper/swiper.scss";
 import "swiper/modules/navigation/navigation.scss";
 import "swiper/modules/pagination/pagination.scss";
+import buildSlides from "./teamData";
+
+const sliderTrack = document.querySelector(".image-slider__wrapper");
+
+sliderTrack.innerHTML = buildSlides();
+
 
 const swiper = new Swiper(".image-slider", {
     modules: [Navigation, Pagination],
@@ -17,6 +23,23 @@ const swiper = new Swiper(".image-slider", {
     },
     slidesPerView: 5,
     spaceBetween: 10,
+    // breakpoints: {
+    //     // when window width is >= 320px
+    //     320: {
+    //         slidesPerView: 2,
+    //         spaceBetween: 20
+    //     },
+    //     // when window width is >= 480px
+    //     768: {
+    //         slidesPerView: 3,
+    //         spaceBetween: 10
+    //     },
+    //     // when window width is >= 640px
+    //     1024: {
+    //         slidesPerView: 5,
+    //         spaceBetween: 10
+    //     }
+    // }
 })
 
 console.log(swiper);
