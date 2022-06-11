@@ -87,7 +87,7 @@ async function onClick(e) {
             removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {
-                  
+                location.reload();                                                     //   Добавил
                 bodyOfLybrary && renderLibrary(watchedArr);                                  //   Добавил
                 refs.watchedMovies?.classList.add('library-btn__isActive');                 //   Добавил
                 refs.queueMovies?.classList.remove('library-btn__isActive');  
@@ -115,6 +115,7 @@ async function onClick(e) {
             removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
 
             if (isQueueActiv) {
+                location.reload();
                 bodyOfLybrary && renderLibrary(queueArr);                                         //   Добавил
                 refs.queueMovies?.classList.add('library-btn__isActive');                        //   Добавил
                 refs.watchedMovies?.classList.remove('library-btn__isActive');
