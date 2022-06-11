@@ -6,10 +6,10 @@ import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
 import "./js/team-modal";
 import "./js/sliderTrendingMovies";
 import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
+import './js/helpers/back-to-top';
 
 let allGenres;
 const addToWatchedBtn = document.querySelector('.btn-watched');
