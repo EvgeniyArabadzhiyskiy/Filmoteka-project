@@ -54,4 +54,9 @@ function renderPaginationBTN(arrays) {
     }
 }
 
+function resetPagination() {
+    paginationList.innerHTML = '';
+}
+
 export { renderPaginationBTN };
+export { resetPagination };

@@ -7,9 +7,10 @@ import NProgress from 'nprogress';
 import renderLibrary from './templates/movieCardLibrary';
 
 
-const refs = { //   Добавил
-    watchedMovies: document.querySelector('button[data-action="watched"]'), //   Добавил
-    queueMovies: document.querySelector('button[data-action="queue"]'), //   Добавил
+const refs = {                                                                  //   Добавил
+    watchedMovies: document.querySelector('button[data-action="watched"]'),     //   Добавил
+    queueMovies: document.querySelector('button[data-action="queue"]'),         //   Добавил
+
 }
 
 const modal = document.querySelector('.backdrop');
@@ -50,17 +51,16 @@ async function onClick(e) {
 
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
-    // console.log('watchedArr', watchedArr);
-    // console.log('queueArr', queueArr);
 
+    
     watchedArr.forEach(obj => {
         if (obj.id === Number(filmId)) {
-            console.log('this film is in the watched');
             addToWatchedBtn.classList.add('pressed');
             addToWatchedBtn.textContent = 'Remove from Watched';
         }
 
     });
+  
     queueArr.forEach(obj => {
         if (obj.id === Number(filmId)) {
             addToQueueBtn.classList.add('pressed');
@@ -83,9 +83,13 @@ async function onClick(e) {
             addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {
-                bodyOfLybrary && renderLibrary(watchedArr) //   Добавил
-                refs.watchedMovies?.classList.add('library-btn__isActive'); //   Добавил
-                refs.queueMovies?.classList.remove('library-btn__isActive'); //   Добавил
+
+  
+                bodyOfLybrary && renderLibrary(watchedArr);                              //   Добавил
+                refs.watchedMovies?.classList.add('library-btn__isActive');             //   Добавил
+                refs.queueMovies?.classList.remove('library-btn__isActive'); 
+             
+
             }
 
         } else {
@@ -93,10 +97,13 @@ async function onClick(e) {
             removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {
-                bodyOfLybrary && renderLibrary(watchedArr) //   Добавил
-                refs.watchedMovies?.classList.add('library-btn__isActive'); //   Добавил
-                refs.queueMovies?.classList.remove('library-btn__isActive');
-            } //   Добавил
+
+                                                                   
+                bodyOfLybrary && renderLibrary(watchedArr);                                  //   Добавил
+                refs.watchedMovies?.classList.add('library-btn__isActive');                 //   Добавил
+                refs.queueMovies?.classList.remove('library-btn__isActive');  
+            }                                                                           //   Добавил
+
         }
 
     });
@@ -110,9 +117,11 @@ async function onClick(e) {
 
 
             if (isQueueActiv) {
-                bodyOfLybrary && renderLibrary(queueArr) //   Добавил
-                refs.queueMovies?.classList.add('library-btn__isActive'); //   Добавил
-                refs.watchedMovies?.classList.remove('library-btn__isActive'); //   Добавил
+
+                bodyOfLybrary && renderLibrary(queueArr);                                        //   Добавил
+                refs.queueMovies?.classList.add('library-btn__isActive');                       //   Добавил
+                refs.watchedMovies?.classList.remove('library-btn__isActive');                  //   Добавил
+
             }
 
         } else {
@@ -120,8 +129,11 @@ async function onClick(e) {
             removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
 
             if (isQueueActiv) {
-                bodyOfLybrary && renderLibrary(queueArr) //   Добавил
-                refs.queueMovies?.classList.add('library-btn__isActive'); //   Добавил
+
+                
+                bodyOfLybrary && renderLibrary(queueArr);                                         //   Добавил
+                refs.queueMovies?.classList.add('library-btn__isActive');                        //   Добавил
+
                 refs.watchedMovies?.classList.remove('library-btn__isActive');
             }
         }

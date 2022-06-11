@@ -1,4 +1,5 @@
-import  "./templates/darkThema";
+import "./darkThema";
+import "./cursor";
 import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN } from './paginationLibrary';
@@ -12,19 +13,25 @@ const refs = {
     queueMovies: document.querySelector('button[data-action="queue"]'),
     sectionLibrary: document.querySelector('.section-library'),
     pagination: document.querySelector('.pagination'),
+    libraryNavigationLinkBtn: document.querySelector('.library-navigation__link'),
 }
 
 if (localStorage.getItem('watched') === null) {
     refs.sectionLibrary.innerHTML = `<h3 class="empty-container">Sorry, but this section is still empty:(</h3>`;
 }
 openModal(refs.moviesList);
-onWatchedMoviesClick();
-console.log(watched);
+if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
+    onQueueMoviesClick();
+}
+else {
+    onWatchedMoviesClick();
+}
 
 refs.watchedMovies.addEventListener('click', onWatchedMoviesClick);
 refs.queueMovies.addEventListener('click', onQueueMoviesClick);
 
 function onWatchedMoviesClick() {
+    sessionStorage.setItem('last-pressed-library-btn', 'watched');
     let currWatched = [];
     refs.watchedMovies.classList.add('library-btn__isActive');
     refs.queueMovies.classList.remove('library-btn__isActive');
@@ -37,14 +44,17 @@ function onWatchedMoviesClick() {
             console.log(e);
         }
     }
-    renderLibrary(currWatched);
+    if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
+        renderLibrary(currWatched);
+    }
     refs.pagination.innerHTML = '';
-    if (watched.length > 0) {
-      //  renderPaginationBTN(watched);
+    if (watched.length > 9) {
+       renderPaginationBTN(watched);
     }
 }
 
 function onQueueMoviesClick() {
+    sessionStorage.setItem('last-pressed-library-btn', 'queue');
     let currQueue = [];
     refs.queueMovies.classList.add('library-btn__isActive');
     refs.watchedMovies.classList.remove('library-btn__isActive');
@@ -57,11 +67,12 @@ function onQueueMoviesClick() {
             console.log(e);
         }
     }
-
-    renderLibrary(currQueue);
+    if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
+         renderLibrary(currQueue);
+     }
     refs.pagination.innerHTML = '';
-    if (queue.length > 0) {
-       // renderPaginationBTN(queue);
+    if (queue.length > 9) {
+       renderPaginationBTN(queue);
     }
 
 }
