@@ -47,7 +47,7 @@ function onWatchedMoviesClick() {
         }
     }
     if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
-        renderLibrary(currWatched);
+        renderLibrary(currWatched);    
     }
     refs.pagination.innerHTML = '';
     if (watched.length > 9) {
