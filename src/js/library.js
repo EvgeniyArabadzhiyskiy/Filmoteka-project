@@ -40,7 +40,7 @@ function onWatchedMoviesClick() {
     renderLibrary(currWatched);
     refs.pagination.innerHTML = '';
     if (watched.length > 0) {
-        renderPaginationBTN(watched);
+      //  renderPaginationBTN(watched);
     }
 }
 
@@ -57,9 +57,11 @@ function onQueueMoviesClick() {
             console.log(e);
         }
     }
+
     renderLibrary(currQueue);
     refs.pagination.innerHTML = '';
     if (queue.length > 0) {
-        renderPaginationBTN(queue);
+       // renderPaginationBTN(queue);
     }
+
 }
