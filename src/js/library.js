@@ -39,8 +39,8 @@ function onWatchedMoviesClick() {
     }
     renderLibrary(currWatched);
     refs.pagination.innerHTML = '';
-    if (watched.length > 0) {
-      //  renderPaginationBTN(watched);
+    if (watched.length > 9) {
+       renderPaginationBTN(watched);
     }
 }
 
@@ -60,8 +60,10 @@ function onQueueMoviesClick() {
 
     renderLibrary(currQueue);
     refs.pagination.innerHTML = '';
-    if (queue.length > 0) {
-       // renderPaginationBTN(queue);
+    if (queue.length > 9) {
+       renderPaginationBTN(queue);
     }
 
 }
+
+export { onWatchedMoviesClick, onQueueMoviesClick };
