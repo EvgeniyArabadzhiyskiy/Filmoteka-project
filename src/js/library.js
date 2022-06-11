@@ -1,4 +1,5 @@
-import  "./templates/darkThema";
+import "./darkThema";
+import "./cursor";
 import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
 

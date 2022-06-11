@@ -1,5 +1,6 @@
 @import './utils/common';
 @import './utils/reset';
+@import "./components/cursor";
 @import './components/header';
 @import './components/footer';
 @import './components/modal';
@@ -12,4 +13,4 @@
 @import './components/modal-team';
 @import './components/spiner';
 @import './components/sliderTrendingMovies';
-
+@import "./components/scrollbar";
