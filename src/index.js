@@ -7,6 +7,7 @@ import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 import NProgress from 'nprogress';
+
 import "./js/team-modal";
 import "./js/sliderTrendingMovies";
 import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";

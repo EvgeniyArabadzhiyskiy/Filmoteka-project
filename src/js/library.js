@@ -1,8 +1,10 @@
+
 import "./darkThema";
 import "./cursor";
 import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN } from './paginationLibrary';
+
 
 let watched = [];
 let queue = [];
