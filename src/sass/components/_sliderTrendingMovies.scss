@@ -3,16 +3,16 @@
 @import 'swiper/modules/navigation/navigation.scss';
 
 .mySwiper {
-    background-color: rgb(247, 247, 247);
-    padding-top: 10px;
-    padding-bottom: 20px;
+    background-color: var(--swiper-bg-color);
+    padding-top: 10px !important;
+    padding-bottom: 20px !important;
 }
 
 .slider-title {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     text-align: center;
 
-    color: #818181;
+    color: var(--svg-color);
     font-size: 14px;
     font-weight: 700;
     line-height: 2;
@@ -24,11 +24,27 @@
     width: 100px;
     border-radius: 5px;
     transition: transform 0.2s linear;
-    &:hover {
-        transform: scale(1.2);
+    @media screen and (min-width:768px) {
+        &:hover {
+                transform: scale(1.2);
+            }
     }
 }
 
 .swiper-btn-color {
-    color: var(--accent-color);
+    background-color: var(--swiper-btn-bg-color);
+    color: var(--accent-color) !important;
+    transition: color 0.2s linear, background-color 0.2s linear;
+    &:hover {
+        background-color: var(--swiper-btn-bg-color-hover);
+            color: var(--black-color) !important;
+    }
+}
+
+.swiper-btn-shape {
+    border-radius: 4px;
+    transition: transform 0.2s linear;
+        &:hover {
+            transform: scale(1.2);
+        }
 }
