@@ -2,7 +2,10 @@ import apiService from "./apiService";
 import renderGallery from "./templates/movieGallary";
 import { input } from "./apiService";
 import NProgress from 'nprogress';
+import {markupGallery} from '../js/templates/startPageMarkup';
 
+
+const mainContainer = document.querySelector('.movie-card-list');
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
 let globalPage = 0;
@@ -111,13 +114,14 @@ function onPaginationChoice(e) {
     } else {
         apiService.fetchTrendData(globalPage)
             .then((data) => {
-                NProgress.done();
-                renderGallery(data.results, allGenres);
-
+                const filmData = renderGallery(data.results, allGenres);
+                const markupMovie = markupGallery(filmData)
+                mainContainer.insertAdjacentHTML("beforeend", markupMovie);
                 renderPaginationButtons(data.total_pages, data.page);
+                console.log(markupMovie);
             })
             .catch(error => console.log(error));
-
+            NProgress.done();
     }
 }
 
