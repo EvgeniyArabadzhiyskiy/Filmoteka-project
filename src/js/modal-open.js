@@ -20,6 +20,7 @@ const modalMovieContainer = document.querySelector('.film-content');
 const modalButtonClose = document.querySelector('.modal__button-close');
 let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
 let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
+export { watchedArr, queueArr };
 
 export default function openModal(movieContainer) {
 
@@ -73,6 +74,7 @@ async function onClick(e) {
     const isQueueActiv = refs.queueMovies?.classList.contains('library-btn__isActive') //   Добавил
 
     addToWatchedBtn.addEventListener('click', () => {
+        
         addToWatchedBtn.classList.toggle('pressed');
         if (addToWatchedBtn.classList.contains('pressed')) {
             addToWatchedBtn.textContent = 'Remove from Watched';
@@ -82,7 +84,6 @@ async function onClick(e) {
                 bodyOfLybrary && renderLibrary(watchedArr);                              //   Добавил
                 refs.watchedMovies?.classList.add('library-btn__isActive');             //   Добавил
                 refs.queueMovies?.classList.remove('library-btn__isActive'); 
-             
 
             }
 

@@ -5,9 +5,9 @@ export function markupGallery(results) {
         return `<li  class="movie-card-item">
     				<div class="movie-poster__container">
     					<img src="${imagePoster}" alt="poster" class="imagePoster" data-id="${id}"/>
-						<div class="btn-box">
-							<button class="btn-watche" data-id="${id}" data-target="watched">add to <br class="transfer" />Watched</button>
-							<button class="btn-queue" data-id="${id}" data-target="queue">add to queue</button>
+						<div class="btn-box gallery">
+							<button class="btn-watche gallery-btn" data-id="${id}" data-target="watched">add to <br class="transfer" />Watched</button>
+							<button class="btn-queue gallery-btn" data-id="${id}" data-target="queue">add to queue</button>
 				  		</div> 
     				</div>
     				<div class="movie-card-item__info">
