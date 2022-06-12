@@ -4,7 +4,7 @@ import "./cursor";
 import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN } from './paginationLibrary';
-
+import "./team-modal";
 
 let watched = [];
 let queue = [];
