@@ -33,10 +33,6 @@ export default function renderGallery(results, dataGenres) {
 				<div class="movie-poster__container">
 					<img src="${imagePoster}" alt="poster" class="imagePoster" data-id="${id}"/>
 				</div>
-				<div class="btn-box">
-                    <button class="btn-watche" data-id="${id}" data-target="watched">add to <br class="transfer" />Watched</button>
-                    <button class="btn-queue" data-id="${id}" data-target="queue">add to queue</button>
-                </div>
 				<div class="movie-card-item__info">
 					<h2 class="movie-card-item__title" data-id="${id}">${original_title}</h2>
 					<p class="movie-card-item__text">${genresNamesUPGRADE} | ${releaseYear} </p>

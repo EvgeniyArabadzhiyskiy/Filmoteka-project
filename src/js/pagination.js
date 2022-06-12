@@ -92,12 +92,15 @@ function onPaginationChoice(e) {
     resetPage();
 
     NProgress.start();
+
     apiService.fetchGenresList().then((data) => {
+
         allGenres = data;
     })
 
     if (input.value) {
         apiService.movieSearch(globalPage)
+
             .then((data) => {
                 NProgress.done();
                 renderGallery(data.results, allGenres);
@@ -114,6 +117,7 @@ function onPaginationChoice(e) {
                 renderPaginationButtons(data.total_pages, data.page);
             })
             .catch(error => console.log(error));
+
     }
 }
 
