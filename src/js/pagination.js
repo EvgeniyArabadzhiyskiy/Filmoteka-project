@@ -1,6 +1,7 @@
 import apiService from "./apiService";
 import renderGallery from "./templates/movieGallary";
 import { input } from "./apiService";
+import NProgress from 'nprogress';
 
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
@@ -24,20 +25,20 @@ function renderPaginationButtons(allPages, page) {
     }
 
     if (page > 3) {
-            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             paginationMarkup += `<li class="pagination-item pagination-pages">1</li>`;
         }
-         }
+    }
 
     if (page > 2) {
         if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && page > 4) {
-        paginationMarkup += `<li class="pagination-item">...</li>`;
+            paginationMarkup += `<li class="pagination-item">...</li>`;
         }
         if (beforePreviousPage > 0) {
             paginationMarkup += `<li class="pagination-item pagination-pages">${beforePreviousPage}</li>`;
         }
     }
-    
+
     if (previousPage > 0) {
         paginationMarkup += `<li class="pagination-item pagination-pages">${previousPage}</li>`;
     }
@@ -49,18 +50,18 @@ function renderPaginationButtons(allPages, page) {
     }
 
     if (page < allPages - 1) {
-        
+
         if (page < allPages - 2) {
             paginationMarkup += `<li class="pagination-item pagination-pages">${afterNextPage}</li>`;
             if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && page < allPages - 3) {
-            paginationMarkup += `<li class="pagination-item">...</li>`;
+                paginationMarkup += `<li class="pagination-item">...</li>`;
             }
         }
         if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             paginationMarkup += `<li class="pagination-item pagination-pages">${allPages}</li>`;
         }
     }
-    
+
     if (page < allPages) {
         paginationMarkup += `<li class="pagination-item pagination-arrow">&raquo</li>`;
     }
@@ -75,7 +76,7 @@ function onPaginationChoice(e) {
         return;
     }
     const value = e.target.textContent;
-   
+
     switch (value) {
         case '«':
             globalPage -= 1;
@@ -90,29 +91,29 @@ function onPaginationChoice(e) {
     }
     resetPage();
 
-
-    apiService.fetchGenresList().then((data)=> {
+    NProgress.start();
+    apiService.fetchGenresList().then((data) => {
         allGenres = data;
     })
 
     if (input.value) {
         apiService.movieSearch(globalPage)
-        .then((data)=> {
-        
-            renderGallery(data.results,allGenres);
-            
-            renderPaginationButtons(data.total_pages, data.page);
-        })
-        .catch(error => console.log(error));
+            .then((data) => {
+                NProgress.done();
+                renderGallery(data.results, allGenres);
+
+                renderPaginationButtons(data.total_pages, data.page);
+            })
+            .catch(error => console.log(error));
     } else {
         apiService.fetchTrendData(globalPage)
-        .then((data)=> {
-        
-            renderGallery(data.results,allGenres);
-            
-            renderPaginationButtons(data.total_pages, data.page);
-        })
-        .catch(error => console.log(error));
+            .then((data) => {
+                NProgress.done();
+                renderGallery(data.results, allGenres);
+
+                renderPaginationButtons(data.total_pages, data.page);
+            })
+            .catch(error => console.log(error));
     }
 }
 
