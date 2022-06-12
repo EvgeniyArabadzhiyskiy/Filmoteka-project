@@ -28,7 +28,7 @@ export default function openModal(movieContainer) {
 }
 
 async function onClick(e) {
-    NProgress.start();
+    // NProgress.start();
     if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
         return
     }
@@ -48,7 +48,7 @@ async function onClick(e) {
 
     modalMovieContainer.insertAdjacentHTML("beforeend", createMarkupFilmInModal);
 
-    NProgress.done();
+    // NProgress.done();
 
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');

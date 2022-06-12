@@ -49,21 +49,31 @@ import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 import NProgress from 'nprogress';
-
 import "./js/team-modal";
 import "./js/sliderTrendingMovies";
 import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
 import './js/helpers/back-to-top';
 import {markupGallery} from './js/templates/startPageMarkup'
 
+
+import addToLibrary from './js/addToLibrary';
+import removeFromLibrary from './js/removeFromLibrary';
+
+
+
+
 let allGenres;
 const addToWatchedBtn = document.querySelector('.btn-watched');
-const filmList = document.querySelector('.movie-card-list'); 
 const mainContainer = document.querySelector('.movie-card-list');
 
 
+
+let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
+let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
+
+
 NProgress.start();
-openModal(filmList)
+openModal(mainContainer)
 
 
 apiService.fetchGenresList().then((data)=> {
@@ -77,7 +87,84 @@ apiService.fetchTrendData().then((data)=> {
   const markupMovie = markupGallery(filmData)
   mainContainer.insertAdjacentHTML("beforeend", markupMovie);
   renderMovieCardsSlider(data.results);
+
+
+
+  const addToWatchedBtn = document.querySelectorAll('.btn-watche');
+  const addToQueueBtn = document.querySelectorAll('.btn-queue');
+
+  addToWatchedBtn.forEach(btn => {
+    watchedArr.forEach(obj => {
+      
+      if (obj.id === Number(btn.dataset.id)) {
+        btn.classList.add('pressed');
+        btn.textContent = 'Remove from Watched';
+        
+      }
+    });
+  })
+  
+  addToQueueBtn.forEach(btn => {
+    queueArr.forEach(obj => {
+    
+      if (obj.id === Number(btn.dataset.id)) {
+        btn.classList.add('pressed');
+        btn.textContent = 'Remove from Queue';
+        
+      }
+    });
+  })
+
+
+
   renderPaginationButtons(data.total_pages, data.page);
 
 }).catch(error => console.log(error))
 NProgress.done()
+
+
+
+mainContainer.addEventListener('click', onListClick)
+
+
+async function onListClick(e) {
+  
+  if (!e.target.dataset.target) {
+    return
+  }
+  
+  const filmId = e.target.dataset.id;
+  const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
+
+
+  if (e.target.dataset.target === "watched") {
+    e.target.classList.toggle('pressed');
+
+    if (e.target.classList.contains('pressed')) {
+      e.target.textContent = 'Remove from Watched';
+      addToLibrary(fullMovieInfo, watchedArr, e.target.dataset.target);
+
+      return
+    }
+    
+    e.target.textContent = 'Add to Watched';
+    removeFromLibrary(filmId, watchedArr, e.target.dataset.target);
+            
+  }
+
+  if (e.target.dataset.target === "queue") {
+    e.target.classList.toggle('pressed');
+
+    if (e.target.classList.contains('pressed')) {
+      e.target.textContent = 'Remove from Queue';
+      addToLibrary(fullMovieInfo, queueArr, e.target.dataset.target);
+      return
+    }
+    
+    e.target.textContent = 'Add to Queue';
+    removeFromLibrary(filmId, queueArr, e.target.dataset.target);
+            
+  }
+
+
+}
