@@ -40,7 +40,12 @@ export default function renderGallery(results, dataGenres) {
 				<div class="movie-card-item__info">
 					<h2 class="movie-card-item__title" data-id="${id}">${original_title}</h2>
 					<p class="movie-card-item__text">${genresNamesUPGRADE} | ${releaseYear} </p>
-				</div>	
+				</div>
+				<div class="btn-box-on-card overlay">
+                    <button class="btn-watched on-card-watced" data-target="watched"><br class="transfer" />Watched</button>
+                    <button class="btn-qweqwe on-card-queue" data-target="queue">queue</button>
+                    </div>
+        </div>	
 			</li>`;
     })
 	.join(''); 
