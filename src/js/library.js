@@ -1,11 +1,15 @@
-import './darkThema';
-import './cursor';
-import openModal from './modal-open';
+
+
+import "./darkThema";
+import "./cursor";
+import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
-import { renderPaginationBTN } from './paginationLibrary';
+import { renderPaginationBTN, resetPagination } from './paginationLibrary';
+import "./team-modal";
 
 let watched = [];
 let queue = [];
+let page = 1;
 
 const refs = {
   moviesList: document.querySelector('.movie-card-list'),
@@ -25,23 +29,31 @@ if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
 } else {
   onWatchedMoviesClick();
 }
-console.log(watched);
 
 refs.watchedMovies.addEventListener('click', onWatchedMoviesClick);
 refs.queueMovies.addEventListener('click', onQueueMoviesClick);
 
 function onWatchedMoviesClick() {
-  sessionStorage.setItem('last-pressed-library-btn', 'watched');
-  let currWatched = [];
-  refs.watchedMovies.classList.add('library-btn__isActive');
-  refs.queueMovies.classList.remove('library-btn__isActive');
-  let watchedKey = localStorage.getItem('watched');
-  if (watchedKey) {
-    try {
-      watched = JSON.parse(watchedKey);
-      currWatched = watched.slice(0, 9);
-    } catch (e) {
-      console.log(e);
+    sessionStorage.setItem('last-pressed-library-btn', 'watched');
+    let currWatched = [];
+    refs.watchedMovies.classList.add('library-btn__isActive');
+    refs.queueMovies.classList.remove('library-btn__isActive');
+    let watchedKey = localStorage.getItem('watched');
+    if (watchedKey) {
+        try {
+            watched = JSON.parse(watchedKey);
+            currWatched = watched.slice(0, 9);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
+        renderLibrary(currWatched);    
+    }
+    resetPagination();
+    if (watched.length > 9) {
+       renderPaginationBTN(watched, page = 1);
+
     }
   }
   if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
@@ -54,17 +66,27 @@ function onWatchedMoviesClick() {
 }
 
 function onQueueMoviesClick() {
-  sessionStorage.setItem('last-pressed-library-btn', 'queue');
-  let currQueue = [];
-  refs.queueMovies.classList.add('library-btn__isActive');
-  refs.watchedMovies.classList.remove('library-btn__isActive');
-  let queueKey = localStorage.getItem('queue');
-  if (queueKey) {
-    try {
-      queue = JSON.parse(queueKey);
-      currQueue = queue.slice(0, 9);
-    } catch (e) {
-      console.log(e);
+
+    sessionStorage.setItem('last-pressed-library-btn', 'queue');
+    let currQueue = [];
+    refs.queueMovies.classList.add('library-btn__isActive');
+    refs.watchedMovies.classList.remove('library-btn__isActive');
+    let queueKey = localStorage.getItem('queue');
+    if (queueKey) {
+        try {
+            queue = JSON.parse(queueKey);
+            currQueue = queue.slice(0, 9);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
+         renderLibrary(currQueue);
+     }
+    resetPagination();
+    if (queue.length > 9) {
+       renderPaginationBTN(queue, page = 1);
+
     }
   }
   if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
@@ -75,5 +97,3 @@ function onQueueMoviesClick() {
     renderPaginationBTN(queue);
   }
 }
-
-export { onWatchedMoviesClick, onQueueMoviesClick };
