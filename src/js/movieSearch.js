@@ -21,14 +21,14 @@ searchFormEl?.addEventListener('submit', onSearchButton);
 export default function onSearchButton (e) {
     e.preventDefault();
     if (!input.value) {
-        searchErrMsgEl.textContent = "Search field is empty. Enter movie name and push search button";
+        searchErrMsgEl.textContent = "Search field is empty. Enter the movie name and press search button";
         searchErrMsgEl.style.display = "block";
         return;
     };
     NProgress.start();
     apiService.movieSearch().then((data)=> {
         if (data.total_results === 0) {
-            searchErrMsgEl.textContent = "Search result is not successful. Enter the correct movie name and push search button";
+            searchErrMsgEl.textContent = "Search result is unsuccessful. Enter the correct movie name and press search button";
             searchErrMsgEl.style.display = "block";
         } else {
             searchErrMsgEl.style.display = "none";
