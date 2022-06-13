@@ -51,9 +51,11 @@ import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 
 import NProgress from 'nprogress';
+
 import './js/team-modal';
 import './js/sliderTrendingMovies';
 import { renderMovieCardsSlider } from './js/templates/renderMovieCardsSlider';
+
 import './js/helpers/back-to-top';
 
 import * as auth from './js/auth';

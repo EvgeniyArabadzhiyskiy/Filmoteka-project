@@ -1,5 +1,5 @@
 import Swiper, { Navigation, Autoplay } from 'swiper';
-import openModal from "./modal-open";
+import openModal from "../modal-open";
 
 const sliderContainer = document.querySelector('.mySwiper');
 
@@ -18,18 +18,14 @@ const swiper = new Swiper('.mySwiper', {
         prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-
         210: {
             slidesPerView: 2,
-
         },
         600: {
             slidesPerView: 6,
         },
         768: {
             slidesPerView: 8,
-
         },
-
     },
     });
