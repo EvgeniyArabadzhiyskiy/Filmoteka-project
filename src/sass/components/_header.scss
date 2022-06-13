@@ -180,19 +180,18 @@ button[type=submit] {
 
 //-----------------------------dark
 
-.label__wrap{
-    position: absolute;
-}
-
 .checkbox  {
     position: absolute;
     opacity: 0;
 }
 
+.fixed-thema{
+    position: relative;
+}
+
 .label{
     position: absolute;
     right: 10;
-    top: 190;
 
     background-color: rgb(136, 102, 39);
     display: flex;
@@ -202,9 +201,8 @@ button[type=submit] {
     height: 26px;
     width: 50px;
 
-    @media screen and (min-width: 768px) {
-            right: 20;
-                top: 170;
+    @media screen and (max-width: 768px) {
+                top: 155;
         }
 }
 

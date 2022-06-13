@@ -41,8 +41,8 @@
 
 // =======================================================================================
 
-import "./js/darkThema";
-import "./js/cursor";
+import "./js/helpers/darkThema";
+import "./js/helpers/cursor";
 import apiService from "./js/apiService";
 import renderGallery from "./js/components/movieGallary";
 import { renderPaginationButtons } from "./js/pagination";
