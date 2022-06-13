@@ -43,7 +43,7 @@
 import "./js/darkThema";
 import "./js/cursor";
 import apiService from "./js/apiService";
-import renderGallery from "./js/templates/movieGallary";
+import renderGallery from "./js/components/movieGallary";
 import { renderPaginationButtons } from "./js/pagination";
 import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
