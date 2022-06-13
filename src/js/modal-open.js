@@ -5,6 +5,7 @@ import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
 //import 'nprogress/nprogress.css';
 import renderLibrary from './templates/movieCardLibrary';
+import galleryBtnStateUpdate from './galleryBtnStateUpdate';
 import { renderPaginationBTN, resetPagination } from './paginationLibrary';
 
 
@@ -34,12 +35,12 @@ async function onClick(e) {
         return
     }
 
-    document.body.classList.add("modal-open")
-    modal.classList.remove('is-hidden')
-    modal.classList.add('slideDownIn')
-    modalButtonClose.addEventListener('click', modalClose)
-    window.addEventListener("keyup", press)
-    window.addEventListener("click", onCloseBackdropClick)
+    document.body.classList.add("modal-open");
+    modal.classList.remove('is-hidden');
+    modal.classList.add('slideDownIn');
+    modalButtonClose.addEventListener('click', modalClose);
+    window.addEventListener("keyup", press);
+    window.addEventListener("click", onCloseBackdropClick);
 
     const filmId = e.target.dataset.id;
 
@@ -136,6 +137,7 @@ function press(e) {
         modalClose();
         window.removeEventListener("keyup", press);
         modalButtonClose.removeEventListener('click', modalClose);
+        galleryBtnStateUpdate();
     }
     return
 }
@@ -143,7 +145,7 @@ function press(e) {
 function onCloseBackdropClick(e) {
     if (e.target.dataset.close === 'backdrop') {
         modalClose();
-
+        galleryBtnStateUpdate();
     }
     return;
 }
@@ -156,4 +158,5 @@ function modalClose(e) {
     window.removeEventListener("click", onCloseBackdropClick);
     modalButtonClose.removeEventListener('click', modalClose);
     modalMovieContainer.innerHTML = "";
+    galleryBtnStateUpdate();
 }

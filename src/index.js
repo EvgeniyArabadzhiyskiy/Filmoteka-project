@@ -63,13 +63,8 @@ import removeFromLibrary from './js/removeFromLibrary';
 
 
 let allGenres;
-const addToWatchedBtn = document.querySelector('.btn-watched');
 const mainContainer = document.querySelector('.movie-card-list');
 
-
-
-// let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
-// let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
 
 
 NProgress.start();
@@ -128,7 +123,6 @@ mainContainer.addEventListener('click', onListClick);
 
 
 async function onListClick(e) {
-  
   if (!e.target.dataset.target) {
     return
   }
@@ -144,7 +138,7 @@ async function onListClick(e) {
       e.target.textContent = 'Remove from Watched';
       addToLibrary(fullMovieInfo, watchedArr, e.target.dataset.target);
 
-      return
+      return;
     }
     
     e.target.textContent = 'Add to Watched';
