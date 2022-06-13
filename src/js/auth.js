@@ -105,9 +105,8 @@ async function addFilm(filmId) {
   await updateDoc(userRef, {
     films: fullMovieInfo,
   });
-  console.log(`film add`);
 }
-addFilm(705865); // симуляція додавання фільму в док юзера
+// addFilm(705865); // симуляція додавання фільму в док юзера
 
 async function getCurrentUserId() {
   let userID;
