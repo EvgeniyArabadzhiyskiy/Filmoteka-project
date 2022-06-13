@@ -8,7 +8,7 @@ function renderMovieCardsSlider(results) {
 		
 		let imagePoster = poster_path ? `${IMG_URL}${poster_path}` : noPoster;		
 		
-      return `<div class="swiper-slide">
+		return `<div class="swiper-slide">
 				<img src="${imagePoster}" alt="poster" class="slide-poster" data-id="${id}"/>
 			</div>`;
     }).join(''); 
