@@ -1,15 +1,15 @@
-import Ilya from '../images/team/Ilya.jpg';
-import Anton from '../images/team/Anton.jpg';
-import Denis from '../images/team/Denis.jpg';
-import Olga from '../images/team/Olga.jpg';
-import Sasha from '../images/team/Sasha.jpg';
-import Serhii from '../images/team/Serhii.jpg';
-import Vova from '../images/team/Vova.jpg';
-import Yana from '../images/team/Yana.jpg';
-import Zhenya from '../images/team/Zhenya.jpg';
-import ZhenyaA from '../images/team/ZhenyaA.jpg';
-import Marina from '../images/team/Marina.jpg';
-import sprites from '../images/SVG-sprites/symbol-sprites.svg';
+import Ilya from '../../images/team/Ilya.jpg';
+import Anton from '../../images/team/Anton.jpg';
+import Denis from '../../images/team/Denis.jpg';
+import Olga from '../../images/team/Olga.jpg';
+import Sasha from '../../images/team/Sasha.jpg';
+import Serhii from '../../images/team/Serhii.jpg';
+import Vova from '../../images/team/Vova.jpg';
+import Yana from '../../images/team/Yana.jpg';
+import Zhenya from '../../images/team/Zhenya.jpg';
+import ZhenyaA from '../../images/team/ZhenyaA.jpg';
+import Marina from '../../images/team/Marina.jpg';
+import sprites from '../../images/SVG-sprites/symbol-sprites.svg';
 
 const teamData = [
   {
@@ -146,6 +146,7 @@ const teamData = [
   },
 ]
 
+
 function buildSlide(teamMember) {
   const { name, role, photo, links } = teamMember;
 
@@ -172,7 +173,7 @@ function buildLink([service, link]) {
   return `
     <li class="social-links__item">
       <a class="social-links__link" href="${link}">
-        <svg class="social-links__icon" width="20" height="20">
+        <svg class="social-links__icon" width="25" height="25">
           <use href="${sprites}#icon-${service}"></use>
         </svg>
       </a>
