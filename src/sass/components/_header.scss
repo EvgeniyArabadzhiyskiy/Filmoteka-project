@@ -95,12 +95,19 @@
 
 
 .nav-item {
-  margin-right: 39px;
+margin-right: 20px;
   position: relative;
-  &:last-child {
+  &:nth-last-child(2) {
     margin-right: 0;
   }
-
+  @media screen and (max-width: 330px) {
+    &:last-child {
+            margin-right: 0;
+        }
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: 39px;
+  }
 }
 
 .nav__current {
