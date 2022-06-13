@@ -11,17 +11,26 @@
           <span class="logo_text">Filmoteka</span></a
         >
       </div>
-      <ul class="library-navigation__list">
-        <li class="library-navigation__item">
-          <a href="/src/index.html" class="library-navigation__link">HOME</a>
-        </li>
-        <li class="library-navigation__item library-active">
-          <a href="/src/library.html" class="library-navigation__link">MY LIBRARY</a>
-        </li>
-      </ul>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href=".//index.html" class="nav__home">home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/src/library.html" class="nav__library nav__current"
+              >my library</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav__logout" name="logoutLibBtn" href="#">Logout</a>
+          </li>
+        </ul>
+      </nav>
     </div>
     <div class="library-check">
-      <button class="library-btn library-btn__isActive" data-action="watched">WATCHED</button>
+      <button class="library-btn library-btn__isActive" data-action="watched">
+        WATCHED
+      </button>
       <button class="library-btn" data-action="queue">QUEUE</button>
     </div>
     <div label__wrap>
