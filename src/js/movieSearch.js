@@ -42,7 +42,8 @@ export default function onSearchButton (e) {
 
             renderPaginationButtons(data.total_pages, data.page);
 
-            NProgress.done()}
+           // NProgress.done()
+        }
     })
     .catch(error => console.log(error));
     NProgress.done();

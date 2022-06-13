@@ -106,7 +106,9 @@ function onPaginationChoice(e) {
 
             .then((data) => {
                 NProgress.done();
-                renderGallery(data.results, allGenres);
+                const filmData = renderGallery(data.results, allGenres);
+                const markupMovie = markupGallery(filmData)
+                mainContainer.insertAdjacentHTML("beforeend", markupMovie);
 
                 renderPaginationButtons(data.total_pages, data.page);
             })
