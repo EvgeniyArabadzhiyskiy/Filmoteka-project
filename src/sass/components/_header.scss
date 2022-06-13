@@ -79,16 +79,18 @@
 }
 
 //-----------------------------------nav
-.nav {
-    display: flex;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.16;
-    text-transform: uppercase;
-    a {
-        color: #FFFFFF;
-        text-decoration: none;
-    }
+
+.nav-list {
+  font-weight: 500;
+  display: flex;
+  font-size: 12px;
+  line-height: 1.16;
+  text-transform: uppercase;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
 }
 
 .nav__home {
