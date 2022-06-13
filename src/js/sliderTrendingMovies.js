@@ -7,7 +7,6 @@ openModal(sliderContainer);
 
 const swiper = new Swiper('.mySwiper', {
     modules: [Navigation, Autoplay],
-    // centeredSlides: true,
     spaceBetween: 5,
     breakpointsBase: 'container',
     autoplay: {
@@ -19,26 +18,18 @@ const swiper = new Swiper('.mySwiper', {
         prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-        320: {
-            slidesPerView: 3,
-        },
-        400: {
-            slidesPerView: 4,
-        },
-        500: {
-            slidesPerView: 5,
+
+        210: {
+            slidesPerView: 2,
+
         },
         600: {
             slidesPerView: 6,
         },
         768: {
             slidesPerView: 8,
+
         },
-        980: {
-            slidesPerView: 10,
-        },
-        1024: {
-            slidesPerView: 11,
-        },
+
     },
     });
