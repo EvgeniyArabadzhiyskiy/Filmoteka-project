@@ -54,7 +54,7 @@ import "./js/sliderTrendingMovies";
 import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
 import './js/helpers/back-to-top';
 import {markupGallery} from './js/templates/startPageMarkup'
-
+import { watchedArr, queueArr } from './js/modal-open'
 
 import addToLibrary from './js/addToLibrary';
 import removeFromLibrary from './js/removeFromLibrary';
@@ -68,12 +68,12 @@ const mainContainer = document.querySelector('.movie-card-list');
 
 
 
-let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
-let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
+// let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
+// let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
 
 
 NProgress.start();
-openModal(mainContainer)
+openModal(mainContainer);
 
 
 apiService.fetchGenresList().then((data)=> {
@@ -81,7 +81,7 @@ apiService.fetchGenresList().then((data)=> {
 })
 
 apiService.fetchTrendData().then((data)=> {
-  
+
 
   const filmData = renderGallery(data.results, allGenres);
   const markupMovie = markupGallery(filmData)
@@ -124,7 +124,7 @@ NProgress.done()
 
 
 
-mainContainer.addEventListener('click', onListClick)
+mainContainer.addEventListener('click', onListClick);
 
 
 async function onListClick(e) {
