@@ -8,6 +8,7 @@ import "./team-modal";
 
 let watched = [];
 let queue = [];
+let page = 1;
 
 const refs = {
     moviesList: document.querySelector('.movie-card-list'),

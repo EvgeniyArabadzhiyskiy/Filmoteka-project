@@ -75,7 +75,7 @@ async function onClick(e) {
     const isQueueActiv = refs.queueMovies?.classList.contains('library-btn__isActive') //   Добавил
 
     addToWatchedBtn.addEventListener('click', () => {
-        
+        let page = 1;
         addToWatchedBtn.classList.toggle('pressed');
         if (addToWatchedBtn.classList.contains('pressed')) {
             addToWatchedBtn.textContent = 'Remove from Watched';
@@ -103,6 +103,7 @@ async function onClick(e) {
 
     });
     addToQueueBtn.addEventListener('click', () => {
+        let page = 1;
         addToQueueBtn.classList.toggle('pressed');
 
         if (addToQueueBtn.classList.contains('pressed')) {
