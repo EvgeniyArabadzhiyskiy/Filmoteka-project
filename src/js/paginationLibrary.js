@@ -17,12 +17,6 @@ function renderPaginationBTN(arrays, page) {
     let nextPage = +page + 1;
     let afterNextPage = +page + 2;
     globalPage = +page;
-    console.log("beforePreviousPage", beforePreviousPage);
-    console.log("previousPage", previousPage);
-    console.log("page", page);
-    console.log("nextPage", nextPage);
-    console.log("afterNextPage", afterNextPage);
-    console.log("globalPage", globalPage);
     if (allPages <= 1) {
         return;
     }
