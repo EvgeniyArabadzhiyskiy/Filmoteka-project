@@ -1,11 +1,12 @@
 import apiService from "./apiService";
-import renderGallery from "./templates/movieGallary";
+import renderGallery from "./components/movieGallary";
 import { renderPaginationButtons } from "./pagination";
 import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
 import { input } from "./apiService";
+import {markupGallery} from './templates/startPageMarkup';
 
-
+const mainContainer = document.querySelector('.movie-card-list');
 const searchFormEl = document.querySelector(".form__search");
 const cardListEl = document.querySelector(".movie-card-list");
 const searchErrMsgEl = document.querySelector(".search__error");
@@ -33,7 +34,12 @@ export default function onSearchButton (e) {
             searchErrMsgEl.style.display = "none";
             clearGallery();
             resetPagination();
-            renderGallery(data.results, allGenres);
+
+            const filmData = renderGallery(data.results, allGenres);
+            const markupMovie = markupGallery(filmData)
+
+            mainContainer.insertAdjacentHTML("beforeend", markupMovie);
+
             renderPaginationButtons(data.total_pages, data.page);
 
             NProgress.done()}
