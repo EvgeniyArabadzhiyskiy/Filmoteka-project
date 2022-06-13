@@ -1,3 +1,4 @@
+
 // import "./js/darkThema";
 // import "./js/cursor";
 // import apiService from "./js/apiService";
@@ -43,16 +44,23 @@
 import "./js/darkThema";
 import "./js/cursor";
 import apiService from "./js/apiService";
-import renderGallery from "./js/templates/movieGallary";
+import renderGallery from "./js/components/movieGallary";
 import { renderPaginationButtons } from "./js/pagination";
 import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
+
 import NProgress from 'nprogress';
-import "./js/team-modal";
-import "./js/helpers/sliderTrendingMovies";
-import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
+
+import './js/team-modal';
+import './js/sliderTrendingMovies';
+import { renderMovieCardsSlider } from './js/templates/renderMovieCardsSlider';
+
 import './js/helpers/back-to-top';
+
+import * as auth from './js/auth';
+
+
 import {markupGallery} from './js/templates/startPageMarkup'
 import { watchedArr, queueArr } from './js/modal-open'
 
@@ -63,13 +71,9 @@ import removeFromLibrary from './js/removeFromLibrary';
 
 
 let allGenres;
-const addToWatchedBtn = document.querySelector('.btn-watched');
 const mainContainer = document.querySelector('.movie-card-list');
 
 
-
-// let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
-// let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
 
 
 NProgress.start();
@@ -77,8 +81,10 @@ openModal(mainContainer);
 
 
 apiService.fetchGenresList().then((data)=> {
+
   allGenres = data;
-})
+});
+
 
 apiService.fetchTrendData().then((data)=> {
 
@@ -117,7 +123,9 @@ apiService.fetchTrendData().then((data)=> {
 
 
 
+
   renderPaginationButtons(data.total_pages, data.page);
+
 
 }).catch(error => console.log(error))
 NProgress.done()
@@ -128,13 +136,13 @@ mainContainer.addEventListener('click', onListClick);
 
 
 async function onListClick(e) {
-  
   if (!e.target.dataset.target) {
     return
   }
   
   const filmId = e.target.dataset.id;
   const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
+
 
 
   if (e.target.dataset.target === "watched") {
@@ -144,7 +152,7 @@ async function onListClick(e) {
       e.target.textContent = 'Remove from Watched';
       addToLibrary(fullMovieInfo, watchedArr, e.target.dataset.target);
 
-      return
+      return;
     }
     
     e.target.textContent = 'Add to Watched';
@@ -167,4 +175,6 @@ async function onListClick(e) {
   }
 
 
+
 }
+

@@ -1,5 +1,5 @@
 import apiService from "./apiService";
-import renderGallery from "./templates/movieGallary";
+import renderGallery from "./components/movieGallary";
 import { input } from "./apiService";
 import NProgress from 'nprogress';
 import {markupGallery} from '../js/templates/startPageMarkup';
@@ -106,7 +106,9 @@ function onPaginationChoice(e) {
 
             .then((data) => {
                 NProgress.done();
-                renderGallery(data.results, allGenres);
+                const filmData = renderGallery(data.results, allGenres);
+                const markupMovie = markupGallery(filmData)
+                mainContainer.insertAdjacentHTML("beforeend", markupMovie);
 
                 renderPaginationButtons(data.total_pages, data.page);
             })

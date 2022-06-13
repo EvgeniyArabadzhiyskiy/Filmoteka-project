@@ -3,60 +3,107 @@ import renderLibrary from './templates/movieCardLibrary';
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
 
-function renderPaginationBTN(arrays) {
-    const notesOnPage = 9;
-    let countOfItems = Math.ceil(arrays.length / notesOnPage);
+const notesOnPage = 9;
+let dataOnPage = [];
+let globalPage = 0;
+let data = [];
 
-    let showPage = (function() {
-        let active;
+function renderPaginationBTN(arrays, page) {
+    data = arrays;
+    let paginationMarkup = '';
+    let allPages = Math.ceil(arrays.length / notesOnPage);
+    let beforePreviousPage = +page - 2;
+    let previousPage = +page - 1;
+    let nextPage = +page + 1;
+    let afterNextPage = +page + 2;
+    globalPage = +page;
+    if (allPages <= 1) {
+        return;
+    }
+
+    if (page > 1) {
+        paginationMarkup += `<li class="pagination-item pagination-arrow">&laquo</li>`;
+    }
+
+    if (page > 3) {
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">1</li>`;
+        }
+         }
+
+    if (page > 2) {
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && page > 4) {
+        paginationMarkup += `<li class="pagination-item">...</li>`;
+        }
+        if (beforePreviousPage > 0) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">${beforePreviousPage}</li>`;
+        }
+    }
+
+    if (previousPage > 0) {
+        paginationMarkup += `<li class="pagination-item pagination-pages">${previousPage}</li>`;
+    }
+
+    paginationMarkup += `<li class="pagination-item pagination-pages current-page">${page}</li>`;
+
+    if (page < allPages) {
+        paginationMarkup += `<li class="pagination-item pagination-pages">${nextPage}</li>`;
+    }
+
+    if (page < allPages - 1) {
         
-        return function(item) {
-            if (active) {
-                active.classList.remove('current-page');
+        if (page < allPages - 2) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">${afterNextPage}</li>`;
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && page < allPages - 3) {
+            paginationMarkup += `<li class="pagination-item">...</li>`;
             }
-            active = item;
-            
-            item.classList.add('current-page');
-            
-            let pageNum = item.innerHTML;
-            
-            let start = (pageNum - 1) * notesOnPage;
-            let end = start + notesOnPage;
-            
-            let notes = arrays.slice(start, end);
-            
-            cardsContainer.innerHTML = '';
-            renderLibrary(notes);
-        };
-    }());
-
-    let items = [];
-    for (let i = 1; i <= countOfItems; i++) {
-        let li = document.createElement('li');
-        li.classList.add('pagination-item');
-        li.classList.add('pagination-pages');
-        li.textContent = i;
-        paginationList.appendChild(li);
-        items.push(li);
+        }
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            paginationMarkup += `<li class="pagination-item pagination-pages">${allPages}</li>`;
+        }
+    }
+    
+    if (page < allPages) {
+        paginationMarkup += `<li class="pagination-item pagination-arrow">&raquo</li>`;
     }
 
-    showPage(items[0]);
+    paginationList.innerHTML = paginationMarkup;
 
-    for (let item of items) {
-        item.addEventListener('click', function() {
-            showPage(this);
-            window.scroll({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
-        });
+    paginationList.addEventListener('click', onPaginationChoice);
+}
+
+function onPaginationChoice(e) {
+    if (e.target.nodeName !== 'LI') {
+        return;
     }
+    const value = e.target.textContent;
+   
+    switch (value) {
+        case '«':
+            globalPage -= 1;
+            break;
+        case '»':
+            globalPage += 1;
+            break;
+        case '...':
+            return;
+        default:
+            globalPage = value;
+    }
+    resetPage();
+    let start = (globalPage - 1) * notesOnPage;
+    let end = start + notesOnPage;
+    dataOnPage = data.slice(start, end);
+    renderLibrary(dataOnPage);
+    renderPaginationBTN(data, globalPage);
+}
+
+function resetPage() {
+    cardsContainer.innerHTML = '';
 }
 
 function resetPagination() {
     paginationList.innerHTML = '';
 }
 
-export { renderPaginationBTN };
-export { resetPagination };
+export { renderPaginationBTN, resetPagination };

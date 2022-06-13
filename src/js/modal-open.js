@@ -5,6 +5,7 @@ import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
 //import 'nprogress/nprogress.css';
 import renderLibrary from './templates/movieCardLibrary';
+import galleryBtnStateUpdate from './galleryBtnStateUpdate';
 import { renderPaginationBTN, resetPagination } from './paginationLibrary';
 
 
@@ -34,12 +35,12 @@ async function onClick(e) {
         return
     }
 
-    document.body.classList.add("modal-open")
-    modal.classList.remove('is-hidden')
-    modal.classList.add('slideDownIn')
-    modalButtonClose.addEventListener('click', modalClose)
-    window.addEventListener("keyup", press)
-    window.addEventListener("click", onCloseBackdropClick)
+    document.body.classList.add("modal-open");
+    modal.classList.remove('is-hidden');
+    modal.classList.add('slideDownIn');
+    modalButtonClose.addEventListener('click', modalClose);
+    window.addEventListener("keyup", press);
+    window.addEventListener("click", onCloseBackdropClick);
 
     const filmId = e.target.dataset.id;
 
@@ -74,7 +75,7 @@ async function onClick(e) {
     const isQueueActiv = refs.queueMovies?.classList.contains('library-btn__isActive') //   Добавил
 
     addToWatchedBtn.addEventListener('click', () => {
-        
+        let page = 1;
         addToWatchedBtn.classList.toggle('pressed');
         if (addToWatchedBtn.classList.contains('pressed')) {
             addToWatchedBtn.textContent = 'Remove from Watched';
@@ -94,7 +95,7 @@ async function onClick(e) {
             if (isWatchedActiv) {                                                  
                 bodyOfLybrary && renderLibrary(watchedArr.slice(0, 9));
                 resetPagination();
-                renderPaginationBTN(watchedArr);                                 //   Добавил
+                renderPaginationBTN(watchedArr, page = 1);                                 //   Добавил
                 refs.watchedMovies?.classList.add('library-btn__isActive');                 //   Добавил
                 refs.queueMovies?.classList.remove('library-btn__isActive');  
             }                                                                           //   Добавил
@@ -102,6 +103,7 @@ async function onClick(e) {
 
     });
     addToQueueBtn.addEventListener('click', () => {
+        let page = 1;
         addToQueueBtn.classList.toggle('pressed');
 
         if (addToQueueBtn.classList.contains('pressed')) {
@@ -121,7 +123,7 @@ async function onClick(e) {
             if (isQueueActiv) {
                 bodyOfLybrary && renderLibrary(queueArr.slice(0, 9));
                 resetPagination();
-                renderPaginationBTN(queueArr);                                        //   Добавил
+                renderPaginationBTN(queueArr, page = 1);                                        //   Добавил
                 refs.queueMovies?.classList.add('library-btn__isActive');                        //   Добавил
                 refs.watchedMovies?.classList.remove('library-btn__isActive');
             }
@@ -136,6 +138,7 @@ function press(e) {
         modalClose();
         window.removeEventListener("keyup", press);
         modalButtonClose.removeEventListener('click', modalClose);
+        galleryBtnStateUpdate();
     }
     return
 }
@@ -143,7 +146,7 @@ function press(e) {
 function onCloseBackdropClick(e) {
     if (e.target.dataset.close === 'backdrop') {
         modalClose();
-
+        galleryBtnStateUpdate();
     }
     return;
 }
@@ -156,4 +159,5 @@ function modalClose(e) {
     window.removeEventListener("click", onCloseBackdropClick);
     modalButtonClose.removeEventListener('click', modalClose);
     modalMovieContainer.innerHTML = "";
+    galleryBtnStateUpdate();
 }
