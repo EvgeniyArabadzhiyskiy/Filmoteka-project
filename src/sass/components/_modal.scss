@@ -27,7 +27,7 @@ body.modal-open {
 .modal {
     overflow-y: auto;
     width: 280px;
-    height: 100%;
+    max-height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
