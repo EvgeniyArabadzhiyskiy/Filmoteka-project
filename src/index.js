@@ -1,3 +1,4 @@
+
 // import "./js/darkThema";
 // import "./js/cursor";
 // import apiService from "./js/apiService";
@@ -48,11 +49,16 @@ import { renderPaginationButtons } from "./js/pagination";
 import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
+
 import NProgress from 'nprogress';
-import "./js/team-modal";
-import "./js/sliderTrendingMovies";
-import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
+import './js/team-modal';
+import './js/sliderTrendingMovies';
+import { renderMovieCardsSlider } from './js/templates/renderMovieCardsSlider';
 import './js/helpers/back-to-top';
+
+import * as auth from './js/auth';
+
+
 import {markupGallery} from './js/templates/startPageMarkup'
 import { watchedArr, queueArr } from './js/modal-open'
 
@@ -67,13 +73,16 @@ const mainContainer = document.querySelector('.movie-card-list');
 
 
 
+
 NProgress.start();
 openModal(mainContainer);
 
 
 apiService.fetchGenresList().then((data)=> {
+
   allGenres = data;
-})
+});
+
 
 apiService.fetchTrendData().then((data)=> {
 
@@ -112,7 +121,9 @@ apiService.fetchTrendData().then((data)=> {
 
 
 
+
   renderPaginationButtons(data.total_pages, data.page);
+
 
 }).catch(error => console.log(error))
 NProgress.done()
@@ -129,6 +140,7 @@ async function onListClick(e) {
   
   const filmId = e.target.dataset.id;
   const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
+
 
 
   if (e.target.dataset.target === "watched") {
@@ -161,4 +173,6 @@ async function onListClick(e) {
   }
 
 
+
 }
+
