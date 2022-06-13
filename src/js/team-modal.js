@@ -4,7 +4,7 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import "swiper/swiper.scss";
 import "swiper/modules/navigation/navigation.scss";
 import "swiper/modules/pagination/pagination.scss";
-import buildSlides from "./teamData";
+import buildSlides from "././data/teamData.js";
 
 const sliderTrack = document.querySelector(".image-slider__wrapper");
 
@@ -20,26 +20,28 @@ const swiper = new Swiper(".image-slider", {
     pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
+        clickable: true,
+        dynamicBullets: true,
     },
-    slidesPerView: 5,
+    slidesPerView: 4,
     spaceBetween: 10,
-    // breakpoints: {
-    //     // when window width is >= 320px
-    //     320: {
-    //         slidesPerView: 2,
-    //         spaceBetween: 20
-    //     },
-    //     // when window width is >= 480px
-    //     768: {
-    //         slidesPerView: 3,
-    //         spaceBetween: 10
-    //     },
-    //     // when window width is >= 640px
-    //     1024: {
-    //         slidesPerView: 5,
-    //         spaceBetween: 10
-    //     }
-    // }
+    breakpoints: {
+        // when window width is >= 320px
+        320: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+        // when window width is >= 480px
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 10
+        },
+        // when window width is >= 640px
+        1024: {
+            slidesPerView: 4,
+            spaceBetween: 10
+        }
+    }
 })
 
 console.log(swiper);
