@@ -94,7 +94,7 @@ async function onClick(e) {
             if (isWatchedActiv) {                                                  
                 bodyOfLybrary && renderLibrary(watchedArr.slice(0, 9));
                 resetPagination();
-                renderPaginationBTN(watchedArr);                                 //   Добавил
+                renderPaginationBTN(watchedArr, page = 1);                                 //   Добавил
                 refs.watchedMovies?.classList.add('library-btn__isActive');                 //   Добавил
                 refs.queueMovies?.classList.remove('library-btn__isActive');  
             }                                                                           //   Добавил
@@ -121,7 +121,7 @@ async function onClick(e) {
             if (isQueueActiv) {
                 bodyOfLybrary && renderLibrary(queueArr.slice(0, 9));
                 resetPagination();
-                renderPaginationBTN(queueArr);                                        //   Добавил
+                renderPaginationBTN(queueArr, page = 1);                                        //   Добавил
                 refs.queueMovies?.classList.add('library-btn__isActive');                        //   Добавил
                 refs.watchedMovies?.classList.remove('library-btn__isActive');
             }
