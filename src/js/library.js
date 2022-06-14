@@ -1,9 +1,12 @@
+import './helpers/initialize-firebase';
+import { signOut, getAuth } from 'firebase/auth';
 import './darkThema';
 import './cursor';
 import openModal from './modal-open';
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN } from './paginationLibrary';
 
+const auth = getAuth();
 let watched = [];
 let queue = [];
 
@@ -14,7 +17,16 @@ const refs = {
   sectionLibrary: document.querySelector('.section-library'),
   pagination: document.querySelector('.pagination'),
   libraryNavigationLinkBtn: document.querySelector('.library-navigation__link'),
+  logoutLibBtn: document.querySelector('.nav__logout'),
 };
+
+refs.logoutLibBtn.addEventListener('click', logoutUser);
+
+function logoutUser(e) {
+  e.preventDefault();
+  signOut(auth);
+  window.location = '../index.html';
+}
 
 if (localStorage.getItem('watched') === null) {
   refs.sectionLibrary.innerHTML = `<h3 class="empty-container">Sorry, but this section is still empty:(</h3>`;
