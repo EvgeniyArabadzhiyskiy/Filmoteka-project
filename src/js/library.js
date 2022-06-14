@@ -1,7 +1,7 @@
 import './helpers/initialize-firebase';
 import { signOut, getAuth } from 'firebase/auth';
-import './helpers/darkThema';
-import './helpers/cursor';
+import './darkThema';
+import './cursor';
 import openModal from './modal-open';
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN, resetPagination } from './paginationLibrary';
