@@ -1,5 +1,7 @@
 import apiService from './apiService'
-import renderMovieModal from './templates/renderMovieModal';
+
+import renderMovieModal from './components/renderMovieModal';
+
 import addToLibrary from './addToLibrary';
 import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
@@ -29,7 +31,9 @@ export default function openModal(movieContainer) {
 }
 
 async function onClick(e) {
-    // NProgress.start();
+
+    NProgress.start();
+
     if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
         return
     }
@@ -52,7 +56,8 @@ async function onClick(e) {
 
     modalMovieContainer.insertAdjacentHTML("beforeend", finalMarkupModal);
 
-    // NProgress.done();
+    NProgress.done();
+
 
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
