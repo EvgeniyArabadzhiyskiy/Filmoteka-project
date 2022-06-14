@@ -93,9 +93,14 @@
 
 }
 
-.nav__home {
-    margin-right: 39px;
-    position: relative;
+
+.nav-item {
+  margin-right: 39px;
+  position: relative;
+  &:last-child {
+    margin-right: 0;
+  }
+
 }
 
 .nav__current {
