@@ -1,6 +1,7 @@
 body.modal-open {
     overflow: hidden;
 }
+
 .backdrop {
     position: fixed;
     top: 0;
@@ -37,8 +38,7 @@ body.modal-open {
     background-color: var(--white-color);
     transform: translate(-50%, -50%) scale(1);
     transition: opacity 250ms ease-in, visibility 250ms ease-in, transform 250ms ease-in;
-    box-shadow: var(--accent-color) 1px 1px 50px, var(--accent-color) 1px 1px 100px;
-    box-shadow: 0px 0px 80px 15px var(--accent-color);
+    box-shadow: 0px 0px 15px 15px var(--accent-color);
     @media screen and (min-width: 768px) and (max-width: 1024px) {
         width: 704px;
         height: auto;
@@ -212,7 +212,6 @@ body.modal-open {
     box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     border: none;
     height: 45px;
-    width: 113px;
     @media screen and (min-width: 768px) {
         width: 125px;
     }
@@ -220,14 +219,14 @@ body.modal-open {
 
 .btn-watched {
     margin-right: 10px;
-    
+    width: 110px;
     @media screen and (min-width: 768px) {
         margin-right: 15px;
     }
 }
 
 .btn-qweqwe {
-    
+    width: 113px;
 }
 
 button.pressed {
