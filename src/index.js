@@ -46,7 +46,7 @@ import "./js/helpers/cursor";
 import apiService from "./js/apiService";
 import renderGallery from "./js/components/movieGallary";
 import { renderPaginationButtons } from "./js/pagination";
-import renderMovieModal from "./js/components/renderMovieModal";
+import renderMovieModal from "./js/templates/renderMovieModal";
 import openModal from "./js/modal-open";
 import onSearchButton from "./js/movieSearch";
 
