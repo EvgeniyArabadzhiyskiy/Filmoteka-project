@@ -1,34 +1,22 @@
-import './helpers/initialize-firebase';
-import { signOut, getAuth } from 'firebase/auth';
-import './darkThema';
-import './cursor';
-import openModal from './modal-open';
+
+import "./helpers/darkThema";
+import "./helpers/cursor";
+import openModal from "./modal-open";
 import renderLibrary from './templates/movieCardLibrary';
 import { renderPaginationBTN, resetPagination } from './paginationLibrary';
 import "./team-modal";
 
-const auth = getAuth();
 let watched = [];
 let queue = [];
 let page = 1;
 
 const refs = {
-  moviesList: document.querySelector('.movie-card-list'),
-  watchedMovies: document.querySelector('button[data-action="watched"]'),
-  queueMovies: document.querySelector('button[data-action="queue"]'),
-  sectionLibrary: document.querySelector('.section-library'),
-  pagination: document.querySelector('.pagination'),
-  libraryNavigationLinkBtn: document.querySelector('.library-navigation__link'),
-  logoutLibBtn: document.querySelector('.nav__logout'),
-};
-
-
-refs.logoutLibBtn.addEventListener('click', logoutUser);
-
-function logoutUser(e) {
-  e.preventDefault();
-  signOut(auth);
-  window.location = '../index.html';
+    moviesList: document.querySelector('.movie-card-list'),
+    watchedMovies: document.querySelector('button[data-action="watched"]'),
+    queueMovies: document.querySelector('button[data-action="queue"]'),
+    sectionLibrary: document.querySelector('.section-library'),
+    pagination: document.querySelector('.pagination'),
+    libraryNavigationLinkBtn: document.querySelector('.library-navigation__link'),
 }
 
 if (localStorage.getItem('watched') === null) {
