@@ -97,17 +97,23 @@
 .nav-item {
 margin-right: 20px;
   position: relative;
-  &:nth-last-child(2) {
+
+
+transition: stroke 100ms linear, transform 100ms ease-in-out 200ms;
+  &:last-child {
     margin-right: 0;
   }
-  @media screen and (max-width: 330px) {
-    &:last-child {
-            margin-right: 0;
-        }
-  }
-  @media screen and (min-width: 768px) {
+   @media screen and (min-width: 768px) {
     margin-right: 39px;
-  }
+   }
+   &:hover{
+    transition: stroke 100ms linear, transform 100ms ease-in-out 200ms;
+    transform: scale(1.1);
+   }
+   a:hover{
+    color: #FF6B01;
+   }
+
 }
 
 .nav__current {
@@ -189,6 +195,7 @@ button[type=submit] {
         text-align: center;
     }
 }
+
 
 //-----------------------------dark
 
@@ -390,3 +397,4 @@ body.dark {
         color: black;
     }
 }
+
