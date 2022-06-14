@@ -3,10 +3,11 @@ import renderMovieModal from './templates/renderMovieModal';
 import addToLibrary from './addToLibrary';
 import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
+//import 'nprogress/nprogress.css';
 import renderLibrary from './templates/movieCardLibrary';
 import galleryBtnStateUpdate from './galleryBtnStateUpdate';
 import { renderPaginationBTN, resetPagination } from './paginationLibrary';
-import { markupModal} from './templates/modalMarkup';
+
 
 const refs = {                                                                  //   Добавил
     watchedMovies: document.querySelector('button[data-action="watched"]'),     //   Добавил
@@ -44,13 +45,10 @@ async function onClick(e) {
     const filmId = e.target.dataset.id;
 
     const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
-    console.log(fullMovieInfo);
-    const createMarkupFilmInModal =await  renderMovieModal(fullMovieInfo);
-    const finalMarkupModal = markupModal(createMarkupFilmInModal);
-    
-    
 
-    modalMovieContainer.insertAdjacentHTML("beforeend", finalMarkupModal);
+    const createMarkupFilmInModal = await renderMovieModal(fullMovieInfo);
+
+    modalMovieContainer.insertAdjacentHTML("beforeend", createMarkupFilmInModal);
 
     // NProgress.done();
 
@@ -133,6 +131,7 @@ async function onClick(e) {
     });
 
 }
+
 
 function press(e) {
     if (e.code === "Escape") {
