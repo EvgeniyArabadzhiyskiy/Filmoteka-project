@@ -92,7 +92,6 @@ apiService.fetchTrendData().then((data)=> {
   const filmData = renderGallery(data.results, allGenres);
   const markupMovie = markupGallery(filmData)
   mainContainer.insertAdjacentHTML("beforeend", markupMovie);
-  
   renderMovieCardsSlider(data.results);
 
 
