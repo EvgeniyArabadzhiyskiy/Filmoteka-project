@@ -53,6 +53,7 @@ import onSearchButton from "./js/movieSearch";
 import NProgress from 'nprogress';
 
 import './js/team-modal';
+import './js/auth-page-close'
 import './js/helpers/sliderTrendingMovies';
 import { renderMovieCardsSlider } from './js/templates/renderMovieCardsSlider';
 

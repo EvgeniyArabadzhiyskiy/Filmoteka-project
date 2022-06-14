@@ -3,6 +3,14 @@
 //   padding: 15px;
 //   margin: auto;
 // }
+.auth-page__btn-close{
+  position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    outline: none;
+    background-color: var(--white-color);
+}
 .form-auth {
   padding: 15px;
   margin: 20px auto;
@@ -25,7 +33,7 @@
     font-size: 14px;
   }
 
-  & button {
+  & .login, .registration {
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
     outline: 0;
