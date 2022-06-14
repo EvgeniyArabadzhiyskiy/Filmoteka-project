@@ -1,4 +1,4 @@
-import './helpers/initialize-firebase';
+import app from './helpers/initialize-firebase';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -28,6 +28,7 @@ const refs = {
   loginBtn: document.querySelector('[name="loginBtn"]'),
   libBtn: document.querySelector('.nav__library'),
   logoutBtn: document.querySelector('[name="logoutBtn"]'),
+  homeBtn: document.querySelector('.nav__home'),
 };
 
 refs.regForm.addEventListener('submit', regNewUser);
@@ -49,35 +50,53 @@ function regNewUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailReg.value.trim();
   const password = e.target.elements.passwordReg.value.trim();
+  if (email === '' || password === '') {
+    refs.regForm.querySelector('.error').innerHTML =
+      'Input fields are not filled';
+    return;
+  }
 
-  createUserWithEmailAndPassword(auth, email, password).then(
-    async userCredential => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(async userCredential => {
       console.log(`New user registered ${userCredential.user.email}`);
       try {
         const docRef = await addDoc(collection(db, 'users'), {
           email: email,
           password: password,
-          films: [],
+          watched: [],
+          queue: [],
         });
-        console.log('Document written with ID: ', docRef.id);
-      } catch (e) {
-        console.error('Error adding document: ', e);
+        refs.regForm.querySelector('.error').innerHTML = '';
+      } catch (error) {
+        console.error('Error adding document: ', error);
       }
-    }
-  );
+    })
+    .catch(error => {
+      refs.regForm.querySelector('.error').innerHTML = error.message;
+    });
 }
 
 async function loginUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailLogin.value.trim();
   const password = e.target.elements.passwordLogin.value.trim();
-  await signInWithEmailAndPassword(auth, email, password);
+  if (email === '' || password === '') {
+    refs.loginForm.querySelector('.error').innerHTML =
+      'Input fields are not filled';
+    return;
+  }
+  await signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      refs.loginForm.querySelector('.error').innerHTML = '';
+    })
+    .catch(error => {
+      refs.loginForm.querySelector('.error').innerHTML = error.message;
+    });
 }
 
 function logoutUser(e) {
   e.preventDefault();
   signOut(auth);
-  console.log('out');
 }
 
 function ifUserLogged() {
@@ -96,41 +115,55 @@ function ifUserLoggedOut() {
   refs.logoutBtn.classList.add('is-hidden');
 }
 
-async function addFilm(filmId) {
+async function addFilm(e) {
+  //   filmId = e.target.dataset.id;
+  let curFilm;
   const userRef = doc(db, 'users', await getCurrentUserId());
-  const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
+  const fullMovieInfo = await apiService.fetchFullMovieInfo(e);
   const userFilms = await getFilms().then(films => {
+    films.forEach(film => {
+      curFilm = film.id;
+      return curFilm;
+    });
     return films;
   });
 
-  // додати перевірку якщо фільм вже доданий
+  if (e.includes(curFilm)) {
+    console.log('added');
+    return;
+  }
+
   userFilms.push(fullMovieInfo);
-  console.log(userFilms);
   await updateDoc(userRef, {
-    films: userFilms,
+    watched: userFilms,
   });
+  return userFilms;
 }
 
-// addFilm(705867);
-// addFilm(705865);
-// addFilm(705866);
-// addFilm(705865);
+// async function deleteFilm(e) {
+//   filmId = e.target.dataset.id;
+//   let curFilm;
+//   const userRef = doc(db, 'users', await getCurrentUserId());
+//   const userFilms = await getFilms().then(films => {
+//     films.forEach(film => {
+//       curFilm = film.id;
+//       return curFilm;
+//     });
+//     return films;
+//   });
+
+//   await updateDoc(userRef, {
+//     films: userFilms,
+//   });
+// }
+
+// const card = document.querySelector('.movie-card__container');
+// card.addEventListener('click', addFilm);
 
 async function getFilms() {
   const userFilms = await getCurrentUserDoc().then(doc => {
-    return doc.data().films;
+    return doc.data().watched;
   });
-  //   const querySnapshot = await getDocs(collection(db, 'users'));
-  //   querySnapshot.forEach(async doc => {
-  //     try {
-  //       if (doc.data().email === auth.currentUser.email) {
-  //         films = doc.data().films;
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       return;
-  //     }
-  //   });
 
   return userFilms;
 }
@@ -142,18 +175,7 @@ async function getCurrentUserId() {
     }
     return doc.id;
   });
-  //   const querySnapshot = await getDocs(collection(db, 'users'));
 
-  //   querySnapshot.forEach(async doc => {
-  //     try {
-  //       if (doc.data().email === auth.currentUser.email) {
-  //         userID = doc.id;
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       return;
-  //     }
-  //   });
   return userID;
 }
 
@@ -176,4 +198,18 @@ async function getCurrentUserDoc() {
   return document;
 }
 
-export { refs, logoutUser };
+async function getAllUsersDoc() {
+  let allDocs = [];
+  const querySnapshot = await getDocs(collection(db, 'users'));
+  querySnapshot.forEach(doc => {
+    try {
+      allDocs.push(doc.data().email);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  return allDocs;
+}
+
+export { refs, logoutUser, addFilm };
