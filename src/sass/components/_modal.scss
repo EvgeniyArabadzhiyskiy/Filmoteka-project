@@ -10,7 +10,7 @@ body.modal-open {
     height: 100%;
     background-color: rgba( #000000, 0.25);
     transition: opacity 200ms ease-in;
-    z-index: 2;
+    z-index: 25;
 }
 
 .backdrop--active {
@@ -27,13 +27,14 @@ body.modal-open {
 .modal {
     overflow-y: auto;
     width: 280px;
-    max-height: 100%;
+    max-height: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
     visibility: visible;
     opacity: 1;
     border-radius: 25px 25px 25px 25px;
+  
     background-color: var(--white-color);
     transform: translate(-50%, -50%) scale(1);
     transition: opacity 250ms ease-in, visibility 250ms ease-in, transform 250ms ease-in;
@@ -59,24 +60,6 @@ body.modal-open {
 }
 
 @keyframes slideDownIn {
-    // 0% {
-    //     transform: translateY(-100%);
-    // }
-    // 50% {
-    //     transform: translateY(8%);
-    // }
-    // 65% {
-    //     transform: translateY(-4%);
-    // }
-    // 80% {
-    //     transform: translateY(4%);
-    // }
-    // 95% {
-    //     transform: translateY(-2%);
-    // }
-    // 100% {
-    //     transform: translateY(0%);
-    // }
         0% {
             scale: 0;
         }
@@ -86,24 +69,6 @@ body.modal-open {
 }
 
 @-webkit-keyframes slideDownIn {
-    // 0% {
-    //     -webkit-transform: translateY(-100%);
-    // }
-    // 50% {
-    //     -webkit-transform: translateY(8%);
-    // }
-    // 65% {
-    //     -webkit-transform: translateY(-4%);
-    // }
-    // 80% {
-    //     -webkit-transform: translateY(4%);
-    // }
-    // 95% {
-    //     -webkit-transform: translateY(-2%);
-    // }
-    // 100% {
-    //     -webkit-transform: translateY(0%);
-    // }
          0% {
              scale: 0;
          }
