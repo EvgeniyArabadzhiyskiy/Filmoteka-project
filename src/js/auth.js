@@ -1,4 +1,5 @@
-import './helpers/initialize-firebase';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,28 +7,43 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs,
   doc,
+  setDoc,
   updateDoc,
 } from 'firebase/firestore';
 import apiService from './apiService';
-import { onLoginBtn, onRegBtn } from './helpers/auth-btn-action';
 
+const firebaseConfig = {
+  apiKey: 'AIzaSyDl7udEYc6yHxHTsho7iDZ8HPitihaHEU4',
+  authDomain: 'filmoteka-46cf5.firebaseapp.com',
+  databaseURL:
+    'https://filmoteka-46cf5-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'filmoteka-46cf5',
+  storageBucket: 'filmoteka-46cf5.appspot.com',
+  messagingSenderId: '1056346694690',
+  appId: '1:1056346694690:web:c5c566f94f38d4dac1167b',
+  measurementId: 'G-9M2V8M9NTK',
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth();
 
 const refs = {
   formWrap: document.querySelector('.form-auth'),
-  loginForm: document.querySelector('[name="loginForm"]'),
+  libBtn: document.querySelector('.nav__library'),
   regForm: document.querySelector('[name="regForm"]'),
   regBtn: document.querySelector('[name="regBtn"]'),
-  loginBtn: document.querySelector('[name="loginBtn"]'),
-  libBtn: document.querySelector('.nav__library'),
+  loginForm: document.querySelector('[name="loginForm"]'),
   logoutBtn: document.querySelector('[name="logoutBtn"]'),
+  loginBtn: document.querySelector('[name="loginBtn"]'),
 };
 
 refs.regForm.addEventListener('submit', regNewUser);
@@ -38,12 +54,25 @@ refs.regBtn.addEventListener('click', onRegBtn);
 
 onAuthStateChanged(auth, async user => {
   if (user) {
-    ifUserLogged();
+    refs.logoutBtn.classList.remove('is-hidden');
+    refs.libBtn.classList.remove('is-hidden');
+    refs.loginBtn.classList.add('is-hidden');
+    refs.regBtn.classList.add('is-hidden');
   }
   if (!user) {
-    ifUserLoggedOut();
+    refs.loginBtn.classList.remove('is-hidden');
+    refs.regBtn.classList.remove('is-hidden');
+    refs.libBtn.classList.add('is-hidden');
+    refs.logoutBtn.classList.add('is-hidden');
+    return;
   }
 });
+
+function logoutUser(e) {
+  e.preventDefault();
+  signOut(auth);
+  refs.libBtn.classList.add('is-hidden');
+}
 
 function regNewUser(e) {
   e.preventDefault();
@@ -57,123 +86,65 @@ function regNewUser(e) {
         const docRef = await addDoc(collection(db, 'users'), {
           email: email,
           password: password,
-          films: [],
+          films: {},
         });
         console.log('Document written with ID: ', docRef.id);
       } catch (e) {
         console.error('Error adding document: ', e);
       }
+      refs.regForm.classList.add('is-hidden');
+      refs.formWrap.classList.add('is-hidden');
     }
   );
+}
+
+async function addFilm(filmId) {
+  const userRef = doc(db, 'users', await getCurrentUserId());
+  const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
+
+  await updateDoc(userRef, {
+    films: fullMovieInfo,
+  });
+}
+// addFilm(705865); // симуляція додавання фільму в док юзера
+
+async function getCurrentUserId() {
+  let userID;
+  const querySnapshot = await getDocs(collection(db, 'users'));
+  querySnapshot.forEach(async doc => {
+    try {
+      if (doc.data().email === auth.currentUser.email) {
+        userID = doc.id;
+      }
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  });
+  try {
+  } catch (error) {}
+
+  return userID;
 }
 
 async function loginUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailLogin.value.trim();
   const password = e.target.elements.passwordLogin.value.trim();
+  const user = auth.currentUser;
   await signInWithEmailAndPassword(auth, email, password);
-}
-
-function logoutUser(e) {
-  e.preventDefault();
-  signOut(auth);
-  console.log('out');
-}
-
-function ifUserLogged() {
-  refs.logoutBtn.classList.remove('is-hidden');
-  refs.libBtn.classList.remove('is-hidden');
-  refs.loginBtn.classList.add('is-hidden');
-  refs.regBtn.classList.add('is-hidden');
-  refs.regForm.classList.add('is-hidden');
+  refs.loginForm.classList.add('is-hidden');
   refs.formWrap.classList.add('is-hidden');
 }
 
-function ifUserLoggedOut() {
-  refs.loginBtn.classList.remove('is-hidden');
-  refs.regBtn.classList.remove('is-hidden');
-  refs.libBtn.classList.add('is-hidden');
-  refs.logoutBtn.classList.add('is-hidden');
+function onLoginBtn() {
+  refs.loginForm.classList.remove('is-hidden');
+  refs.formWrap.classList.remove('is-hidden');
+  refs.regForm.classList.add('is-hidden');
 }
 
-async function addFilm(filmId) {
-  const userRef = doc(db, 'users', await getCurrentUserId());
-  const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
-  const userFilms = await getFilms().then(films => {
-    return films;
-  });
-
-  // додати перевірку якщо фільм вже доданий
-  userFilms.push(fullMovieInfo);
-  console.log(userFilms);
-  await updateDoc(userRef, {
-    films: userFilms,
-  });
+function onRegBtn() {
+  refs.regForm.classList.remove('is-hidden');
+  refs.formWrap.classList.remove('is-hidden');
+  refs.loginForm.classList.add('is-hidden');
 }
-
-// addFilm(705867);
-// addFilm(705865);
-// addFilm(705866);
-// addFilm(705865);
-
-async function getFilms() {
-  const userFilms = await getCurrentUserDoc().then(doc => {
-    return doc.data().films;
-  });
-  //   const querySnapshot = await getDocs(collection(db, 'users'));
-  //   querySnapshot.forEach(async doc => {
-  //     try {
-  //       if (doc.data().email === auth.currentUser.email) {
-  //         films = doc.data().films;
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       return;
-  //     }
-  //   });
-
-  return userFilms;
-}
-
-async function getCurrentUserId() {
-  const userID = await getCurrentUserDoc().then(doc => {
-    if (doc === undefined) {
-      return;
-    }
-    return doc.id;
-  });
-  //   const querySnapshot = await getDocs(collection(db, 'users'));
-
-  //   querySnapshot.forEach(async doc => {
-  //     try {
-  //       if (doc.data().email === auth.currentUser.email) {
-  //         userID = doc.id;
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //       return;
-  //     }
-  //   });
-  return userID;
-}
-
-async function getCurrentUserDoc() {
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  let document;
-  if (auth.currentUser === null) {
-    return;
-  }
-  querySnapshot.forEach(async doc => {
-    try {
-      if (doc.data().email === auth.currentUser.email) {
-        document = doc;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  return document;
-}
-
-export { refs, logoutUser };
