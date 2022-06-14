@@ -3,16 +3,15 @@ import renderLibrary from './templates/movieCardLibrary';
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
 
-const notesOnPage320 = 4;
-const notesOnPage768 = 8;
-const notesOnPage1024 = 9;
+const notesOnPage = 9;
+let dataOnPage = [];
 let globalPage = 0;
 let data = [];
 
-
-function renderPaginationBTN(arrays, page, allPages) {
+function renderPaginationBTN(arrays, page) {
     data = arrays;
     let paginationMarkup = '';
+    let allPages = Math.ceil(arrays.length / notesOnPage);
     let beforePreviousPage = +page - 2;
     let previousPage = +page - 1;
     let nextPage = +page + 1;
@@ -92,12 +91,11 @@ function onPaginationChoice(e) {
             globalPage = value;
     }
     resetPage();
-    changeScreenDevice(data);
-    window.scroll({
-        top: 100,
-        left: 100,
-        behavior: 'smooth'
-    });
+    let start = (globalPage - 1) * notesOnPage;
+    let end = start + notesOnPage;
+    dataOnPage = data.slice(start, end);
+    renderLibrary(dataOnPage);
+    renderPaginationBTN(data, globalPage);
 }
 
 function resetPage() {
@@ -106,42 +104,6 @@ function resetPage() {
 
 function resetPagination() {
     paginationList.innerHTML = '';
-}
-
-function changeScreenDevice(arrays) {
-    const mediaQuery320 = window.matchMedia('(min-width: 320px) and (max-width: 767px)');
-    const mediaQuery768 = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
-    const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
-    function mediaQuery320Handler(mq) {
-        if (mq.matches) {
-            let start = (globalPage - 1) * notesOnPage320;
-            let end = start + notesOnPage320;
-            renderLibrary(arrays.slice(start, end));
-            renderPaginationBTN(arrays, globalPage, Math.ceil(arrays.length / notesOnPage320));
-        }
-    }
-    function mediaQuery768Handler(mq) {
-        if (mq.matches) {
-            let start = (globalPage - 1) * notesOnPage768;
-            let end = start + notesOnPage768;
-            renderLibrary(arrays.slice(start, end));
-            renderPaginationBTN(arrays, globalPage, Math.ceil(arrays.length / notesOnPage768));
-        }
-    }
-    function mediaQuery1024Handler(mq) {
-        if (mq.matches) {
-            let start = (globalPage - 1) * notesOnPage1024;
-            let end = start + notesOnPage1024;
-            renderLibrary(arrays.slice(start, end));
-            renderPaginationBTN(arrays, globalPage, Math.ceil(arrays.length / notesOnPage1024));
-        }
-    }
-    mediaQuery320.addListener(mediaQuery320Handler);
-    mediaQuery768.addListener(mediaQuery768Handler);
-    mediaQuery1024.addListener(mediaQuery1024Handler);
-    mediaQuery320Handler(mediaQuery320);
-    mediaQuery768Handler(mediaQuery768);
-    mediaQuery1024Handler(mediaQuery1024);
 }
 
 export { renderPaginationBTN, resetPagination };
