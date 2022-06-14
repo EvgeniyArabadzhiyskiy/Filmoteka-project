@@ -1,146 +1,195 @@
-import apiService from './apiService';
+import apiService from './apiService'
 import renderMovieModal from './templates/renderMovieModal';
 import addToLibrary from './addToLibrary';
 import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
-//import 'nprogress/nprogress.css';
 import renderLibrary from './templates/movieCardLibrary';
-import { onWatchedMoviesClick, onQueueMoviesClick } from './library';
+import galleryBtnStateUpdate from './galleryBtnStateUpdate';
+import { renderPaginationBTN, resetPagination } from './paginationLibrary';
+import { markupModal} from './templates/modalMarkup';
 
-const refs = {
-  //   Добавил
-  watchedMovies: document.querySelector('button[data-action="watched"]'), //   Добавил
-  queueMovies: document.querySelector('button[data-action="queue"]'), //   Добавил
-};
+const refs = {                                                                  //   Добавил
+    watchedMovies: document.querySelector('button[data-action="watched"]'),     //   Добавил
+    queueMovies: document.querySelector('button[data-action="queue"]'),         //   Добавил
+
+}
 
 const modal = document.querySelector('.backdrop');
 
 const modalMovieContainer = document.querySelector('.film-content');
 const modalButtonClose = document.querySelector('.modal__button-close');
-let watchedArr = JSON.parse(localStorage.getItem('watched'))
-  ? JSON.parse(localStorage.getItem('watched'))
-  : [];
-let queueArr = JSON.parse(localStorage.getItem('queue'))
-  ? JSON.parse(localStorage.getItem('queue'))
-  : [];
+let watchedArr = JSON.parse(localStorage.getItem('watched')) ? JSON.parse(localStorage.getItem('watched')) : [];
+let queueArr = JSON.parse(localStorage.getItem('queue')) ? JSON.parse(localStorage.getItem('queue')) : [];
+export { watchedArr, queueArr };
 
 export default function openModal(movieContainer) {
-  movieContainer.addEventListener('click', onClick);
+
+    movieContainer.addEventListener('click', onClick)
+
 }
 
 async function onClick(e) {
-  NProgress.start();
-  if (e.target.nodeName !== 'IMG' && e.target.nodeName !== 'H2') {
-    return;
-  }
-  document.body.classList.add('modal-open');
-  modal.classList.remove('is-hidden');
-  modalButtonClose.addEventListener('click', modalClose);
-  window.addEventListener('keyup', press);
-  window.addEventListener('click', onCloseBackdropClick);
-
-  const filmId = e.target.dataset.id;
-
-  const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
-
-  const createMarkupFilmInModal = await renderMovieModal(fullMovieInfo);
-
-  modalMovieContainer.insertAdjacentHTML('beforeend', createMarkupFilmInModal);
-
-  NProgress.done();
-
-  const addToWatchedBtn = document.querySelector('.btn-watched');
-  const addToQueueBtn = document.querySelector('.btn-qweqwe');
-
-  watchedArr.forEach(obj => {
-    if (obj.id === Number(filmId)) {
-      addToWatchedBtn.classList.add('pressed');
-      addToWatchedBtn.textContent = 'Remove from Watched';
+    // NProgress.start();
+    if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
+        return
     }
-  });
-  queueArr.forEach(obj => {
-    if (obj.id === Number(filmId)) {
-      addToQueueBtn.classList.add('pressed');
-      addToQueueBtn.textContent = 'Remove from Queue';
-    }
-  });
 
-  const bodyOfLybrary = document.body.classList.contains('library'); //   Добавил
-  const isWatchedActiv = refs.watchedMovies?.classList.contains(
-    'library-btn__isActive'
-  ); //   Добавил
-  const isQueueActiv = refs.queueMovies?.classList.contains(
-    'library-btn__isActive'
-  ); //   Добавил
+    document.body.classList.add("modal-open");
+    modal.classList.remove('is-hidden');
+    modal.classList.add('slideDownIn');
+    modalButtonClose.addEventListener('click', modalClose);
+    window.addEventListener("keyup", press);
+    window.addEventListener("click", onCloseBackdropClick);
 
-  addToWatchedBtn.addEventListener('click', () => {
-    addToWatchedBtn.classList.toggle('pressed');
-    if (addToWatchedBtn.classList.contains('pressed')) {
-      addToWatchedBtn.textContent = 'Remove from Watched';
-      addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
+    const filmId = e.target.dataset.id;
 
-      if (isWatchedActiv) {
-        bodyOfLybrary && onWatchedMoviesClick(); //   Добавил
-        refs.watchedMovies?.classList.add('library-btn__isActive'); //   Добавил
-        refs.queueMovies?.classList.remove('library-btn__isActive'); //   Добавил
-      }
-    } else {
-      addToWatchedBtn.textContent = 'Add to Watched';
-      removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
+    const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
+    console.log(fullMovieInfo);
+    const createMarkupFilmInModal =await  renderMovieModal(fullMovieInfo);
+    const finalMarkupModal = markupModal(createMarkupFilmInModal);
+    
+    
 
-      if (isWatchedActiv) {
-        bodyOfLybrary && onWatchedMoviesClick(); //   Добавил
-        refs.watchedMovies?.classList.add('library-btn__isActive'); //   Добавил
-        refs.queueMovies?.classList.remove('library-btn__isActive');
-      } //   Добавил
-    }
-  });
-  addToQueueBtn.addEventListener('click', () => {
-    addToQueueBtn.classList.toggle('pressed');
+    modalMovieContainer.insertAdjacentHTML("beforeend", finalMarkupModal);
 
-    if (addToQueueBtn.classList.contains('pressed')) {
-      addToQueueBtn.textContent = 'Remove from Queue';
-      addToLibrary(fullMovieInfo, queueArr, addToQueueBtn.dataset.target);
+    // NProgress.done();
 
-      if (isQueueActiv) {
-        bodyOfLybrary && onQueueMoviesClick(); //   Добавил
-        refs.queueMovies?.classList.add('library-btn__isActive'); //   Добавил
-        refs.watchedMovies?.classList.remove('library-btn__isActive'); //   Добавил
-      }
-    } else {
-      addToQueueBtn.textContent = 'Add to Queue';
-      removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
+    const addToWatchedBtn = document.querySelector('.btn-watched');
+    const addToQueueBtn = document.querySelector('.btn-qweqwe');
 
-      if (isQueueActiv) {
-        bodyOfLybrary && onQueueMoviesClick(); //   Добавил
-        refs.queueMovies?.classList.add('library-btn__isActive'); //   Добавил
-        refs.watchedMovies?.classList.remove('library-btn__isActive');
-      }
-    }
-  });
+    watchedArr.forEach(obj => {
+        if (obj.id === Number(filmId)) {
+            addToWatchedBtn.classList.add('pressed');
+            addToWatchedBtn.textContent = 'Remove from Watched';
+        }
+
+    });
+  
+    queueArr.forEach(obj => {
+        if (obj.id === Number(filmId)) {
+            addToQueueBtn.classList.add('pressed');
+            addToQueueBtn.textContent = 'Remove from Queue';
+        }
+    });
+
+    const bodyOfLybrary = document.body.classList.contains('library') //   Добавил
+    const isWatchedActiv = refs.watchedMovies?.classList.contains('library-btn__isActive') //   Добавил
+    const isQueueActiv = refs.queueMovies?.classList.contains('library-btn__isActive') //   Добавил
+
+    addToWatchedBtn.addEventListener('click', () => {
+        addToWatchedBtn.classList.toggle('pressed');
+
+        if (addToWatchedBtn.classList.contains('pressed')) {
+            addToWatchedBtn.textContent = 'Remove from Watched';
+            addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
+
+            if (isWatchedActiv) {
+                bodyOfLybrary && changeScreenDevice(watchedArr);                             //   Добавил
+                refs.watchedMovies?.classList.add('library-btn__isActive');             //   Добавил
+                refs.queueMovies?.classList.remove('library-btn__isActive'); 
+
+            }
+
+        } else {
+            addToWatchedBtn.textContent = 'Add to Watched';
+            removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
+
+            if (isWatchedActiv) {                                                  
+                bodyOfLybrary && changeScreenDevice(watchedArr);                                 //   Добавил
+                refs.watchedMovies?.classList.add('library-btn__isActive');                 //   Добавил
+                refs.queueMovies?.classList.remove('library-btn__isActive');  
+            }                                                                           //   Добавил
+        }
+
+    });
+    addToQueueBtn.addEventListener('click', () => {
+        addToQueueBtn.classList.toggle('pressed');
+
+        if (addToQueueBtn.classList.contains('pressed')) {
+            addToQueueBtn.textContent = 'Remove from Queue';
+            addToLibrary(fullMovieInfo, queueArr, addToQueueBtn.dataset.target);
+
+            if (isQueueActiv) {
+                bodyOfLybrary && changeScreenDevice(queueArr);                                        //   Добавил
+                refs.queueMovies?.classList.add('library-btn__isActive');                       //   Добавил
+                refs.watchedMovies?.classList.remove('library-btn__isActive');                  //   Добавил
+
+            }
+        } else {
+            addToQueueBtn.textContent = 'Add to Queue';
+            removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
+
+            if (isQueueActiv) {
+                bodyOfLybrary && changeScreenDevice(queueArr);                                      //   Добавил
+                refs.queueMovies?.classList.add('library-btn__isActive');                        //   Добавил
+                refs.watchedMovies?.classList.remove('library-btn__isActive');
+            }
+        }
+    });
+
 }
 
 function press(e) {
-  if (e.code === 'Escape') {
-    modalClose();
-    window.removeEventListener('keyup', press);
-    modalButtonClose.removeEventListener('click', modalClose);
-  }
-  return;
+    if (e.code === "Escape") {
+        modalClose();
+        window.removeEventListener("keyup", press);
+        modalButtonClose.removeEventListener('click', modalClose);
+        galleryBtnStateUpdate();
+    }
+    return
 }
 
 function onCloseBackdropClick(e) {
-  if (e.target.dataset.close === 'backdrop') {
-    modalClose();
-  }
-  return;
+    if (e.target.dataset.close === 'backdrop') {
+        modalClose();
+        galleryBtnStateUpdate();
+    }
+    return;
 }
 
 function modalClose(e) {
-  document.body.classList.remove('modal-open');
-  modal.classList.add('is-hidden');
-  window.removeEventListener('keyup', press);
-  window.removeEventListener('click', onCloseBackdropClick);
-  modalButtonClose.removeEventListener('click', modalClose);
-  modalMovieContainer.innerHTML = '';
+    document.body.classList.remove("modal-open");
+    modal.classList.add('is-hidden');
+    modal.classList.remove("slideDownIn")
+    window.removeEventListener("keyup", press);
+    window.removeEventListener("click", onCloseBackdropClick);
+    modalButtonClose.removeEventListener('click', modalClose);
+    modalMovieContainer.innerHTML = "";
+    galleryBtnStateUpdate();
+}
+
+function changeScreenDevice(arrays) {
+    const mediaQuery320 = window.matchMedia('(min-width: 320px) and (max-width: 767px)');
+    const mediaQuery768 = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+    const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
+    function mediaQuery320Handler(mq) {
+        if (mq.matches) {
+            let page = 1;
+            renderLibrary(arrays.slice(0, 4));
+            resetPagination();
+            renderPaginationBTN(arrays, page = 1, Math.ceil(arrays.length / 4));  
+        }
+    }
+    function mediaQuery768Handler(mq) {
+        if (mq.matches) {
+            let page = 1;
+            renderLibrary(arrays.slice(0, 8));
+            resetPagination();
+            renderPaginationBTN(arrays, page = 1, Math.ceil(arrays.length / 8));
+        }
+    }
+    function mediaQuery1024Handler(mq) {
+        if (mq.matches) {
+            let page = 1;
+            renderLibrary(arrays.slice(0, 9));
+            resetPagination();
+            renderPaginationBTN(arrays, page = 1, Math.ceil(arrays.length / 9));
+        }
+    }
+    mediaQuery320.addListener(mediaQuery320Handler);
+    mediaQuery768.addListener(mediaQuery768Handler);
+    mediaQuery1024.addListener(mediaQuery1024Handler);
+    mediaQuery320Handler(mediaQuery320);
+    mediaQuery768Handler(mediaQuery768);
+    mediaQuery1024Handler(mediaQuery1024);
 }

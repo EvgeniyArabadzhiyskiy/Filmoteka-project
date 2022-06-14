@@ -4,11 +4,13 @@ import './darkThema';
 import './cursor';
 import openModal from './modal-open';
 import renderLibrary from './templates/movieCardLibrary';
-import { renderPaginationBTN } from './paginationLibrary';
+import { renderPaginationBTN, resetPagination } from './paginationLibrary';
+import "./team-modal";
 
 const auth = getAuth();
 let watched = [];
 let queue = [];
+let page = 1;
 
 const refs = {
   moviesList: document.querySelector('.movie-card-list'),
@@ -20,6 +22,7 @@ const refs = {
   logoutLibBtn: document.querySelector('.nav__logout'),
 };
 
+
 refs.logoutLibBtn.addEventListener('click', logoutUser);
 
 function logoutUser(e) {
@@ -29,63 +32,82 @@ function logoutUser(e) {
 }
 
 if (localStorage.getItem('watched') === null) {
-  refs.sectionLibrary.innerHTML = `<h3 class="empty-container">Sorry, but this section is still empty:(</h3>`;
+    refs.sectionLibrary.innerHTML = `<h3 class="empty-container">Sorry, but this section is still empty:(</h3>`;
 }
 openModal(refs.moviesList);
 if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
-  onQueueMoviesClick();
-} else {
-  onWatchedMoviesClick();
+    onQueueMoviesClick();
 }
-console.log(watched);
+else {
+    onWatchedMoviesClick();
+}
 
 refs.watchedMovies.addEventListener('click', onWatchedMoviesClick);
 refs.queueMovies.addEventListener('click', onQueueMoviesClick);
 
 function onWatchedMoviesClick() {
-  sessionStorage.setItem('last-pressed-library-btn', 'watched');
-  let currWatched = [];
-  refs.watchedMovies.classList.add('library-btn__isActive');
-  refs.queueMovies.classList.remove('library-btn__isActive');
-  let watchedKey = localStorage.getItem('watched');
-  if (watchedKey) {
-    try {
-      watched = JSON.parse(watchedKey);
-      currWatched = watched.slice(0, 9);
-    } catch (e) {
-      console.log(e);
+    sessionStorage.setItem('last-pressed-library-btn', 'watched');
+    refs.watchedMovies.classList.add('library-btn__isActive');
+    refs.queueMovies.classList.remove('library-btn__isActive');
+    let watchedKey = localStorage.getItem('watched');
+    if (watchedKey) {
+        try {
+            watched = JSON.parse(watchedKey);
+        } catch (e) {
+            console.log(e);
+        }
     }
-  }
-  if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
-    renderLibrary(currWatched);
-  }
-  refs.pagination.innerHTML = '';
-  if (watched.length > 9) {
-    renderPaginationBTN(watched);
-  }
+    if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
+        changeScreenDevice(watched);    
+    }
 }
 
 function onQueueMoviesClick() {
-  sessionStorage.setItem('last-pressed-library-btn', 'queue');
-  let currQueue = [];
-  refs.queueMovies.classList.add('library-btn__isActive');
-  refs.watchedMovies.classList.remove('library-btn__isActive');
-  let queueKey = localStorage.getItem('queue');
-  if (queueKey) {
-    try {
-      queue = JSON.parse(queueKey);
-      currQueue = queue.slice(0, 9);
-    } catch (e) {
-      console.log(e);
+    sessionStorage.setItem('last-pressed-library-btn', 'queue');
+    refs.queueMovies.classList.add('library-btn__isActive');
+    refs.watchedMovies.classList.remove('library-btn__isActive');
+    let queueKey = localStorage.getItem('queue');
+    if (queueKey) {
+        try {
+            queue = JSON.parse(queueKey);
+        } catch (e) {
+            console.log(e);
+        }
     }
-  }
-  if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
-    renderLibrary(currQueue);
-  }
-  refs.pagination.innerHTML = '';
-  if (queue.length > 9) {
-    renderPaginationBTN(queue);
-  }
+    if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
+        changeScreenDevice(queue);
+    }
 }
 
-export { onWatchedMoviesClick, onQueueMoviesClick };
+function changeScreenDevice(arrays) {
+    const mediaQuery320 = window.matchMedia('(min-width: 320px) and (max-width: 767px)');
+    const mediaQuery768 = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+    const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
+    function mediaQuery320Handler(mq) {
+        if (mq.matches) {
+            renderLibrary(arrays.slice(0, 4));
+            resetPagination();
+            renderPaginationBTN(arrays, page = 1, Math.ceil(arrays.length / 4));
+        }
+    }
+    function mediaQuery768Handler(mq) {
+        if (mq.matches) {
+            renderLibrary(arrays.slice(0, 8));
+            resetPagination();
+            renderPaginationBTN(arrays, page = 1, Math.ceil(arrays.length / 8));
+        }
+    }
+    function mediaQuery1024Handler(mq) {
+        if (mq.matches) {
+            renderLibrary(arrays.slice(0, 9));
+            resetPagination();
+            renderPaginationBTN(arrays, page = 1, Math.ceil(arrays.length / 9));
+        }
+    }
+    mediaQuery320.addListener(mediaQuery320Handler);
+    mediaQuery768.addListener(mediaQuery768Handler);
+    mediaQuery1024.addListener(mediaQuery1024Handler);
+    mediaQuery320Handler(mediaQuery320);
+    mediaQuery768Handler(mediaQuery768);
+    mediaQuery1024Handler(mediaQuery1024);
+}
