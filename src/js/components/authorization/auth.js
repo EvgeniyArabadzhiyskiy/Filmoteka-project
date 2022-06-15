@@ -24,10 +24,10 @@ const refs = {
   formWrap: document.querySelector('.form-auth'),
   loginForm: document.querySelector('[name="loginForm"]'),
   regForm: document.querySelector('[name="regForm"]'),
-  regBtn: document.querySelector('[name="regBtn"]'),
-  loginBtn: document.querySelector('[name="loginBtn"]'),
-  libBtn: document.querySelector('.nav__library'),
-  logoutBtn: document.querySelector('[name="logoutBtn"]'),
+  regBtn: document.querySelector('.nav-item__reg'),
+  loginBtn: document.querySelector('.nav-item__login'),
+  libBtn: document.querySelector('.nav-item__lib'),
+  logoutBtn: document.querySelector('.nav-item__logout'),
   homeBtn: document.querySelector('.nav__home'),
 };
 
@@ -141,39 +141,6 @@ function ifUserLoggedOut() {
   refs.logoutBtn.classList.add('is-hidden');
 }
 
-async function addFilm(e) {
-  //   filmId = e.target.dataset.id;
-  let curFilm;
-  const userRef = doc(db, 'users', await getCurrentUserId());
-  const fullMovieInfo = await apiService.fetchFullMovieInfo(e);
-  const userFilms = await getFilms().then(films => {
-    films.forEach(film => {
-      curFilm = film.id;
-      return curFilm;
-    });
-    return films;
-  });
-
-  if (e.includes(curFilm)) {
-    console.log('added');
-    return;
-  }
-
-  userFilms.push(fullMovieInfo);
-  await updateDoc(userRef, {
-    watched: userFilms,
-  });
-  return userFilms;
-}
-
-async function getFilms() {
-  const userFilms = await getCurrentUserDoc().then(doc => {
-    return doc.data().watched;
-  });
-
-  return userFilms;
-}
-
 async function getCurrentUserId() {
   const userID = await getCurrentUserDoc().then(doc => {
     if (doc === undefined) {
@@ -203,4 +170,4 @@ async function getCurrentUserDoc() {
 
   return document;
 }
-export { refs, logoutUser, addFilm };
+export { refs, logoutUser };
