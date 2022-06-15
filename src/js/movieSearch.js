@@ -1,11 +1,11 @@
-import apiService from "../../apiService";
-import renderGallery from "../startPage/movieGallary";
-import { renderPaginationButtons } from "../pagination/pagination";
-import { resetPagination } from "../pagination/pagination";
+import apiService from "./apiService";
+import renderGallery from "./components/movieGallary";
+import { renderPaginationButtons } from "./pagination";
+import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
-import { input } from "../../apiService";
-import { markupGallery } from '../../templates/startPageMarkup';
-import galleryBtnStateUpdate from '../../galleryBtnStateUpdate';
+import { input } from "./apiService";
+import { markupGallery } from './templates/startPageMarkup';
+import galleryBtnStateUpdate from './galleryBtnStateUpdate';
 
 const mainContainer = document.querySelector('.movie-card-list');
 const searchFormEl = document.querySelector(".form__search");

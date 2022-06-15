@@ -1,12 +1,12 @@
-import apiService from '../../apiService'
-import renderMovieModal from './renderMovieModal';
-import addToLibrary from '../library/addToLibrary';
-import removeFromLibrary from '../library/removeFromLibrary';
+import apiService from './apiService'
+import renderMovieModal from './components/renderMovieModal';
+import addToLibrary from './addToLibrary';
+import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
-import renderLibrary from '../../templates/movieCardLibrary';
-import galleryBtnStateUpdate from '../../galleryBtnStateUpdate';
-import { renderPaginationBTN, resetPagination } from '../pagination/paginationLibrary';
-import { markupModal} from '../../templates/modalMarkup';
+import renderLibrary from './templates/movieCardLibrary';
+import galleryBtnStateUpdate from './galleryBtnStateUpdate';
+import { renderPaginationBTN, resetPagination } from './paginationLibrary';
+import { markupModal} from './templates/modalMarkup';
 
 const refs = {                                                                  //   Добавил
     watchedMovies: document.querySelector('button[data-action="watched"]'),     //   Добавил
