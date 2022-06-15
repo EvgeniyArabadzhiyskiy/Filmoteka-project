@@ -1,4 +1,5 @@
 import noPoster from '../../images/no-poster.jpg';
+
 const IMG_URL= `https://image.tmdb.org/t/p/w500`;
 const moviesList = document.querySelector('.movie-card-list');
 

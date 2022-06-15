@@ -14,5 +14,4 @@ function renderMovieCardsSlider(results) {
     }).join(''); 
   swiperContainer.insertAdjacentHTML("beforeend", markup);
 }
-
 export { renderMovieCardsSlider };

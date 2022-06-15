@@ -16,9 +16,7 @@
     height: 40px;
     transition: background-color 0.25s ease-in;
     border-radius: 5px;
-    &:not(:last-child){
-        margin-right: 5px;
-    }
+    
 }
 
 .pagination-arrow {

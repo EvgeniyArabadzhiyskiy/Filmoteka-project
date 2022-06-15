@@ -1,13 +1,13 @@
-import apiService from "./apiService";
-import renderGallery from "./components/movieGallary";
-import { input } from "./apiService";
+import apiService from "../../apiService";
+import renderGallery from "../startPage/movieGallary";
+import { input } from "../../../js/apiService";
 import NProgress from 'nprogress';
-import {markupGallery} from '../js/templates/startPageMarkup';
+import {markupGallery} from '../../templates/startPageMarkup';
 
 
 const mainContainer = document.querySelector('.movie-card-list');
 const paginationList = document.querySelector('.pagination');
-const cardsContainer = document.querySelector('.movie-card-list');
+
 let globalPage = 0;
 let allGenres;
 
@@ -120,7 +120,6 @@ function onPaginationChoice(e) {
                 const markupMovie = markupGallery(filmData)
                 mainContainer.insertAdjacentHTML("beforeend", markupMovie);
                 renderPaginationButtons(data.total_pages, data.page);
-                // console.log(markupMovie);
             })
             .catch(error => console.log(error));
             NProgress.done();
@@ -128,7 +127,7 @@ function onPaginationChoice(e) {
 }
 
 function resetPage() {
-    cardsContainer.innerHTML = '';
+    mainContainer.innerHTML = '';
 }
 
 function resetPagination() {
