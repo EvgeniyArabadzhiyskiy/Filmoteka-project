@@ -1,8 +1,7 @@
 import apiService from './apiService'
 import renderMovieModal from './components/renderMovieModal';
-import { updaterStorage } from "./helpers/updaterStorage";
-// import addToLibrary from './addToLibrary';
-// import removeFromLibrary from './removeFromLibrary';
+import addToLibrary from './addToLibrary';
+import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
 import renderLibrary from './templates/movieCardLibrary';
 import galleryBtnStateUpdate from './galleryBtnStateUpdate';
@@ -82,7 +81,7 @@ async function onClick(e) {
 
         if (addToWatchedBtn.classList.contains('pressed')) {
             addToWatchedBtn.textContent = 'Remove from Watched';
-            updaterStorage.addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
+            addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {
                 bodyOfLybrary && changeScreenDevice(watchedArr);                             //   Добавил
@@ -93,7 +92,7 @@ async function onClick(e) {
 
         } else {
             addToWatchedBtn.textContent = 'Add to Watched';
-            updaterStorage.removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
+            removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {                                                  
                 bodyOfLybrary && changeScreenDevice(watchedArr);                                 //   Добавил
@@ -108,7 +107,7 @@ async function onClick(e) {
 
         if (addToQueueBtn.classList.contains('pressed')) {
             addToQueueBtn.textContent = 'Remove from Queue';
-            updaterStorage.addToLibrary(fullMovieInfo, queueArr, addToQueueBtn.dataset.target);
+            addToLibrary(fullMovieInfo, queueArr, addToQueueBtn.dataset.target);
 
             if (isQueueActiv) {
                 bodyOfLybrary && changeScreenDevice(queueArr);                                        //   Добавил
@@ -118,7 +117,7 @@ async function onClick(e) {
             }
         } else {
             addToQueueBtn.textContent = 'Add to Queue';
-            updaterStorage.removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
+            removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
 
             if (isQueueActiv) {
                 bodyOfLybrary && changeScreenDevice(queueArr);                                      //   Добавил
