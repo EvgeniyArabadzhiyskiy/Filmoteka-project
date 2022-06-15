@@ -64,7 +64,19 @@ studentsModal.addEventListener("click", (e) => {
 function toggleModal() {
     studentsModal.classList.toggle("is-hidden");
     document.body.classList.toggle("modal-open");
+    onModalOpen()
 };
 
+function onModalOpen() {
+    window.addEventListener('keydown', onEscPress);
+}
+function onEscPress(event) {
+    if (event.code === 'Escape') {
+        toggleModal();
+        onModalClose();
+    }
+}
 
-
+function onModalClose() {
+    window.removeEventListener('keydown', onEscPress);
+}
