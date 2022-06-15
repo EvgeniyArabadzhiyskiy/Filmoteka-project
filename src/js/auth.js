@@ -1,4 +1,4 @@
-import app from '../../helpers/initialize-firebase';
+import app from './helpers/initialize-firebase';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -14,8 +14,8 @@ import {
   doc,
   updateDoc,
 } from 'firebase/firestore';
-import apiService from '../../apiService';
-import { onLoginBtn, onRegBtn } from '../../helpers/auth-btn-action';
+import apiService from './apiService';
+import { onLoginBtn, onRegBtn } from './helpers/auth-btn-action';
 
 const db = getFirestore(app);
 const auth = getAuth();

@@ -1,8 +1,8 @@
-import apiService from "../../apiService";
-import renderGallery from "../startPage/movieGallary";
-import { input } from "../../../js/apiService";
+import apiService from "./apiService";
+import renderGallery from "./components/movieGallary";
+import { input } from "./apiService";
 import NProgress from 'nprogress';
-import {markupGallery} from '../../templates/startPageMarkup';
+import {markupGallery} from '../js/templates/startPageMarkup';
 
 
 const mainContainer = document.querySelector('.movie-card-list');

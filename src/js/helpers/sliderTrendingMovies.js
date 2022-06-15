@@ -1,5 +1,5 @@
 import Swiper, { Navigation, Autoplay } from 'swiper';
-import openModal from "../components/modal/modal-open";
+import openModal from "../modal-open";
 
 const sliderContainer = document.querySelector('.mySwiper');
 

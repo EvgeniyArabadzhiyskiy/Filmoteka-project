@@ -1,6 +1,6 @@
 // import { IMG_URL } from "./movieGallary";
 const IMG_URL= `https://image.tmdb.org/t/p/w500`;
-import noPoster from '../../../images/no-poster.jpg';
+import noPoster from '../../images/no-poster.jpg';
 
 //const modalMovieContainer = document.querySelector('.film-content');
  
