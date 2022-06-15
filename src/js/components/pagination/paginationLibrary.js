@@ -1,4 +1,4 @@
-import renderLibrary from './templates/movieCardLibrary';
+import renderLibrary from '../../templates/movieCardLibrary';
 
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');
@@ -143,5 +143,4 @@ function changeScreenDevice(arrays) {
     mediaQuery768Handler(mediaQuery768);
     mediaQuery1024Handler(mediaQuery1024);
 }
-
 export { renderPaginationBTN, resetPagination };

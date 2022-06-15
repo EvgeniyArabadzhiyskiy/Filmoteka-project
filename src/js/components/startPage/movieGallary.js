@@ -1,5 +1,4 @@
-
-import noPoster from '../../images/no-poster.jpg';
+import noPoster from '../../../images/no-poster.jpg';
 const IMG_URL= `https://image.tmdb.org/t/p/w500`;
 
  
@@ -7,13 +6,11 @@ export default function renderGallery(results, dataGenres) {
 	const genres = dataGenres?.genres
 
     return results.map(({ poster_path, original_title, release_date, genre_ids, id }) => {
-	
+
 		if (original_title === "") {
         	original_title = "Sorry, no title for the movie.";
-		}else if (original_title.length > 40){
-			 	original_title =  original_title.slice(0, 40) + "...";
-			  }
-		
+		}
+
 		if (!release_date) {
 			release_date = "Expected";
 		}
