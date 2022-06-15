@@ -1,5 +1,4 @@
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+import app from './helpers/initialize-firebase';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,43 +6,29 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs,
   doc,
-  setDoc,
   updateDoc,
 } from 'firebase/firestore';
 import apiService from './apiService';
+import { onLoginBtn, onRegBtn } from './helpers/auth-btn-action';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyDl7udEYc6yHxHTsho7iDZ8HPitihaHEU4',
-  authDomain: 'filmoteka-46cf5.firebaseapp.com',
-  databaseURL:
-    'https://filmoteka-46cf5-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'filmoteka-46cf5',
-  storageBucket: 'filmoteka-46cf5.appspot.com',
-  messagingSenderId: '1056346694690',
-  appId: '1:1056346694690:web:c5c566f94f38d4dac1167b',
-  measurementId: 'G-9M2V8M9NTK',
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth();
 
 const refs = {
   formWrap: document.querySelector('.form-auth'),
-  libBtn: document.querySelector('.nav__library'),
+  loginForm: document.querySelector('[name="loginForm"]'),
   regForm: document.querySelector('[name="regForm"]'),
   regBtn: document.querySelector('[name="regBtn"]'),
-  loginForm: document.querySelector('[name="loginForm"]'),
-  logoutBtn: document.querySelector('[name="logoutBtn"]'),
   loginBtn: document.querySelector('[name="loginBtn"]'),
+  libBtn: document.querySelector('.nav__library'),
+  logoutBtn: document.querySelector('[name="logoutBtn"]'),
+  homeBtn: document.querySelector('.nav__home'),
 };
 
 refs.regForm.addEventListener('submit', regNewUser);
@@ -54,97 +39,168 @@ refs.regBtn.addEventListener('click', onRegBtn);
 
 onAuthStateChanged(auth, async user => {
   if (user) {
-    refs.logoutBtn.classList.remove('is-hidden');
-    refs.libBtn.classList.remove('is-hidden');
-    refs.loginBtn.classList.add('is-hidden');
-    refs.regBtn.classList.add('is-hidden');
+    ifUserLogged();
   }
   if (!user) {
-    refs.loginBtn.classList.remove('is-hidden');
-    refs.regBtn.classList.remove('is-hidden');
-    refs.libBtn.classList.add('is-hidden');
-    refs.logoutBtn.classList.add('is-hidden');
-    return;
+    ifUserLoggedOut();
   }
 });
-
-function logoutUser(e) {
-  e.preventDefault();
-  signOut(auth);
-  refs.libBtn.classList.add('is-hidden');
-}
 
 function regNewUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailReg.value.trim();
   const password = e.target.elements.passwordReg.value.trim();
+  if (email === '' || password === '') {
+    refs.regForm.querySelector('.error').innerHTML =
+      'Input fields are not filled';
+    return;
+  }
 
-  createUserWithEmailAndPassword(auth, email, password).then(
-    async userCredential => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(async userCredential => {
       console.log(`New user registered ${userCredential.user.email}`);
       try {
         const docRef = await addDoc(collection(db, 'users'), {
           email: email,
           password: password,
-          films: {},
+          watched: [],
+          queue: [],
         });
-        console.log('Document written with ID: ', docRef.id);
-      } catch (e) {
-        console.error('Error adding document: ', e);
+        refs.regForm.querySelector('.error').innerHTML = '';
+      } catch (error) {
+        console.error('Error adding document: ', error);
       }
-      refs.regForm.classList.add('is-hidden');
-      refs.formWrap.classList.add('is-hidden');
-    }
-  );
-}
-
-async function addFilm(filmId) {
-  const userRef = doc(db, 'users', await getCurrentUserId());
-  const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
-
-  await updateDoc(userRef, {
-    films: fullMovieInfo,
-  });
-}
-// addFilm(705865); // симуляція додавання фільму в док юзера
-
-async function getCurrentUserId() {
-  let userID;
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  querySnapshot.forEach(async doc => {
-    try {
-      if (doc.data().email === auth.currentUser.email) {
-        userID = doc.id;
+    })
+    .catch(error => {
+      console.log(error.message);
+      if (error.message.includes('email-already-in-use')) {
+        refs.regForm.querySelector('.error').innerHTML = 'Email already in use';
+        return;
       }
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  });
-  try {
-  } catch (error) {}
-
-  return userID;
+      if (error.message.includes('weak-password')) {
+        refs.regForm.querySelector('.error').innerHTML =
+          'Password should be at least 6 characters';
+        return;
+      }
+    });
 }
 
 async function loginUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailLogin.value.trim();
   const password = e.target.elements.passwordLogin.value.trim();
-  const user = auth.currentUser;
-  await signInWithEmailAndPassword(auth, email, password);
-  refs.loginForm.classList.add('is-hidden');
+
+  if (email === '' || password === '') {
+    refs.loginForm.querySelector('.error').innerHTML =
+      'Input fields are not filled';
+    return;
+  }
+
+  await signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      refs.loginForm.querySelector('.error').innerHTML = '';
+    })
+    .catch(error => {
+      console.log(error);
+      if (error.message.includes('wrong-password')) {
+        refs.loginForm.querySelector('.error').innerHTML = 'Wrong password';
+        return;
+      }
+      if (error.message.includes('user-not-found)')) {
+        refs.loginForm.querySelector('.error').innerHTML =
+          'User email not found';
+        return;
+      }
+      if (error.message.includes('too-many-requests)')) {
+        refs.loginForm.querySelector('.error').innerHTML =
+          ' Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
+        return;
+      }
+    });
+}
+
+function logoutUser(e) {
+  e.preventDefault();
+  signOut(auth);
+}
+
+function ifUserLogged() {
+  refs.logoutBtn.classList.remove('is-hidden');
+  refs.libBtn.classList.remove('is-hidden');
+  refs.loginBtn.classList.add('is-hidden');
+  refs.regBtn.classList.add('is-hidden');
+  refs.regForm.classList.add('is-hidden');
   refs.formWrap.classList.add('is-hidden');
 }
 
-function onLoginBtn() {
-  refs.loginForm.classList.remove('is-hidden');
-  refs.formWrap.classList.remove('is-hidden');
-  refs.regForm.classList.add('is-hidden');
+function ifUserLoggedOut() {
+  refs.loginBtn.classList.remove('is-hidden');
+  refs.regBtn.classList.remove('is-hidden');
+  refs.libBtn.classList.add('is-hidden');
+  refs.logoutBtn.classList.add('is-hidden');
 }
 
-function onRegBtn() {
-  refs.regForm.classList.remove('is-hidden');
-  refs.formWrap.classList.remove('is-hidden');
-  refs.loginForm.classList.add('is-hidden');
+async function addFilm(e) {
+  //   filmId = e.target.dataset.id;
+  let curFilm;
+  const userRef = doc(db, 'users', await getCurrentUserId());
+  const fullMovieInfo = await apiService.fetchFullMovieInfo(e);
+  const userFilms = await getFilms().then(films => {
+    films.forEach(film => {
+      curFilm = film.id;
+      return curFilm;
+    });
+    return films;
+  });
+
+  if (e.includes(curFilm)) {
+    console.log('added');
+    return;
+  }
+
+  userFilms.push(fullMovieInfo);
+  await updateDoc(userRef, {
+    watched: userFilms,
+  });
+  return userFilms;
 }
+
+async function getFilms() {
+  const userFilms = await getCurrentUserDoc().then(doc => {
+    return doc.data().watched;
+  });
+
+  return userFilms;
+}
+
+async function getCurrentUserId() {
+  const userID = await getCurrentUserDoc().then(doc => {
+    if (doc === undefined) {
+      return;
+    }
+    return doc.id;
+  });
+
+  return userID;
+}
+
+async function getCurrentUserDoc() {
+  const querySnapshot = await getDocs(collection(db, 'users'));
+  let document;
+  if (auth.currentUser === null) {
+    return;
+  }
+  querySnapshot.forEach(async doc => {
+    try {
+      if (doc.data().email === auth.currentUser.email) {
+        document = doc;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  return document;
+}
+
+export { refs, logoutUser, addFilm };

@@ -3,13 +3,13 @@
 //   padding: 15px;
 //   margin: auto;
 // }
-.auth-page__btn-close{
+.auth-page__btn-close {
   position: absolute;
-    top: 8px;
-    right: 8px;
-    border: none;
-    outline: none;
-    background-color: var(--white-color);
+  top: 8px;
+  right: 8px;
+  border: none;
+  outline: none;
+  background-color: var(--white-color);
 }
 .form-auth {
   padding: 15px;
@@ -32,8 +32,7 @@
     box-sizing: border-box;
     font-size: 14px;
   }
-
-  & .login, .registration {
+  & .btn-auth {
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -52,4 +51,9 @@
       background-color: #43a047;
     }
   }
+}
+
+.error {
+  color: rgb(214, 61, 61);
+  padding-top: 40px;
 }
