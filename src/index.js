@@ -6,6 +6,7 @@ import { renderPaginationButtons } from "./js/components/pagination/pagination";
 import openModal from "./js/components/modal/modal-open";
 import NProgress from 'nprogress';
 import './js/components/team-modal';
+import onSearchButton from "./js/components/search/movieSearch";
 import './js/components/authorization/auth-page-close'
 import './js/helpers/sliderTrendingMovies';
 import { renderMovieCardsSlider } from './js/templates/renderMovieCardsSlider';
@@ -35,7 +36,7 @@ apiService.fetchTrendData().then((data)=> {
   const filmData = renderGallery(data.results, allGenres);
   const markupMovie = markupGallery(filmData)
   mainContainer.insertAdjacentHTML("beforeend", markupMovie);
-  
+  NProgress.done()
   renderMovieCardsSlider(data.results);
 
 
@@ -72,7 +73,7 @@ apiService.fetchTrendData().then((data)=> {
 
 
 }).catch(error => console.log(error))
-NProgress.done()
+
 
 
 
