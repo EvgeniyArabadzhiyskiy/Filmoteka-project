@@ -80,17 +80,34 @@ async function loginUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailLogin.value.trim();
   const password = e.target.elements.passwordLogin.value.trim();
+  const querySnapshot = await getDocs(collection(db, 'users'));
+
   if (email === '' || password === '') {
     refs.loginForm.querySelector('.error').innerHTML =
       'Input fields are not filled';
     return;
   }
+
   await signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       refs.loginForm.querySelector('.error').innerHTML = '';
     })
     .catch(error => {
-      refs.loginForm.querySelector('.error').innerHTML = error.message;
+      console.log(error);
+      if (error.message.includes('wrong-password')) {
+        refs.loginForm.querySelector('.error').innerHTML = 'Wrong password';
+        return;
+      }
+      if (error.message.includes('user-not-found)')) {
+        refs.loginForm.querySelector('.error').innerHTML =
+          'User email not found';
+        return;
+      }
+      if (error.message.includes('too-many-requests)')) {
+        refs.loginForm.querySelector('.error').innerHTML =
+          ' Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
+        return;
+      }
     });
 }
 
@@ -140,26 +157,6 @@ async function addFilm(e) {
   return userFilms;
 }
 
-// async function deleteFilm(e) {
-//   filmId = e.target.dataset.id;
-//   let curFilm;
-//   const userRef = doc(db, 'users', await getCurrentUserId());
-//   const userFilms = await getFilms().then(films => {
-//     films.forEach(film => {
-//       curFilm = film.id;
-//       return curFilm;
-//     });
-//     return films;
-//   });
-
-//   await updateDoc(userRef, {
-//     films: userFilms,
-//   });
-// }
-
-// const card = document.querySelector('.movie-card__container');
-// card.addEventListener('click', addFilm);
-
 async function getFilms() {
   const userFilms = await getCurrentUserDoc().then(doc => {
     return doc.data().watched;
@@ -196,20 +193,6 @@ async function getCurrentUserDoc() {
   });
 
   return document;
-}
-
-async function getAllUsersDoc() {
-  let allDocs = [];
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  querySnapshot.forEach(doc => {
-    try {
-      allDocs.push(doc.data().email);
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  return allDocs;
 }
 
 export { refs, logoutUser, addFilm };
