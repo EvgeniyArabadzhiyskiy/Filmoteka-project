@@ -65,8 +65,9 @@ import * as auth from './js/auth';
 import {markupGallery} from './js/templates/startPageMarkup'
 import { watchedArr, queueArr } from './js/modal-open'
 
-import addToLibrary from './js/addToLibrary';
-import removeFromLibrary from './js/removeFromLibrary';
+// import addToLibrary from './js/addToLibrary';
+// import removeFromLibrary from './js/removeFromLibrary';
+import  {updaterStorage}  from "./js/helpers/updaterStorage";
 
 
 
@@ -152,13 +153,13 @@ async function onListClick(e) {
 
     if (e.target.classList.contains('pressed')) {
       e.target.textContent = 'Remove from Watched';
-      addToLibrary(fullMovieInfo, watchedArr, e.target.dataset.target);
+      updaterStorage.addToLibrary(fullMovieInfo, watchedArr, e.target.dataset.target);
 
       return;
     }
     
     e.target.textContent = 'Add to Watched';
-    removeFromLibrary(filmId, watchedArr, e.target.dataset.target);
+    updaterStorage.removeFromLibrary(filmId, watchedArr, e.target.dataset.target);
             
   }
 
@@ -167,12 +168,12 @@ async function onListClick(e) {
 
     if (e.target.classList.contains('pressed')) {
       e.target.textContent = 'Remove from Queue';
-      addToLibrary(fullMovieInfo, queueArr, e.target.dataset.target);
+      updaterStorage.addToLibrary(fullMovieInfo, queueArr, e.target.dataset.target);
       return
     }
     
     e.target.textContent = 'Add to Queue';
-    removeFromLibrary(filmId, queueArr, e.target.dataset.target);
+    updaterStorage.removeFromLibrary(filmId, queueArr, e.target.dataset.target);
             
   }
 
