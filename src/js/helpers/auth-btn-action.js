@@ -1,4 +1,4 @@
-import { refs } from '../auth';
+import { refs } from '../components/authorization/auth';
 function onLoginBtn() {
   refs.loginForm.classList.remove('is-hidden');
   refs.formWrap.classList.remove('is-hidden');

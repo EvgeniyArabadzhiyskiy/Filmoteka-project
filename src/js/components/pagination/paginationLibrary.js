@@ -1,4 +1,4 @@
-import renderLibrary from './templates/movieCardLibrary';
+import renderLibrary from '../../templates/movieCardLibrary';
 
 const paginationList = document.querySelector('.pagination');
 const cardsContainer = document.querySelector('.movie-card-list');

@@ -1,4 +1,4 @@
-import { watchedArr, queueArr } from './modal-open';
+import { watchedArr, queueArr } from './components/modal/modal-open';
 
 export default function galleryBtnStateUpdate() {
     const libraryWatchedBtn = document.querySelectorAll('.btn-watche');
