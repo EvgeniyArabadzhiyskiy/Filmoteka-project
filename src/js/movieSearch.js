@@ -4,7 +4,8 @@ import { renderPaginationButtons } from "./pagination";
 import { resetPagination } from "./pagination";
 import NProgress from 'nprogress';
 import { input } from "./apiService";
-import {markupGallery} from './templates/startPageMarkup';
+import { markupGallery } from './templates/startPageMarkup';
+import galleryBtnStateUpdate from './galleryBtnStateUpdate';
 
 const mainContainer = document.querySelector('.movie-card-list');
 const searchFormEl = document.querySelector(".form__search");
@@ -39,7 +40,7 @@ export default function onSearchButton (e) {
             const markupMovie = markupGallery(filmData)
 
             mainContainer.insertAdjacentHTML("beforeend", markupMovie);
-
+            galleryBtnStateUpdate();
             renderPaginationButtons(data.total_pages, data.page);
 
            // NProgress.done()
