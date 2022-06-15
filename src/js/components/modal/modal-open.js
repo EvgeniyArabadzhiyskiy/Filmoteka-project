@@ -40,7 +40,7 @@ async function onClick(e) {
     modalButtonClose.addEventListener('click', modalClose);
     window.addEventListener("keyup", press);
     window.addEventListener("click", onCloseBackdropClick);
-
+    NProgress.done();
     const filmId = e.target.dataset.id;
 
     const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
@@ -52,7 +52,7 @@ async function onClick(e) {
 
     modalMovieContainer.insertAdjacentHTML("beforeend", finalMarkupModal);
 
-     NProgress.done();
+     
 
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
