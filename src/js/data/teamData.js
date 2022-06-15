@@ -9,9 +9,9 @@ import Yana from '../../images/team/Yana.jpg';
 import Zhenya from '../../images/team/Zhenya.jpg';
 import ZhenyaA from '../../images/team/ZhenyaA.jpg';
 import Marina from '../../images/team/Marina.jpg';
-import sprites from '../../images/SVG-sprites/symbol-sprites.svg';
+// import sprites from '../../images/SVG-sprites/symbol-sprites.svg';
 
-const teamData = [
+export const teamData = [
   {
     id: 1,
     name: 'Евгений Арабаджийский',
@@ -147,36 +147,36 @@ const teamData = [
 ]
 
 
-function buildSlide(teamMember) {
-  const { name, role, photo, links } = teamMember;
+// function buildSlide(teamMember) {
+//   const { name, role, photo, links } = teamMember;
 
-  return `
-    <div class="image-slider__slide swiper-slide">
-      <div class="image-slider__image">
-        <img src="${photo}" alt="1" />
-      </div>
-      <div class="info">
-        <h3 class="info-title">${name}</h3>
-        <p class="info-role">${role}</p>
+//   return `
+//     <div class="image-slider__slide swiper-slide">
+//       <div class="image-slider__image">
+//         <img src="${photo}" alt="1" />
+//       </div>
+//       <div class="info">
+//         <h3 class="info-title">${name}</h3>
+//         <p class="info-role">${role}</p>
 
-        <ul class="social-links">${Object.entries(links).map(buildLink).join('')
-    } </ul>
-      </div>
-    </div>
-  `
-}
-export default function buildSlides() {
-  return teamData.map(buildSlide).join('')
-}
+//         <ul class="social-links">${Object.entries(links).map(buildLink).join('')
+//     } </ul>
+//       </div>
+//     </div>
+//   `
+// }
+// export default function buildSlides() {
+//   return teamData.map(buildSlide).join('')
+// }
 
-function buildLink([service, link]) {
-  return `
-    <li class="social-links__item">
-      <a class="social-links__link" href="${link}">
-        <svg class="social-links__icon" width="25" height="25">
-          <use href="${sprites}#icon-${service}"></use>
-        </svg>
-      </a>
-    </li>
-  `
-}
+// function buildLink([service, link]) {
+//   return `
+//     <li class="social-links__item">
+//       <a class="social-links__link" href="${link}">
+//         <svg class="social-links__icon" width="25" height="25">
+//           <use href="${sprites}#icon-${service}"></use>
+//         </svg>
+//       </a>
+//     </li>
+//   `
+// }

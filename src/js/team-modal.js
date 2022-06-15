@@ -4,7 +4,8 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import "swiper/swiper.scss";
 import "swiper/modules/navigation/navigation.scss";
 import "swiper/modules/pagination/pagination.scss";
-import buildSlides from "././data/teamData.js";
+import buildSlides from "../js/templates/buildSlider";
+// import buildSlides from "././data/teamData.js";
 
 const sliderTrack = document.querySelector(".image-slider__wrapper");
 
@@ -44,7 +45,7 @@ const swiper = new Swiper(".image-slider", {
     }
 })
 
-console.log(swiper);
+// console.log(swiper);
 
 const modalOpenBtn = document.querySelector(".students-modal-btn");
 const studentsModal = document.querySelector(".backdrop-team");
