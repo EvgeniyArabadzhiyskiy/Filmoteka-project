@@ -4,7 +4,7 @@ import openModal from '../modal/modal-open';
 import renderLibrary from '../../templates/movieCardLibrary';
 import { renderPaginationBTN, resetPagination } from '../pagination/paginationLibrary';
 import '../team-modal';
-//import app from '../../helpers/initialize-firebase';
+import app from '../../helpers/initialize-firebase';
 import { signOut, getAuth } from 'firebase/auth';
 
 let watched = [];
