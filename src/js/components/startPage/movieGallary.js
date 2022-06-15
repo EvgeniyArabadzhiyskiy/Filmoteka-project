@@ -9,7 +9,9 @@ export default function renderGallery(results, dataGenres) {
 
 		if (original_title === "") {
         	original_title = "Sorry, no title for the movie.";
-		}
+		}else if (original_title.length > 40){
+			original_title =  original_title.slice(0, 40) + "...";
+		   }
 
 		if (!release_date) {
 			release_date = "Expected";
