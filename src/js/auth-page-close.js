@@ -18,6 +18,7 @@ function onAuthPageClose() {
 //         onModalClose();
 //     }
 // }
+
 // function onModalClose() {
 //     window.removeEventListener("keydown", onEscPress);
 // }

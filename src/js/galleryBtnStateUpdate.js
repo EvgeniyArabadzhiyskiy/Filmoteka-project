@@ -17,7 +17,6 @@ export default function galleryBtnStateUpdate() {
             }
         })
     });
-    
     libraryQueueBtn.forEach(btn => {
         queueArr.forEach(obj => {
             if (Number(btn.dataset.id) === obj.id) {

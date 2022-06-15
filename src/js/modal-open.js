@@ -1,16 +1,16 @@
-import apiService from '../../apiService'
-import renderMovieModal from './renderMovieModal';
-import addToLibrary from '../library/addToLibrary';
-import removeFromLibrary from '../library/removeFromLibrary';
+import apiService from './apiService'
+import renderMovieModal from './components/renderMovieModal';
+import addToLibrary from './addToLibrary';
+import removeFromLibrary from './removeFromLibrary';
 import NProgress from 'nprogress';
-import renderLibrary from '../../templates/movieCardLibrary';
+import renderLibrary from './templates/movieCardLibrary';
 import galleryBtnStateUpdate from './galleryBtnStateUpdate';
-import { renderPaginationBTN, resetPagination } from '../pagination/paginationLibrary';
-import { markupModal} from '../../templates/modalMarkup';
+import { renderPaginationBTN, resetPagination } from './paginationLibrary';
+import { markupModal} from './templates/modalMarkup';
 
-const refs = {                                                                  
-    watchedMovies: document.querySelector('button[data-action="watched"]'),    
-    queueMovies: document.querySelector('button[data-action="queue"]'),         
+const refs = {                                                                  //   Добавил
+    watchedMovies: document.querySelector('button[data-action="watched"]'),     //   Добавил
+    queueMovies: document.querySelector('button[data-action="queue"]'),         //   Добавил
 
 }
 
@@ -29,7 +29,7 @@ export default function openModal(movieContainer) {
 }
 
 async function onClick(e) {
-     NProgress.start();
+    // NProgress.start();
     if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
         return
     }
@@ -52,7 +52,7 @@ async function onClick(e) {
 
     modalMovieContainer.insertAdjacentHTML("beforeend", finalMarkupModal);
 
-     NProgress.done();
+    // NProgress.done();
 
     const addToWatchedBtn = document.querySelector('.btn-watched');
     const addToQueueBtn = document.querySelector('.btn-qweqwe');
@@ -72,9 +72,9 @@ async function onClick(e) {
         }
     });
 
-    const bodyOfLybrary = document.body.classList.contains('library') 
-    const isWatchedActiv = refs.watchedMovies?.classList.contains('library-btn__isActive') 
-    const isQueueActiv = refs.queueMovies?.classList.contains('library-btn__isActive') 
+    const bodyOfLybrary = document.body.classList.contains('library') //   Добавил
+    const isWatchedActiv = refs.watchedMovies?.classList.contains('library-btn__isActive') //   Добавил
+    const isQueueActiv = refs.queueMovies?.classList.contains('library-btn__isActive') //   Добавил
 
     addToWatchedBtn.addEventListener('click', () => {
         addToWatchedBtn.classList.toggle('pressed');
@@ -84,8 +84,8 @@ async function onClick(e) {
             addToLibrary(fullMovieInfo, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {
-                bodyOfLybrary && changeScreenDevice(watchedArr);                             
-                refs.watchedMovies?.classList.add('library-btn__isActive');             
+                bodyOfLybrary && changeScreenDevice(watchedArr);                             //   Добавил
+                refs.watchedMovies?.classList.add('library-btn__isActive');             //   Добавил
                 refs.queueMovies?.classList.remove('library-btn__isActive'); 
 
             }
@@ -95,10 +95,10 @@ async function onClick(e) {
             removeFromLibrary(filmId, watchedArr, addToWatchedBtn.dataset.target);
 
             if (isWatchedActiv) {                                                  
-                bodyOfLybrary && changeScreenDevice(watchedArr);                                 
-                refs.watchedMovies?.classList.add('library-btn__isActive');                 
+                bodyOfLybrary && changeScreenDevice(watchedArr);                                 //   Добавил
+                refs.watchedMovies?.classList.add('library-btn__isActive');                 //   Добавил
                 refs.queueMovies?.classList.remove('library-btn__isActive');  
-            }                                                                           
+            }                                                                           //   Добавил
         }
 
     });
@@ -110,9 +110,9 @@ async function onClick(e) {
             addToLibrary(fullMovieInfo, queueArr, addToQueueBtn.dataset.target);
 
             if (isQueueActiv) {
-                bodyOfLybrary && changeScreenDevice(queueArr);                                        
-                refs.queueMovies?.classList.add('library-btn__isActive');                       
-                refs.watchedMovies?.classList.remove('library-btn__isActive');                  
+                bodyOfLybrary && changeScreenDevice(queueArr);                                        //   Добавил
+                refs.queueMovies?.classList.add('library-btn__isActive');                       //   Добавил
+                refs.watchedMovies?.classList.remove('library-btn__isActive');                  //   Добавил
 
             }
         } else {
@@ -120,8 +120,8 @@ async function onClick(e) {
             removeFromLibrary(filmId, queueArr, addToQueueBtn.dataset.target);
 
             if (isQueueActiv) {
-                bodyOfLybrary && changeScreenDevice(queueArr);                                      
-                refs.queueMovies?.classList.add('library-btn__isActive');                        
+                bodyOfLybrary && changeScreenDevice(queueArr);                                      //   Добавил
+                refs.queueMovies?.classList.add('library-btn__isActive');                        //   Добавил
                 refs.watchedMovies?.classList.remove('library-btn__isActive');
             }
         }

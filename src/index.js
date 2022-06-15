@@ -1,23 +1,81 @@
+
+// import "./js/darkThema";
+// import "./js/cursor";
+// import apiService from "./js/apiService";
+// import renderGallery from "./js/templates/movieGallary";
+// import { renderPaginationButtons } from "./js/pagination";
+// import renderMovieModal from "./js/templates/renderMovieModal";
+// import openModal from "./js/modal-open";
+// import onSearchButton from "./js/movieSearch";
+// import NProgress from 'nprogress';
+
+// import "./js/team-modal";
+// import "./js/sliderTrendingMovies";
+// import { renderMovieCardsSlider } from "./js/templates/renderMovieCardsSlider";
+// import './js/helpers/back-to-top';
+
+// let allGenres;
+// const filmList = document.querySelector('.movie-card-list'); 
+
+// NProgress.start();
+// openModal(filmList);
+
+// const mainContainer = document.querySelector('.movie-card__container');
+// apiService.fetchGenresList().then((data) => {
+//   allGenres = data;
+// })
+
+// apiService.fetchTrendData().then((data) => {
+ 
+//   renderMovieCardsSlider(data.results);
+
+//   renderGallery(data.results, allGenres);
+
+//   renderPaginationButtons(data.total_pages, data.page);
+
+// }).catch(error => console.log(error));
+// NProgress.done();
+
+
+
+
+// =======================================================================================
+
 import "./js/helpers/darkThema";
 import "./js/helpers/cursor";
 import apiService from "./js/apiService";
-import renderGallery from "./js/components/startPage/movieGallary";
-import { renderPaginationButtons } from "./js/components/pagination/pagination";
-import openModal from "./js/components/modal/modal-open";
+import renderGallery from "./js/components/movieGallary";
+import { renderPaginationButtons } from "./js/pagination";
+import renderMovieModal from "./js/components/renderMovieModal";
+import openModal from "./js/modal-open";
+import onSearchButton from "./js/movieSearch";
+
 import NProgress from 'nprogress';
-import './js/components/team-modal';
-import './js/components/authorization/auth-page-close'
+
+import './js/team-modal';
+import './js/auth-page-close'
 import './js/helpers/sliderTrendingMovies';
 import { renderMovieCardsSlider } from './js/templates/renderMovieCardsSlider';
+
 import './js/helpers/back-to-top';
-import * as auth from './js/components/authorization/auth';
+
+import * as auth from './js/auth';
+
+
 import {markupGallery} from './js/templates/startPageMarkup'
-import { watchedArr, queueArr } from './js/components/modal/modal-open'
-import addToLibrary from './js/components/library/addToLibrary';
-import removeFromLibrary from './js/components/library/removeFromLibrary';
+import { watchedArr, queueArr } from './js/modal-open'
+
+import addToLibrary from './js/addToLibrary';
+import removeFromLibrary from './js/removeFromLibrary';
+
+
+
 
 let allGenres;
 const mainContainer = document.querySelector('.movie-card-list');
+
+
+
 
 NProgress.start();
 openModal(mainContainer);

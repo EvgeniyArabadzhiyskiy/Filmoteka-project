@@ -20,6 +20,7 @@ return `<img src="${imagePoster}" alt="" width="280" height="357" class="modal__
         <p>Genre</p>
     </li>
         </ul>
+
         <ul>
             <li class="film__item">
                 <p class="film__text"><span class="rating">${vote_average}</span> / <span class="rating--grey">${vote_count}</span></p>
