@@ -131,6 +131,7 @@ function ifUserLogged() {
   refs.regBtn.classList.add('is-hidden');
   refs.regForm.classList.add('is-hidden');
   refs.formWrap.classList.add('is-hidden');
+  refs.homeBtn.classList.add('nav__current');
 }
 
 function ifUserLoggedOut() {
