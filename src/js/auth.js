@@ -141,7 +141,6 @@ function ifUserLoggedOut() {
 }
 
 async function addFilm(e) {
-  //   filmId = e.target.dataset.id;
   let curFilm;
   const userRef = doc(db, 'users', await getCurrentUserId());
   const fullMovieInfo = await apiService.fetchFullMovieInfo(e);
