@@ -1,4 +1,4 @@
-import { watchedArr, queueArr } from './components/modal/modal-open';
+import { watchedArr, queueArr } from './modal-open';
 
 export default function galleryBtnStateUpdate() {
     const libraryWatchedBtn = document.querySelectorAll('.btn-watche');
@@ -17,6 +17,7 @@ export default function galleryBtnStateUpdate() {
             }
         })
     });
+    
     libraryQueueBtn.forEach(btn => {
         queueArr.forEach(obj => {
             if (Number(btn.dataset.id) === obj.id) {

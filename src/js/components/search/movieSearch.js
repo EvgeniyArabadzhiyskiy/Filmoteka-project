@@ -5,7 +5,7 @@ import { resetPagination } from "../pagination/pagination";
 import NProgress from 'nprogress';
 import { input } from "../../apiService";
 import { markupGallery } from '../../templates/startPageMarkup';
-import galleryBtnStateUpdate from '../../galleryBtnStateUpdate';
+import galleryBtnStateUpdate from '../../components/modal/galleryBtnStateUpdate';
 
 const mainContainer = document.querySelector('.movie-card-list');
 const searchFormEl = document.querySelector(".form__search");
@@ -43,7 +43,7 @@ export default function onSearchButton (e) {
             galleryBtnStateUpdate();
             renderPaginationButtons(data.total_pages, data.page);
 
-           // NProgress.done()
+            NProgress.done()
         }
     })
     .catch(error => console.log(error));

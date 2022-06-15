@@ -4,7 +4,7 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import "swiper/swiper.scss";
 import "swiper/modules/navigation/navigation.scss";
 import "swiper/modules/pagination/pagination.scss";
-import buildSlides from "././data/teamData.js";
+import buildSlides from "../data/teamData.js";
 
 const sliderTrack = document.querySelector(".image-slider__wrapper");
 

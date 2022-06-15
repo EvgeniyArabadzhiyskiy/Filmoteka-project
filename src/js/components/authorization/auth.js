@@ -203,5 +203,4 @@ async function getCurrentUserDoc() {
 
   return document;
 }
-
 export { refs, logoutUser, addFilm };

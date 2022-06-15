@@ -143,5 +143,4 @@ function changeScreenDevice(arrays) {
     mediaQuery768Handler(mediaQuery768);
     mediaQuery1024Handler(mediaQuery1024);
 }
-
 export { renderPaginationBTN, resetPagination };
