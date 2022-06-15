@@ -9,7 +9,10 @@ export default function renderLibrary(data) {
 
       if (original_title === "") {
           original_title = "Sorry, no title for the movie.";
-      }
+      }else if (original_title.length > 40){
+        original_title =  original_title.slice(0, 40) + "...";
+       }
+
       const genresNames = genres.reduce((acc, { name }, index) => {
           if (!genres.length) {
             return acc;
