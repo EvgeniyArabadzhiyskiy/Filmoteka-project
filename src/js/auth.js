@@ -72,7 +72,16 @@ function regNewUser(e) {
       }
     })
     .catch(error => {
-      refs.regForm.querySelector('.error').innerHTML = error.message;
+      console.log(error.message);
+      if (error.message.includes('email-already-in-use')) {
+        refs.regForm.querySelector('.error').innerHTML = 'Email already in use';
+        return;
+      }
+      if (error.message.includes('weak-password')) {
+        refs.regForm.querySelector('.error').innerHTML =
+          'Password should be at least 6 characters';
+        return;
+      }
     });
 }
 
@@ -80,7 +89,6 @@ async function loginUser(e) {
   e.preventDefault();
   const email = e.target.elements.emailLogin.value.trim();
   const password = e.target.elements.passwordLogin.value.trim();
-  const querySnapshot = await getDocs(collection(db, 'users'));
 
   if (email === '' || password === '') {
     refs.loginForm.querySelector('.error').innerHTML =
