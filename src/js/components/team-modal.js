@@ -66,5 +66,10 @@ function toggleModal() {
     document.body.classList.toggle("modal-open");
 };
 
+window.addEventListener("keydown", (e) => {
+    if (e.code === 'Escape') {
+        toggleModal();
+    }
+});
 
 
