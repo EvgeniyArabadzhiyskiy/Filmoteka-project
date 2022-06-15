@@ -2,7 +2,10 @@ import '../../helpers/darkThema';
 import '../../helpers/cursor';
 import openModal from '../modal/modal-open';
 import renderLibrary from '../../templates/movieCardLibrary';
-import { renderPaginationBTN, resetPagination } from '../pagination/paginationLibrary';
+import {
+  renderPaginationBTN,
+  resetPagination,
+} from '../pagination/paginationLibrary';
 import '../team-modal';
 import app from '../../helpers/initialize-firebase';
 import { signOut, getAuth } from 'firebase/auth';
@@ -26,7 +29,7 @@ refs.logoutLibBtn.addEventListener('click', logoutUser);
 function logoutUser(e) {
   e.preventDefault();
   signOut(auth);
-  window.location = '../index.html';
+  window.location = '../../../index.html';
 }
 
 if (localStorage.getItem('watched') === null) {
