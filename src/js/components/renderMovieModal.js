@@ -1,11 +1,11 @@
 // import { IMG_URL } from "./movieGallary";
 const IMG_URL= `https://image.tmdb.org/t/p/w500`;
+import { title } from 'process';
 import noPoster from '../../images/no-poster.jpg';
 
 //const modalMovieContainer = document.querySelector('.film-content');
- 
-export default function renderMovieModal({id, poster_path, original_title, vote_average,vote_count, popularity, overview, genres}) {
 
+export default function renderMovieModal({id, poster_path, original_title, vote_average,vote_count, popularity, overview, genres}) {
  
     let imagePoster = poster_path ? `${IMG_URL}${poster_path}` : noPoster;
     if (overview === "") {
@@ -29,7 +29,7 @@ export default function renderMovieModal({id, poster_path, original_title, vote_
         }
         return acc;
       },'');	
-return {id, imagePoster, original_title,popularity, original_title,vote_average,vote_count, genresNames,overview}
+return {id, imagePoster, original_title,popularity, vote_average,vote_count, genresNames,overview}
 }
 
 // `<img src="${imagePoster}" alt="" width="280" height="357" class="modal__img">
