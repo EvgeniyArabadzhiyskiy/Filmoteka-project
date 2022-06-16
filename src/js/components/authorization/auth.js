@@ -67,9 +67,7 @@ function regNewUser(e) {
           queue: [],
         });
         refs.regForm.querySelector('.error').innerHTML = '';
-      } catch (error) {
-        console.error('Error adding document: ', error);
-      }
+      } catch (error) {}
     })
     .catch(error => {
       console.log(error.message);
@@ -122,6 +120,7 @@ async function loginUser(e) {
 function logoutUser(e) {
   e.preventDefault();
   signOut(auth);
+  refs.loginBtn.classList.remove('nav__current');
 }
 
 function ifUserLogged() {
@@ -137,8 +136,8 @@ function ifUserLogged() {
 function ifUserLoggedOut() {
   refs.loginBtn.classList.remove('is-hidden');
   refs.regBtn.classList.remove('is-hidden');
-  refs.libBtn.classList.add('is-hidden');
   refs.logoutBtn.classList.add('is-hidden');
+  refs.libBtn.classList.add('is-hidden');
 }
 
 async function getCurrentUserId() {
@@ -163,9 +162,7 @@ async function getCurrentUserDoc() {
       if (doc.data().email === auth.currentUser.email) {
         document = doc;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   });
 
   return document;
