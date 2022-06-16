@@ -20,8 +20,8 @@ const teamData = [
     links: {
       github: 'https://github.com/EvgeniyArabadzhiyskiy',
       linkedin: '',
-      facebook: '',
-      telegram: '',
+      facebook: 'https://www.facebook.com/profile.php?id=100042664034805',
+      telegram: 'https://t.me/Evgeniy_ZP',
     },
   },
   {
@@ -31,9 +31,9 @@ const teamData = [
     photo: Ilya,
     links: {
       github: 'https://github.com/ZeinHome',
-      linkedin: '',
+      linkedin: 'https://www.linkedin.com/in/ilya-pyatnichuk-a97705210',
       facebook: '',
-      telegram: '',
+      telegram: 'https://t.me/zeinhome',
     },
   },
   {
@@ -43,9 +43,9 @@ const teamData = [
     photo: Anton,
     links: {
       github: 'https://github.com/axtellion',
-      linkedin: '',
+      linkedin: 'https://www.linkedin.com/in/anton-honchar-57318a22b/',
       facebook: '',
-      telegram: '',
+      telegram: 'https://t.me/axtellion',
     },
   },
   {
@@ -55,9 +55,9 @@ const teamData = [
     photo: Serhii,
     links: {
       github: 'https://github.com/zhchok',
-      linkedin: '',
-      facebook: '',
-      telegram: '',
+      linkedin: 'https://www.linkedin.com/in/serhii-khanas-516677223',
+      facebook: 'https://www.facebook.com/profile.php?id=100017360502493',
+      telegram: 'https://t.me/zhchok',
     },
   },
   {
@@ -67,8 +67,8 @@ const teamData = [
     photo: Vova,
     links: {
       github: 'https://github.com/VSHKURAT',
-      linkedin: '',
-      facebook: '',
+      linkedin: 'https://www.linkedin.com/in/volodymyr-shkuratovskyi-7a4466158',
+      facebook: 'https://www.facebook.com/profile.php?id=100002864006172',
       telegram: '',
     },
   },
@@ -79,9 +79,9 @@ const teamData = [
     photo: Denis,
     links: {
       github: 'https://github.com/Preksler',
-      linkedin: '',
-      facebook: '',
-      telegram: '',
+      linkedin: 'www.linkedin.com/in/preksler',
+      facebook: 'https://www.facebook.com/preksler',
+      telegram: 'https://t.me/Preksler',
     },
   },
   {
@@ -93,7 +93,7 @@ const teamData = [
       github: 'https://github.com/Yevhen-Synehin',
       linkedin: '',
       facebook: '',
-      telegram: '',
+      telegram: 'https://t.me/Johnny_Rembo',
     },
   },
   {
@@ -104,8 +104,8 @@ const teamData = [
     links: {
       github: 'https://github.com/Marina-Hizhnyak',
       linkedin: '',
-      facebook: '',
-      telegram: '',
+      facebook: 'https://www.facebook.com/profile.php?id=100021046459297',
+      telegram: 'http://t.me/malvino4ka1208',
     },
   },
   {
@@ -117,7 +117,7 @@ const teamData = [
       github: 'https://github.com/yanaleso',
       linkedin: '',
       facebook: '',
-      telegram: '',
+      telegram: 'https://t.me/yana_leso',
     },
   },
   {
@@ -127,9 +127,9 @@ const teamData = [
     photo: Sasha,
     links: {
       github: 'https://github.com/sasha-shkapenko ',
-      linkedin: '',
-      facebook: '',
-      telegram: '',
+      linkedin: 'https://www.linkedin.com/in/alexandra-shkapenko-5b430823a/',
+      facebook: 'https://www.facebook.com/sasha.shkapenko/',
+      telegram: 'https://t.me/sasha_shkapenko',
     },
   },
   {
@@ -139,9 +139,9 @@ const teamData = [
     photo: Olga,
     links: {
       github: 'https://github.com/OlhaKhodorenko',
-      linkedin: '',
-      facebook: '',
-      telegram: '',
+      linkedin: 'https://www.linkedin.com/in/olha-khodorenko-bb7916114',
+      facebook: 'https://www.facebook.com/profile.php?id=100004423965389',
+      telegram: 'https://t.me/OlhaKhodorenko',
     },
   },
 ]
