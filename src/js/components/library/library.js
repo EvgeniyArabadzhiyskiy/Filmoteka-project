@@ -38,7 +38,13 @@ if (localStorage.getItem('watched') === null) {
 openModal(refs.moviesList);
 if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
   onQueueMoviesClick();
+<<<<<<< Updated upstream
 } else {
+=======
+}
+
+else{
+>>>>>>> Stashed changes
   onWatchedMoviesClick();
 }
 
