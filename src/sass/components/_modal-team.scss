@@ -10,8 +10,8 @@
 }
 .modal-team {
   padding: 15px;
-  width: 1230px;
-  height: 430px;
+  width: 350px;
+  height: 500px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -22,18 +22,13 @@
   transform: translate(-50%, -50%) scale(1);
   transition: opacity 250ms ease-in, visibility 250ms ease-in,
     transform 250ms ease-in;
-
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
     width: 730px;
     height: 430px;
   }
   @media screen and (min-width: 1024px) {
     width: 1230px;
     height: 430px;
-  }
-  @media screen and (max-width: 767px) {
-    width: 350px;
-    height: 500px;
   }
 }
 
@@ -140,7 +135,7 @@
 .modal-team__btn-close {
   position: absolute;
   top: -30px;
-  right: -30px;
+  right: -15px;
   z-index: 10;
   padding: 0;
   border: none;
@@ -148,6 +143,12 @@
   color: inherit;
   background-color: transparent;
   fill: #ff6b01;
+  @media screen and (min-width: 1024px) {
+    right: 105px;
+  }
+  @media screen and (max-width: 767px) {
+    right: 15px;
+  }
 }
 
 .image-slider {
@@ -170,11 +171,8 @@
   }
 }
 
-.btn-next {
-  color: gray;
-}
-.btn-prev {
-  color: gray;
+.swiper-button-prev:after, .swiper-button-next:after{
+  color: #ff6b01;
 }
 
 .swiper-pagination .swiper-pagination-bullet {
