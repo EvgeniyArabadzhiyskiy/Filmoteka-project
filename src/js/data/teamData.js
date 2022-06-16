@@ -79,7 +79,7 @@ const teamData = [
     photo: Denis,
     links: {
       github: 'https://github.com/Preksler',
-      linkedin: 'www.linkedin.com/in/preksler',
+      linkedin: 'https://www.linkedin.com/in/preksler',
       facebook: 'https://www.facebook.com/preksler',
       telegram: 'https://t.me/Preksler',
     },
@@ -91,7 +91,7 @@ const teamData = [
     photo: Zhenya,
     links: {
       github: 'https://github.com/Yevhen-Synehin',
-      linkedin: '',
+      linkedin: 'https://www.linkedin.com/in/yevhen-synehin-3a65b7242',
       facebook: '',
       telegram: 'https://t.me/Johnny_Rembo',
     },
