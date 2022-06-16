@@ -26,7 +26,7 @@ export default function onSearchButton (e) {
         searchErrMsgEl.style.display = "block";
         return;
     };
-    NProgress.start();
+    //NProgress.start();
     apiService.movieSearch().then((data)=> {
         if (data.total_results === 0) {
             searchErrMsgEl.textContent = "Search result is unsuccessful. Enter the correct movie name and press the search button";
@@ -43,11 +43,11 @@ export default function onSearchButton (e) {
             galleryBtnStateUpdate();
             renderPaginationButtons(data.total_pages, data.page);
 
-            NProgress.done()
+           // NProgress.done()
         }
     })
     .catch(error => console.log(error));
-    NProgress.done();
+    //NProgress.done();
 };
 
 

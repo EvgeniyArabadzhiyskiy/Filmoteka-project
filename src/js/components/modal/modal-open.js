@@ -2,7 +2,6 @@ import apiService from '../../apiService'
 import renderMovieModal from './renderMovieModal';
 import addToLibrary from '../library/addToLibrary';
 import removeFromLibrary from '../library/removeFromLibrary';
-import NProgress from 'nprogress';
 import renderLibrary from '../../templates/movieCardLibrary';
 import galleryBtnStateUpdate from './galleryBtnStateUpdate';
 import { renderPaginationBTN, resetPagination } from '../pagination/paginationLibrary';
@@ -29,7 +28,6 @@ export default function openModal(movieContainer) {
 }
 
 async function onClick(e) {
-     NProgress.start();
     if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
         return
     }
@@ -40,9 +38,8 @@ async function onClick(e) {
     modalButtonClose.addEventListener('click', modalClose);
     window.addEventListener("keyup", press);
     window.addEventListener("click", onCloseBackdropClick);
-    NProgress.done();
+    
     const filmId = e.target.dataset.id;
-
     const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
     const createMarkupFilmInModal =await  renderMovieModal(fullMovieInfo);
     const finalMarkupModal = markupModal(createMarkupFilmInModal);
