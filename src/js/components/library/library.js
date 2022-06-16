@@ -43,7 +43,7 @@ if (sessionStorage.getItem(LAST_PRESSED_KEY) === 'queue') {
   onQueueMoviesClick();
 }
 
-if (sessionStorage.getItem(LAST_PRESSED_KEY) === 'watched') {
+else {
   onWatchedMoviesClick();
 }
 

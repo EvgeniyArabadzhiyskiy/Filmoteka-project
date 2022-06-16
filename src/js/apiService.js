@@ -1,4 +1,5 @@
 import axios from 'axios';
+import NProgress from 'nprogress';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '33da1ae0687d870981cf19ad4813876b';
@@ -10,11 +11,13 @@ export const input = document.querySelector('#search-query');
 export default {
   async fetchTrendData(page = 1) {
     try {
+      NProgress.start()
       const {data} = await axios.get(`${TREND_URL}?api_key=${API_KEY}&page=${page}`);
       return data;
     } catch (error) {
       console.error('Smth wrong with api:' + error.message);
-    } 
+    }
+     finally {NProgress.done()}
   },
 
   async fetchGenresList() {
@@ -28,20 +31,24 @@ export default {
 
   async fetchFullMovieInfo(id) {
     try {
+      NProgress.start()
       const movieFullInfo = await axios.get(`${URL_ID}/${id}?api_key=${API_KEY}`);
       return movieFullInfo.data;  
     } catch (error) {
       console.error('Smth wrong with api:' + error.message);
     }
-  },
+    finally {NProgress.done()}
+  } ,
 
   async movieSearch(page = 1) {
     try {
+      NProgress.start()
       const foundMovies = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&page=${page}&query=${input.value}`);
     return foundMovies.data;
     } catch (error) {
       console.error('Smth wrong with api:' + error.message);
     }
+    finally {NProgress.done()}
   },
 };
 

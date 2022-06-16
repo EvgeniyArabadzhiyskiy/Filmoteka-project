@@ -29,7 +29,7 @@ export default function openModal(movieContainer) {
 }
 
 async function onClick(e) {
-     NProgress.start();
+    //  NProgress.start();
     if (e.target.nodeName !== "IMG" && e.target.nodeName !== "H2") {
         return
     }
@@ -40,7 +40,7 @@ async function onClick(e) {
     modalButtonClose.addEventListener('click', modalClose);
     window.addEventListener("keyup", press);
     window.addEventListener("click", onCloseBackdropClick);
-    NProgress.done();
+    // NProgress.done();
     const filmId = e.target.dataset.id;
 
     const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
