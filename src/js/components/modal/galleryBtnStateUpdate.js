@@ -9,7 +9,6 @@ export default function galleryBtnStateUpdate() {
             if (Number(btn.dataset.id) === obj.id) {
                 btn.classList.add('pressed');
                 btn.textContent = 'Remove from Watched';
-                console.log('в библиотеке');
             }
             else {
                 btn.classList.remove('pressed');

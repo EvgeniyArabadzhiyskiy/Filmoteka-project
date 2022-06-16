@@ -20,7 +20,7 @@ import removeFromLibrary from './js/components/library/removeFromLibrary';
 let allGenres;
 const mainContainer = document.querySelector('.movie-card-list');
 
-NProgress.start();
+// NProgress.start();
 openModal(mainContainer);
 
 
@@ -36,7 +36,7 @@ apiService.fetchTrendData().then((data)=> {
   const filmData = renderGallery(data.results, allGenres);
   const markupMovie = markupGallery(filmData)
   mainContainer.insertAdjacentHTML("beforeend", markupMovie);
-  NProgress.done()
+  // NProgress.done()
   renderMovieCardsSlider(data.results);
 
 

@@ -26,7 +26,7 @@ export default function onSearchButton (e) {
         searchErrMsgEl.style.display = "block";
         return;
     };
-    NProgress.start();
+    // NProgress.start();
     apiService.movieSearch().then((data)=> {
         if (data.total_results === 0) {
             searchErrMsgEl.textContent = "Search result is unsuccessful. Enter the correct movie name and press the search button";
@@ -47,7 +47,7 @@ export default function onSearchButton (e) {
         }
     })
     .catch(error => console.log(error));
-    NProgress.done();
+    // NProgress.done();
 };
 
 
