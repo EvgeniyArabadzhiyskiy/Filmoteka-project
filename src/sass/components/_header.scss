@@ -222,7 +222,7 @@ button[type='submit'] {
 
 .label {
   position: absolute;
-  right: 35;
+  right: 32;
 
   background-color: rgb(136, 102, 39);
   display: flex;
@@ -233,6 +233,7 @@ button[type='submit'] {
   width: 50px;
 
   @media screen and (max-width: 768px) {
+    right: 20;
     top: 155;
   }
 }
