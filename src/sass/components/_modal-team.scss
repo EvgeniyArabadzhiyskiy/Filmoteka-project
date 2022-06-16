@@ -42,6 +42,11 @@
   border: none;
   outline: none;
   background-color: inherit;
+  transition: color 200ms linear;
+
+  &:hover {
+    color: #ff6b01;
+  }
 }
 
 .image-slider__image img {

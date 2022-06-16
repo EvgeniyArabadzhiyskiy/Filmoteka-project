@@ -44,39 +44,43 @@ const swiper = new Swiper(".image-slider", {
     }
 })
 
-console.log(swiper);
 
 const modalOpenBtn = document.querySelector(".students-modal-btn");
-const studentsModal = document.querySelector(".backdrop-team");
 const modalCloseBtn = document.querySelector(".modal-team__btn-close");
+const studentsModal = document.querySelector(".backdrop-team");
+const studentsSlider = document.querySelector(".swiper-team");
+
+function toggleTeamModal() {
+    studentsModal.classList.toggle("is-hidden");
+    document.body.classList.toggle("modal-open");
+}
 
 
-modalOpenBtn.addEventListener("click", toggleModal);
+modalOpenBtn.addEventListener("click", onOpenTeamModal);
+modalCloseBtn.addEventListener("click", onCloseTeamModal);
 
-modalCloseBtn.addEventListener("click", toggleModal);
+function onOpenTeamModal() {
+    toggleTeamModal()
+    window.addEventListener('keydown', onEscPress);
+}
+
+
+function onCloseTeamModal() {
+    toggleTeamModal()
+    window.removeEventListener('keydown', onEscPress);
+}
 
 studentsModal.addEventListener("click", (e) => {
-    if (e.target === studentsModal) {
-        toggleModal();
+    if (e.target === studentsModal || e.target === studentsSlider) {
+        onCloseTeamModal();
     }
 });
 
-function toggleModal() {
-    studentsModal.classList.toggle("is-hidden");
-    document.body.classList.toggle("modal-open");
-    onModalOpen()
-};
 
-function onModalOpen() {
-    window.addEventListener('keydown', onEscPress);
-}
 function onEscPress(event) {
     if (event.code === 'Escape') {
-        toggleModal();
-        onModalClose();
+        onCloseTeamModal();
     }
 }
 
-function onModalClose() {
-    window.removeEventListener('keydown', onEscPress);
-}
+
