@@ -48,7 +48,6 @@ const swiper = new Swiper(".image-slider", {
 const modalOpenBtn = document.querySelector(".students-modal-btn");
 const modalCloseBtn = document.querySelector(".modal-team__btn-close");
 const studentsModal = document.querySelector(".backdrop-team");
-const studentsSlider = document.querySelector(".swiper-team");
 
 function toggleTeamModal() {
     studentsModal.classList.toggle("is-hidden");
@@ -71,7 +70,7 @@ function onCloseTeamModal() {
 }
 
 studentsModal.addEventListener("click", (e) => {
-    if (e.target === studentsModal || e.target === studentsSlider) {
+    if (e.target === studentsModal) {
         onCloseTeamModal();
     }
 });
