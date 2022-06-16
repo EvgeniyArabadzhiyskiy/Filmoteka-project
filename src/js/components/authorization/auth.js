@@ -58,7 +58,7 @@ function regNewUser(e) {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(async userCredential => {
-      console.log(`New user registered ${userCredential.user.email}`);
+     
       try {
         const docRef = await addDoc(collection(db, 'users'), {
           email: email,
