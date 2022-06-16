@@ -44,7 +44,6 @@ async function onClick(e) {
     const filmId = e.target.dataset.id;
 
     const fullMovieInfo = await apiService.fetchFullMovieInfo(filmId);
-    console.log(fullMovieInfo);
     const createMarkupFilmInModal =await  renderMovieModal(fullMovieInfo);
     const finalMarkupModal = markupModal(createMarkupFilmInModal);
     

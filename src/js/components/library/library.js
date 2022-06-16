@@ -14,6 +14,7 @@ let watched = [];
 let queue = [];
 let page = 1;
 const auth = getAuth();
+const LAST_PRESSED_KEY = 'last-pressed-library-btn';
 const refs = {
   moviesList: document.querySelector('.movie-card-list'),
   watchedMovies: document.querySelector('button[data-action="watched"]'),
@@ -35,10 +36,14 @@ function logoutUser(e) {
 if (localStorage.getItem('watched') === null) {
   refs.sectionLibrary.innerHTML = `<h3 class="empty-container">Sorry, but this section is still empty:(</h3>`;
 }
+
 openModal(refs.moviesList);
-if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
+
+if (sessionStorage.getItem(LAST_PRESSED_KEY) === 'queue') {
   onQueueMoviesClick();
-} else {
+}
+
+if (sessionStorage.getItem(LAST_PRESSED_KEY) === 'watched') {
   onWatchedMoviesClick();
 }
 
@@ -46,7 +51,7 @@ refs.watchedMovies.addEventListener('click', onWatchedMoviesClick);
 refs.queueMovies.addEventListener('click', onQueueMoviesClick);
 
 function onWatchedMoviesClick() {
-  sessionStorage.setItem('last-pressed-library-btn', 'watched');
+  sessionStorage.setItem(LAST_PRESSED_KEY, 'watched');
   refs.watchedMovies.classList.add('library-btn__isActive');
   refs.queueMovies.classList.remove('library-btn__isActive');
   let watchedKey = localStorage.getItem('watched');
@@ -57,13 +62,13 @@ function onWatchedMoviesClick() {
       console.log(e);
     }
   }
-  if (sessionStorage.getItem('last-pressed-library-btn') === 'watched') {
+  if (sessionStorage.getItem(LAST_PRESSED_KEY) === 'watched') {
     changeScreenDevice(watched);
   }
 }
 
 function onQueueMoviesClick() {
-  sessionStorage.setItem('last-pressed-library-btn', 'queue');
+  sessionStorage.setItem(LAST_PRESSED_KEY, 'queue');
   refs.queueMovies.classList.add('library-btn__isActive');
   refs.watchedMovies.classList.remove('library-btn__isActive');
   let queueKey = localStorage.getItem('queue');
@@ -74,7 +79,7 @@ function onQueueMoviesClick() {
       console.log(e);
     }
   }
-  if (sessionStorage.getItem('last-pressed-library-btn') === 'queue') {
+  if (sessionStorage.getItem(LAST_PRESSED_KEY) === 'queue') {
     changeScreenDevice(queue);
   }
 }
